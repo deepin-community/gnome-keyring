@@ -1,0 +1,68 @@
+From e777b48cc1d7981817da68b309052c98413a7d9a Mon Sep 17 00:00:00 2001
+From: bluesky <chenchongbiao@deepin.org>
+Date: Wed, 2 Aug 2023 16:16:31 +0800
+Subject: [PATCH] =?UTF-8?q?feat:=20=E5=A2=9E=E5=8A=A0=E4=B8=80=E4=B8=AA?=
+ =?UTF-8?q?=E5=8F=AF=E9=80=89=E4=BD=BF=E7=94=A8=E7=9A=84=E7=89=B9=E6=80=A7?=
+ =?UTF-8?q?=EF=BC=8C=E8=AE=BE=E7=BD=AEkeyring=E7=9B=AE=E5=BD=95=E5=8A=9F?=
+ =?UTF-8?q?=E8=83=BD?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+增加一个可选使用的特性，设置keyring目录功能，该特性不影响流程
+
+Log: 增加一个可选使用的特性，设置keyring目录功能
+---
+ daemon/dbus/gkd-secret-service.c |  9 +++++++++
+ pkcs11/gkm/gkm-util.c            | 12 +++++++++++-
+ 2 files changed, 20 insertions(+), 1 deletion(-)
+
+diff --git a/daemon/dbus/gkd-secret-service.c b/daemon/dbus/gkd-secret-service.c
+index a0cd9e8..d3a25d0 100644
+--- a/daemon/dbus/gkd-secret-service.c
++++ b/daemon/dbus/gkd-secret-service.c
+@@ -159,9 +159,18 @@ get_default_path (void)
+ 	gchar *new_directory;
+ 	gchar *alias_directory = NULL;
+ 
++	const gchar *customPath = g_getenv("GNOME_KEYRING_CUSTOM_LOCAL_PATH");
++	if (customPath && customPath[0]) {
++	    alias_directory = g_strdup(customPath);
++	    g_debug("keyring custom local directory was overridden: %s", customPath);
++	}
++
+ #if WITH_DEBUG
+ 	const gchar *path = g_getenv ("GNOME_KEYRING_TEST_PATH");
+ 	if (path && path[0]) {
++		if (alias_directory != NULL) {
++			g_free (alias_directory);
++		}
+ 		alias_directory = g_strdup (path);
+ 		g_debug ("Alias directory was overridden by tests: %s", path);
+ 	}
+diff --git a/pkcs11/gkm/gkm-util.c b/pkcs11/gkm/gkm-util.c
+index af0180e..d2829c1 100644
+--- a/pkcs11/gkm/gkm-util.c
++++ b/pkcs11/gkm/gkm-util.c
+@@ -142,7 +142,17 @@ gkm_util_locate_keyrings_directory (void)
+ {
+ 	gchar *old_directory;
+ 	gchar *new_directory;
+-	gchar *directory;
++	gchar *directory = NULL;
++
++	const gchar *customPath = g_getenv("GNOME_KEYRING_CUSTOM_LOCAL_PATH");
++    if (customPath && customPath[0]) {
++        directory = g_strdup(customPath);
++        g_debug("keyring custom local directory was overridden: %s", customPath);
++    }
++
++	if (directory != NULL) {
++		return directory;
++	}
+ 
+ 	old_directory = g_build_filename (g_get_home_dir (), ".gnome2", "keyrings", NULL);
+ 	new_directory = g_build_filename (g_get_user_data_dir (), "keyrings", NULL);
+-- 
+2.33.1
+

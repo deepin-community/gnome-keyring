@@ -1,3 +1,9 @@
+gnome-keyring (40.0-deepin1) stable; urgency=medium
+
+  * Add an optional feature to set the keyring directory function
+
+ -- bluesky <chenchongbiao@deepin.org>  Wed, 02 Aug 2023 16:40:53 +0800
+
 gnome-keyring (40.0-deepin) stable; urgency=medium
 
   * ['Rebuild  against by  current gcc 11.2']
