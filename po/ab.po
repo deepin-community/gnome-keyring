@@ -1,23 +1,14 @@
-#
-# Ihar Hrachyshka <ihar.hrachyshka@gmail.com>, 2007.
-# Yuri Matsuk <yuri@matsuk.net>, 2011.
-# Yuras Shumovich <shumovichy@gmail.com>, 2017.
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-keyring.master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-keyring/issues\n"
-"POT-Creation-Date: 2022-11-13 15:19+0000\n"
-"PO-Revision-Date: 2022-12-13 09:16+0300\n"
-"Last-Translator: Yuras Shumovich <shumovichy@gmail.com>\n"
-"Language-Team: Belarusian <i18n-bel-gnome@googlegroups.com>\n"
-"Language: be\n"
+"POT-Creation-Date: 2023-01-25 18:58+0000\n"
+"Last-Translator: Нанба Наала <naala-nanba@rambler.ru>\n"
+"Language-Team: Abkhazian <daniel.abzakh@gmail.com>\n"
+"Language: ab\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 3.2.2\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. TRANSLATORS: This is the label for an keyring created without a label
 #: daemon/dbus/gkd-secret-change.c:84 daemon/dbus/gkd-secret-change.c:120
@@ -27,12 +18,12 @@ msgstr ""
 #: pkcs11/wrap-layer/gkm-wrap-login.c:345
 #: pkcs11/wrap-layer/gkm-wrap-prompt.c:733
 msgid "Unnamed"
-msgstr "Неназваны"
+msgstr "Хьӡыда"
 
 #: daemon/dbus/gkd-secret-change.c:89
 #, c-format
 msgid "Enter the old password for the “%s” keyring"
-msgstr "Увядзіце стары пароль для вязкі ключоў «%s»"
+msgstr ""
 
 #: daemon/dbus/gkd-secret-change.c:93
 #, c-format
@@ -40,20 +31,18 @@ msgid ""
 "An application wants to change the password for the “%s” keyring. Enter the "
 "old password for it."
 msgstr ""
-"Праграма хоча змяніць пароль для вязкі ключоў «%s». Увядзіце стары пароль да "
-"яе."
 
 #: daemon/dbus/gkd-secret-change.c:99 daemon/dbus/gkd-secret-change.c:135
 #: daemon/dbus/gkd-secret-change.c:146 pkcs11/wrap-layer/gkm-wrap-prompt.c:1143
 #: pkcs11/wrap-layer/gkm-wrap-prompt.c:1256
 #: pkcs11/wrap-layer/gkm-wrap-prompt.c:1291
 msgid "Continue"
-msgstr "Працягнуць"
+msgstr "Ацҵара"
 
 #: daemon/dbus/gkd-secret-change.c:125
 #, c-format
 msgid "Choose a new password for the “%s” keyring"
-msgstr "Выберыце новы пароль для вязкі ключоў «%s»"
+msgstr ""
 
 #: daemon/dbus/gkd-secret-change.c:129
 #, c-format
@@ -61,12 +50,10 @@ msgid ""
 "An application wants to change the password for the “%s” keyring. Choose the "
 "new password you want to use for it."
 msgstr ""
-"Праграма хоча змяніць пароль для вязкі ключоў «%s». Выберыце для яе новы "
-"пароль."
 
 #: daemon/dbus/gkd-secret-change.c:142 daemon/dbus/gkd-secret-create.c:94
 msgid "Store passwords unencrypted?"
-msgstr "Захоўваць паролі незашыфраванымі?"
+msgstr ""
 
 #: daemon/dbus/gkd-secret-change.c:144 daemon/dbus/gkd-secret-create.c:96
 msgid ""
@@ -74,17 +61,14 @@ msgid ""
 "safely encrypted. They will be accessible by anyone with access to your "
 "files."
 msgstr ""
-"Выбраўшы пусты пароль, вы не забяспечыце шыфраванне захаваных пароляў да "
-"разнастайных сэрвісаў. Доступ да гэтых пароляў зможа займець любы "
-"карыстальнік, які здолее прачытаць вашы файлы."
 
 #: daemon/dbus/gkd-secret-change.c:152
 msgid "The original password was incorrect"
-msgstr "Няправільны бягучы пароль"
+msgstr ""
 
 #: daemon/dbus/gkd-secret-change.c:348
 msgid "Change Keyring Password"
-msgstr "Змяненне пароля да вязкі ключоў"
+msgstr ""
 
 #: daemon/dbus/gkd-secret-create.c:80
 #, c-format
@@ -92,61 +76,59 @@ msgid ""
 "An application wants to create a new keyring called “%s”. Choose the "
 "password you want to use for it."
 msgstr ""
-"Праграма хоча стварыць новую вязку ключоў з назвай «%s». Выберыце для яе "
-"пароль."
 
 #: daemon/dbus/gkd-secret-create.c:84
 msgid "Choose password for new keyring"
-msgstr "Выберыце пароль да новай вязкі ключоў"
+msgstr ""
 
 #: daemon/dbus/gkd-secret-create.c:309
 msgid "New Keyring Password"
-msgstr "Новы пароль да вязкі ключоў"
+msgstr ""
 
 #: daemon/gnome-keyring-pkcs11.desktop.in:4
 msgid "Certificate and Key Storage"
-msgstr "Сховішча сертыфікатаў і ключоў"
+msgstr ""
 
 #: daemon/gnome-keyring-pkcs11.desktop.in:5
 msgid "GNOME Keyring: PKCS#11 Component"
-msgstr "Вязкі ключоў GNOME: кампанент PKCS#11"
+msgstr ""
 
 #: daemon/gnome-keyring-secrets.desktop.in:4
 msgid "Secret Storage Service"
-msgstr "Служба сховішча для сакрэтаў"
+msgstr ""
 
 #: daemon/gnome-keyring-secrets.desktop.in:5
 msgid "GNOME Keyring: Secret Service"
-msgstr "Вязкі ключоў GNOME: служба сакрэтаў"
+msgstr ""
 
 #: daemon/gnome-keyring-ssh.desktop.in:4
 msgid "SSH Key Agent"
-msgstr "Агент ключоў SSH"
+msgstr "Ацаԥхақәа рагент SSH"
 
 #: daemon/gnome-keyring-ssh.desktop.in:5
 msgid "GNOME Keyring: SSH Agent"
-msgstr "Вязкі ключоў GNOME: агент SSH"
+msgstr ""
 
 #. TRANSLATORS: This is the display label for the login keyring
 #: daemon/login/gkd-login.c:162
 msgid "Login"
-msgstr "Уваход"
+msgstr "Аҭаҩра"
 
 #. Get the label ready
 #: daemon/login/gkd-login-interaction.c:191
 #: pkcs11/wrap-layer/gkm-wrap-login.c:345
 #, c-format
 msgid "Unlock password for: %s"
-msgstr "Пароль для разблакіравання: %s"
+msgstr "Ажәамаӡа аужьра : %s"
 
 #: daemon/ssh-agent/gkd-ssh-agent-interaction.c:100
 #: pkcs11/wrap-layer/gkm-wrap-prompt.c:634
 msgid "Unlock private key"
-msgstr "Разблакіраванне закрытага ключа"
+msgstr "Ахатәы цаҧха аужьра"
 
 #: daemon/ssh-agent/gkd-ssh-agent-interaction.c:101
 msgid "Enter password to unlock the private key"
-msgstr "Увядзіце пароль, каб разблакіраваць закрыты ключ"
+msgstr ""
 
 #. TRANSLATORS: The private key is locked
 #: daemon/ssh-agent/gkd-ssh-agent-interaction.c:104
@@ -154,12 +136,11 @@ msgstr "Увядзіце пароль, каб разблакіраваць за�
 #, c-format
 msgid "An application wants access to the private key “%s”, but it is locked"
 msgstr ""
-"Праграма патрабуе доступу да закрытага ключа «%s», але ён заблакіраваны"
 
 #: daemon/ssh-agent/gkd-ssh-agent-interaction.c:111
 #: pkcs11/wrap-layer/gkm-wrap-prompt.c:650
 msgid "Automatically unlock this key whenever I’m logged in"
-msgstr "Аўтаматычна разблакіраваць гэты ключ, калі я ўвайшоў у сістэму"
+msgstr "Ари ацаԥха автоматикла аужьра асистема аҭалара ашьҭахь"
 
 #: daemon/ssh-agent/gkd-ssh-agent-interaction.c:113
 #: pkcs11/wrap-layer/gkm-wrap-prompt.c:600
@@ -169,27 +150,27 @@ msgstr "Аўтаматычна разблакіраваць гэты ключ, �
 #: pkcs11/wrap-layer/gkm-wrap-prompt.c:747
 #: pkcs11/wrap-layer/gkm-wrap-prompt.c:779
 msgid "Unlock"
-msgstr "Разблакіраваць"
+msgstr ""
 
 #: daemon/ssh-agent/gkd-ssh-agent-interaction.c:116
 #: pkcs11/wrap-layer/gkm-wrap-prompt.c:745
 msgid "The unlock password was incorrect"
-msgstr "Няправільны пароль разблакіравання"
+msgstr ""
 
 #: egg/dotlock.c:668
 #, c-format
 msgid "failed to create temporary file `%s': %s\n"
-msgstr "не ўдалося стварыць часовы файл «%s»: %s\n"
+msgstr ""
 
 #: egg/dotlock.c:718
 #, c-format
 msgid "error writing to `%s': %s\n"
-msgstr "памылка запісу ў «%s»: %s\n"
+msgstr ""
 
 #: egg/dotlock.c:782
 #, c-format
 msgid "can't create `%s': %s\n"
-msgstr "не ўдалося стварыць «%s»: %s\n"
+msgstr ""
 
 #. Note: It is unlikley that we get a race here unless a pid is
 #. reused too fast or a new process with the same pid as the one
@@ -197,122 +178,122 @@ msgstr "не ўдалося стварыць «%s»: %s\n"
 #: egg/dotlock.c:1048
 #, c-format
 msgid "removing stale lockfile (created by %d)\n"
-msgstr "выдаленне састарэлага блок-файла (створаны працэсам %d)\n"
+msgstr ""
 
 #: egg/dotlock.c:1084
 #, c-format
 msgid "waiting for lock (held by %d%s) %s...\n"
-msgstr "чаканне блакіравання (утрымліваецца %d%s) %s...\n"
+msgstr ""
 
 #: egg/dotlock.c:1085
 msgid "(deadlock?) "
-msgstr "(узаемнае блакіраванне?) "
+msgstr "(анибакылара)"
 
 #: egg/dotlock.c:1124
 #, c-format
 msgid "lock `%s' not made: %s\n"
-msgstr "блакіраванне «%s» не выканана: %s\n"
+msgstr ""
 
 #: egg/dotlock.c:1150
 #, c-format
 msgid "waiting for lock %s...\n"
-msgstr "чаканне блакіравання %s...\n"
+msgstr ""
 
 #: egg/egg-oid.c:40
 msgid "Domain Component"
-msgstr "Даменны кампанент"
+msgstr "Ахьыӡқәа рҵакыра"
 
 #: egg/egg-oid.c:42
 msgid "User ID"
-msgstr "ID карыстальніка"
+msgstr "Ахархәаҩ иеԥшрагәаҭага"
 
 #: egg/egg-oid.c:45
 msgid "Email Address"
-msgstr "Адрас электроннай пошты"
+msgstr "Аел. ԥошьҭа аҭыӡҭыԥ"
 
 #: egg/egg-oid.c:53
 msgid "Date of Birth"
-msgstr "Дата нараджэння"
+msgstr "Аира Арыцхә"
 
 #: egg/egg-oid.c:55
 msgid "Place of Birth"
-msgstr "Месца нараджэння"
+msgstr "Аира аҭыҧ"
 
 #: egg/egg-oid.c:57
 msgid "Gender"
-msgstr "Пол"
+msgstr "Ахаҵара-аҧҳәысра"
 
 #: egg/egg-oid.c:59
 msgid "Country of Citizenship"
-msgstr "Грамадзянства"
+msgstr "Атәылауаҩра"
 
 #: egg/egg-oid.c:61
 msgid "Country of Residence"
-msgstr "Краіна пражывання"
+msgstr "Шәахьынхо атәыла"
 
 #: egg/egg-oid.c:64
 msgid "Common Name"
-msgstr "Агульнае імя"
+msgstr "Азеԥш хьӡы"
 
 #: egg/egg-oid.c:66
 msgid "Surname"
-msgstr "Прозвішча"
+msgstr "Ажәла"
 
 #: egg/egg-oid.c:68
 msgid "Serial Number"
-msgstr "Серыйны нумар"
+msgstr "Асериатә номер"
 
 #: egg/egg-oid.c:70
 msgid "Country"
-msgstr "Краіна"
+msgstr "Атәыла"
 
 #: egg/egg-oid.c:72
 msgid "Locality"
-msgstr "Населены пункт"
+msgstr "Аҭыҧ"
 
 #: egg/egg-oid.c:74
 msgid "State"
-msgstr "Вобласць"
+msgstr "Аҵакыра"
 
 #: egg/egg-oid.c:76
 msgid "Street"
-msgstr "Вуліца"
+msgstr "Амҩаду"
 
 #: egg/egg-oid.c:78
 msgid "Organization"
-msgstr "Установа"
+msgstr "Еиҿкаара"
 
 #: egg/egg-oid.c:80
 msgid "Organizational Unit"
-msgstr "Аддзел установы"
+msgstr "Аиҟәша"
 
 #: egg/egg-oid.c:82
 msgid "Title"
-msgstr "Пасада"
+msgstr "Ахы"
 
 #: egg/egg-oid.c:84
 msgid "Telephone Number"
-msgstr "Нумар тэлефона"
+msgstr "Аҭел аномер"
 
 #: egg/egg-oid.c:86
 msgid "Given Name"
-msgstr "Імя"
+msgstr "Ахьӡ"
 
 #: egg/egg-oid.c:88
 msgid "Initials"
-msgstr "Ініцыялы"
+msgstr "Аинициалқәа"
 
 #: egg/egg-oid.c:90
 msgid "Generation Qualifier"
-msgstr "Пазнака пакалення"
+msgstr "Абиҧара адырга"
 
 #: egg/egg-oid.c:92
 msgid "DN Qualifier"
-msgstr "Пазнака DN"
+msgstr "Аиҩдырааратә ахьӡ адырга"
 
 #: egg/egg-oid.c:94
 msgid "Pseudonym"
-msgstr "Псеўданім"
+msgstr "Апсевдоним"
 
 #: egg/egg-oid.c:97
 msgid "RSA"
@@ -320,15 +301,15 @@ msgstr "RSA"
 
 #: egg/egg-oid.c:98
 msgid "MD2 with RSA"
-msgstr "MD2 з RSA"
+msgstr ""
 
 #: egg/egg-oid.c:99
 msgid "MD5 with RSA"
-msgstr "MD5 з RSA"
+msgstr ""
 
 #: egg/egg-oid.c:100
 msgid "SHA1 with RSA"
-msgstr "SHA1 з RSA"
+msgstr ""
 
 #: egg/egg-oid.c:102
 msgid "DSA"
@@ -336,40 +317,40 @@ msgstr "DSA"
 
 #: egg/egg-oid.c:103
 msgid "SHA1 with DSA"
-msgstr "SHA1 з DSA"
+msgstr ""
 
 #. Extended Key Usages
 #: egg/egg-oid.c:106
 msgid "Server Authentication"
-msgstr "Праверка сапраўднасці сервера"
+msgstr "Асервер ахаҭареилкаара"
 
 #: egg/egg-oid.c:107
 msgid "Client Authentication"
-msgstr "Праверка сапраўднасці кліента"
+msgstr "Аҭааҩ ихаҭареилкаара"
 
 #: egg/egg-oid.c:108
 msgid "Code Signing"
-msgstr "Падпісванне кода"
+msgstr ""
 
 #: egg/egg-oid.c:109
 msgid "Email Protection"
-msgstr "Абарона электроннай пошты"
+msgstr ""
 
 #: egg/egg-oid.c:110
 msgid "Time Stamping"
-msgstr "Дадаванне часавай меткі"
+msgstr ""
 
 #: pkcs11/gkm/gkm-certificate.c:578
 msgid "Unnamed Certificate"
-msgstr "Неназваны сертыфікат"
+msgstr "Ихьӡыдоу асертификат"
 
 #: pkcs11/ssh-store/gkm-ssh-private-key.c:341
 msgid "Couldn’t parse public SSH key"
-msgstr "Не ўдалося разабраць адкрыты ключ SSH"
+msgstr ""
 
 #: pkcs11/wrap-layer/gkm-wrap-prompt.c:590
 msgid "Unlock Login Keyring"
-msgstr "Разблакіраванне сеансавай вязкі ключоў"
+msgstr ""
 
 #: pkcs11/wrap-layer/gkm-wrap-prompt.c:591
 #: pkcs11/wrap-layer/gkm-wrap-prompt.c:615
@@ -377,76 +358,73 @@ msgstr "Разблакіраванне сеансавай вязкі ключо�
 #: pkcs11/wrap-layer/gkm-wrap-prompt.c:767
 #: pkcs11/wrap-layer/gkm-wrap-prompt.c:1250
 msgid "Authentication required"
-msgstr "Патрабуецца праверка сапраўднасці"
+msgstr ""
 
 #: pkcs11/wrap-layer/gkm-wrap-prompt.c:594
 msgid ""
 "The password you use to log in to your computer no longer matches that of "
 "your login keyring."
 msgstr ""
-"Пароль для ўваходу ў сістэму ўжо не адпавядае паролю да сеансавай вязкі "
-"ключоў."
 
 #: pkcs11/wrap-layer/gkm-wrap-prompt.c:596
 msgid ""
 "The login keyring did not get unlocked when you logged into your computer."
-msgstr "Сеансавая вязка ключоў не была разблакіравана пры ўваходзе ў сістэму."
+msgstr ""
 
 #: pkcs11/wrap-layer/gkm-wrap-prompt.c:614
 msgid "Unlock Keyring"
-msgstr "Разблакіраванне вязкі ключоў"
+msgstr ""
 
 #: pkcs11/wrap-layer/gkm-wrap-prompt.c:617
 #, c-format
 msgid "An application wants access to the keyring “%s”, but it is locked"
-msgstr "Праграма патрабуе доступу да вязкі ключоў «%s», але яна заблакіравана"
+msgstr ""
 
 #: pkcs11/wrap-layer/gkm-wrap-prompt.c:623
 msgid "Automatically unlock this keyring whenever I’m logged in"
-msgstr "Аўтаматычна разблакіраваць гэту вязку ключоў, пакуль я ў сістэме"
+msgstr "Ари ацаԥхақәа реидҳәала автоматикла аужьра асистема аҭыҵраан"
 
 #: pkcs11/wrap-layer/gkm-wrap-prompt.c:636
 msgid "Unlock certificate"
-msgstr "Разблакіраванне сертыфіката"
+msgstr ""
 
 #: pkcs11/wrap-layer/gkm-wrap-prompt.c:638
 msgid "Unlock public key"
-msgstr "Разблакіраванне адкрытага ключа"
+msgstr ""
 
 #: pkcs11/wrap-layer/gkm-wrap-prompt.c:652
 msgid "Automatically unlock this certificate whenever I’m logged in"
-msgstr "Аўтаматычна разблакіраваць гэты сертыфікат, пакуль я ў сістэме"
+msgstr "Ари асертификат автоматикла аужьра асистема аҭалараан"
 
 #: pkcs11/wrap-layer/gkm-wrap-prompt.c:654
 #: pkcs11/wrap-layer/gkm-wrap-prompt.c:776
 #: pkcs11/wrap-layer/gkm-wrap-prompt.c:1140
 #: pkcs11/wrap-layer/gkm-wrap-prompt.c:1289
 msgid "Automatically unlock whenever I’m logged in"
-msgstr "Аўтаматычна разблакіраваць, пакуль я ў сістэме"
+msgstr "Автоматикла аужьра асистема аҭалараан"
 
 #. TRANSLATORS: The certificate is locked
 #: pkcs11/wrap-layer/gkm-wrap-prompt.c:668
 #, c-format
 msgid "An application wants access to the certificate “%s”, but it is locked"
-msgstr "Праграма патрабуе доступу да сертыфіката «%s», але ён заблакіраваны"
+msgstr ""
 
 #. TRANSLATORS: The public key is locked
 #: pkcs11/wrap-layer/gkm-wrap-prompt.c:671
 #, c-format
 msgid "An application wants access to the public key “%s”, but it is locked"
 msgstr ""
-"Праграма патрабуе доступу да адкрытага ключа «%s», але ён заблакіраваны"
 
 #. TRANSLATORS: The object '%s' is locked
 #: pkcs11/wrap-layer/gkm-wrap-prompt.c:674
 #, c-format
 msgid "An application wants access to “%s”, but it is locked"
-msgstr "Праграма патрабуе доступу да аб'екта «%s», але ён заблакіраваны"
+msgstr ""
 
 #. Build up the prompt
 #: pkcs11/wrap-layer/gkm-wrap-prompt.c:766
 msgid "Unlock certificate/key storage"
-msgstr "Разблакіраваць сховішча сертыфікатаў і ключоў"
+msgstr ""
 
 #. TRANSLATORS: The storage is locked, and needs unlocking before the application can use it.
 #: pkcs11/wrap-layer/gkm-wrap-prompt.c:770
@@ -455,16 +433,14 @@ msgid ""
 "An application wants access to the certificate/key storage “%s”, but it is "
 "locked"
 msgstr ""
-"Праграма патрабуе доступ да сховішча сертыфікатаў і ключоў «%s», але яно "
-"заблакіравана"
 
 #: pkcs11/wrap-layer/gkm-wrap-prompt.c:1131
 msgid "New Password Required"
-msgstr "Патрабуецца новы пароль"
+msgstr "Иаҭахуп ажәамаӡа ҿыц"
 
 #: pkcs11/wrap-layer/gkm-wrap-prompt.c:1132
 msgid "New password required"
-msgstr "Патрабуецца новы пароль"
+msgstr "Иаҭахуп ажәамаӡа ҿыц"
 
 #: pkcs11/wrap-layer/gkm-wrap-prompt.c:1134
 #, c-format
@@ -472,89 +448,4167 @@ msgid ""
 "In order to prepare “%s” for storage of certificates or keys, a password is "
 "required"
 msgstr ""
-"Каб падрыхтаваць «%s» для захавання сертыфікатаў і ключоў, патрэбны пароль"
+"«%s» асертификатқәеи ацаҧхақәеи реиқәырхара  азыҟаҵаразы  ажәамаӡа арбаратәуп"
 
 #: pkcs11/wrap-layer/gkm-wrap-prompt.c:1249
 #: pkcs11/wrap-layer/gkm-wrap-prompt.c:1280
 msgid "Change Password"
-msgstr "Змяненне пароля"
+msgstr ""
 
 #: pkcs11/wrap-layer/gkm-wrap-prompt.c:1252
 #, c-format
 msgid "To change the password for “%s”, the original password is required"
-msgstr "Каб змяніць пароль для «%s», патрабуецца бягучы пароль"
+msgstr "«%s» апароль  аҧсахразы иаҭахуп изаамҭанытәиу ажәамаӡа"
 
 #: pkcs11/wrap-layer/gkm-wrap-prompt.c:1281
 msgid "Change password"
-msgstr "Змяніць пароль"
+msgstr "Ажәамаӡа аҧсахра"
 
 #: pkcs11/wrap-layer/gkm-wrap-prompt.c:1283
 #, c-format
 msgid "Type a new password for “%s”"
-msgstr "Увядзіце новы пароль для «%s»"
+msgstr "Иҭажәгал ажәамаӡа ҿыц «%s» азы"
 
 #: tool/gkr-tool.c:100
 msgid "usage: gnome-keyring command [options]\n"
-msgstr "Выкарыстанне: gnome-keyring каманда [параметры]\n"
+msgstr ""
 
 #: tool/gkr-tool.c:102
 msgid "commands: "
-msgstr "каманды: "
+msgstr ""
 
 #. Translators: keep same length as translated message "commands: "
 #: tool/gkr-tool.c:106
 msgid "          "
-msgstr "        "
+msgstr "          "
 
-#~ msgid "Enter password to unlock your login keyring"
-#~ msgstr "Увядзіце пароль для разблакіравання сеансавай вязкі ключоў"
 
-#~ msgid "Enter password to unlock"
-#~ msgstr "Увядзіце пароль, каб разблакіраваць"
 
-#~ msgid "Enter password to unlock the certificate"
-#~ msgstr "Увядзіце пароль, каб разблакіраваць сертыфікат"
 
-#~ msgid "Enter password to unlock the public key"
-#~ msgstr "Увядзіце пароль для разблакіравання адкрытага ключа"
 
-#~ msgid "Enter password to unlock the certificate/key storage"
-#~ msgstr "Увядзіце пароль для разблакіравання сховішча сертыфікатаў і ключоў"
 
-#~ msgid "New password required for secure storage"
-#~ msgstr "Для бяспечнага сховішча патрэбны новы пароль"
 
-#~ msgid "Original password for secure storage"
-#~ msgstr "Арыгінальны пароль да бяспечнага сховішча"
 
-#~ msgid "Change password for secure storage"
-#~ msgstr "Змяненне пароля да бяспечнага сховішча"
 
-#~ msgid "GPG Password Agent"
-#~ msgstr "Агент пароляў GPG"
 
-#~ msgid "GNOME Keyring: GPG Agent"
-#~ msgstr "Вязкі ключоў GNOME: Агент GPG"
 
-#~ msgid "Unknown"
-#~ msgstr "Невядома"
 
-#~ msgid "PGP Key: %s"
-#~ msgstr "Ключ PGP: %s"
 
-#~ msgid "Enter Passphrase"
-#~ msgstr "Увод парольнай фразы"
 
-#~ msgid "Automatically unlock this key, whenever I'm logged in"
-#~ msgstr "Аўтаматычна разблакіраваць гэты ключ, пакуль я ў сістэме"
 
-#~ msgid "Unexpected error in select() reading data from a child process (%s)"
-#~ msgstr ""
-#~ "Нечаканая памылка ў функцыі select() пры чытанні даных ад працэсу-"
-#~ "нашчадка (%s)"
 
-#~ msgid "Unexpected error in waitpid() (%s)"
-#~ msgstr "Нечаканая памылка ў функцыі waitpid() (%s)"
 
-#~ msgid "Enter password for keyring '%s' to unlock"
-#~ msgstr "Увядзіце пароль для разблакіравання вязкі ключоў \"%s\""
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#, fuzzy

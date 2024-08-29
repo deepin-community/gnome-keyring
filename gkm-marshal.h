@@ -6,7 +6,7 @@
 
 G_BEGIN_DECLS
 
-/* BOOLEAN:VOID (pkcs11/gkm/gkm-marshal.list:1) */
+/* BOOLEAN:VOID (../pkcs11/gkm/gkm-marshal.list:1) */
 extern
 void gkm_marshal_BOOLEAN__VOID (GClosure     *closure,
                                 GValue       *return_value,
@@ -15,7 +15,7 @@ void gkm_marshal_BOOLEAN__VOID (GClosure     *closure,
                                 gpointer      invocation_hint,
                                 gpointer      marshal_data);
 
-/* VOID:STRING,ULONG (pkcs11/gkm/gkm-marshal.list:2) */
+/* VOID:STRING,ULONG (../pkcs11/gkm/gkm-marshal.list:2) */
 extern
 void gkm_marshal_VOID__STRING_ULONG (GClosure     *closure,
                                      GValue       *return_value,
@@ -24,7 +24,7 @@ void gkm_marshal_VOID__STRING_ULONG (GClosure     *closure,
                                      gpointer      invocation_hint,
                                      gpointer      marshal_data);
 
-/* VOID:OBJECT,ULONG (pkcs11/gkm/gkm-marshal.list:3) */
+/* VOID:OBJECT,ULONG (../pkcs11/gkm/gkm-marshal.list:3) */
 extern
 void gkm_marshal_VOID__OBJECT_ULONG (GClosure     *closure,
                                      GValue       *return_value,

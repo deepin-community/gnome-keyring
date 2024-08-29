@@ -10,12 +10,58 @@
 #  include "config.h"
 #endif
 
-#include "./daemon/dbus/gkd-internal-generated.h"
+#include "../daemon/dbus/gkd-internal-generated.h"
 
 #include <string.h>
 #ifdef G_OS_UNIX
 #  include <gio/gunixfdlist.h>
 #endif
+
+#ifdef G_ENABLE_DEBUG
+#define g_marshal_value_peek_boolean(v)  g_value_get_boolean (v)
+#define g_marshal_value_peek_char(v)     g_value_get_schar (v)
+#define g_marshal_value_peek_uchar(v)    g_value_get_uchar (v)
+#define g_marshal_value_peek_int(v)      g_value_get_int (v)
+#define g_marshal_value_peek_uint(v)     g_value_get_uint (v)
+#define g_marshal_value_peek_long(v)     g_value_get_long (v)
+#define g_marshal_value_peek_ulong(v)    g_value_get_ulong (v)
+#define g_marshal_value_peek_int64(v)    g_value_get_int64 (v)
+#define g_marshal_value_peek_uint64(v)   g_value_get_uint64 (v)
+#define g_marshal_value_peek_enum(v)     g_value_get_enum (v)
+#define g_marshal_value_peek_flags(v)    g_value_get_flags (v)
+#define g_marshal_value_peek_float(v)    g_value_get_float (v)
+#define g_marshal_value_peek_double(v)   g_value_get_double (v)
+#define g_marshal_value_peek_string(v)   (char*) g_value_get_string (v)
+#define g_marshal_value_peek_param(v)    g_value_get_param (v)
+#define g_marshal_value_peek_boxed(v)    g_value_get_boxed (v)
+#define g_marshal_value_peek_pointer(v)  g_value_get_pointer (v)
+#define g_marshal_value_peek_object(v)   g_value_get_object (v)
+#define g_marshal_value_peek_variant(v)  g_value_get_variant (v)
+#else /* !G_ENABLE_DEBUG */
+/* WARNING: This code accesses GValues directly, which is UNSUPPORTED API.
+ *          Do not access GValues directly in your code. Instead, use the
+ *          g_value_get_*() functions
+ */
+#define g_marshal_value_peek_boolean(v)  (v)->data[0].v_int
+#define g_marshal_value_peek_char(v)     (v)->data[0].v_int
+#define g_marshal_value_peek_uchar(v)    (v)->data[0].v_uint
+#define g_marshal_value_peek_int(v)      (v)->data[0].v_int
+#define g_marshal_value_peek_uint(v)     (v)->data[0].v_uint
+#define g_marshal_value_peek_long(v)     (v)->data[0].v_long
+#define g_marshal_value_peek_ulong(v)    (v)->data[0].v_ulong
+#define g_marshal_value_peek_int64(v)    (v)->data[0].v_int64
+#define g_marshal_value_peek_uint64(v)   (v)->data[0].v_uint64
+#define g_marshal_value_peek_enum(v)     (v)->data[0].v_long
+#define g_marshal_value_peek_flags(v)    (v)->data[0].v_ulong
+#define g_marshal_value_peek_float(v)    (v)->data[0].v_float
+#define g_marshal_value_peek_double(v)   (v)->data[0].v_double
+#define g_marshal_value_peek_string(v)   (v)->data[0].v_pointer
+#define g_marshal_value_peek_param(v)    (v)->data[0].v_pointer
+#define g_marshal_value_peek_boxed(v)    (v)->data[0].v_pointer
+#define g_marshal_value_peek_pointer(v)  (v)->data[0].v_pointer
+#define g_marshal_value_peek_object(v)   (v)->data[0].v_pointer
+#define g_marshal_value_peek_variant(v)  (v)->data[0].v_pointer
+#endif /* !G_ENABLE_DEBUG */
 
 typedef struct
 {
@@ -149,6 +195,194 @@ _g_value_equal (const GValue *a, const GValue *b)
         break;
     }
   return ret;
+}
+
+static void
+_g_dbus_codegen_marshal_BOOLEAN__OBJECT_STRING_VARIANT_VARIANT (
+    GClosure     *closure,
+    GValue       *return_value,
+    unsigned int  n_param_values,
+    const GValue *param_values,
+    void         *invocation_hint G_GNUC_UNUSED,
+    void         *marshal_data)
+{
+  typedef gboolean (*_GDbusCodegenMarshalBoolean_ObjectStringVariantVariantFunc)
+       (void *data1,
+        GDBusMethodInvocation *arg_method_invocation,
+        const gchar *arg_collection,
+        GVariant *arg_original,
+        GVariant *arg_master,
+        void *data2);
+  _GDbusCodegenMarshalBoolean_ObjectStringVariantVariantFunc callback;
+  GCClosure *cc = (GCClosure*) closure;
+  void *data1, *data2;
+  gboolean v_return;
+
+  g_return_if_fail (return_value != NULL);
+  g_return_if_fail (n_param_values == 5);
+
+  if (G_CCLOSURE_SWAP_DATA (closure))
+    {
+      data1 = closure->data;
+      data2 = g_value_peek_pointer (param_values + 0);
+    }
+  else
+    {
+      data1 = g_value_peek_pointer (param_values + 0);
+      data2 = closure->data;
+    }
+
+  callback = (_GDbusCodegenMarshalBoolean_ObjectStringVariantVariantFunc)
+    (marshal_data ? marshal_data : cc->callback);
+
+  v_return =
+    callback (data1,
+              g_marshal_value_peek_object (param_values + 1),
+              g_marshal_value_peek_string (param_values + 2),
+              g_marshal_value_peek_variant (param_values + 3),
+              g_marshal_value_peek_variant (param_values + 4),
+              data2);
+
+  g_value_set_boolean (return_value, v_return);
+}
+
+static void
+_g_dbus_codegen_marshal_BOOLEAN__OBJECT_STRING (
+    GClosure     *closure,
+    GValue       *return_value,
+    unsigned int  n_param_values,
+    const GValue *param_values,
+    void         *invocation_hint G_GNUC_UNUSED,
+    void         *marshal_data)
+{
+  typedef gboolean (*_GDbusCodegenMarshalBoolean_ObjectStringFunc)
+       (void *data1,
+        GDBusMethodInvocation *arg_method_invocation,
+        const gchar *arg_collection,
+        void *data2);
+  _GDbusCodegenMarshalBoolean_ObjectStringFunc callback;
+  GCClosure *cc = (GCClosure*) closure;
+  void *data1, *data2;
+  gboolean v_return;
+
+  g_return_if_fail (return_value != NULL);
+  g_return_if_fail (n_param_values == 3);
+
+  if (G_CCLOSURE_SWAP_DATA (closure))
+    {
+      data1 = closure->data;
+      data2 = g_value_peek_pointer (param_values + 0);
+    }
+  else
+    {
+      data1 = g_value_peek_pointer (param_values + 0);
+      data2 = closure->data;
+    }
+
+  callback = (_GDbusCodegenMarshalBoolean_ObjectStringFunc)
+    (marshal_data ? marshal_data : cc->callback);
+
+  v_return =
+    callback (data1,
+              g_marshal_value_peek_object (param_values + 1),
+              g_marshal_value_peek_string (param_values + 2),
+              data2);
+
+  g_value_set_boolean (return_value, v_return);
+}
+
+static void
+_g_dbus_codegen_marshal_BOOLEAN__OBJECT_VARIANT_VARIANT (
+    GClosure     *closure,
+    GValue       *return_value,
+    unsigned int  n_param_values,
+    const GValue *param_values,
+    void         *invocation_hint G_GNUC_UNUSED,
+    void         *marshal_data)
+{
+  typedef gboolean (*_GDbusCodegenMarshalBoolean_ObjectVariantVariantFunc)
+       (void *data1,
+        GDBusMethodInvocation *arg_method_invocation,
+        GVariant *arg_attributes,
+        GVariant *arg_master,
+        void *data2);
+  _GDbusCodegenMarshalBoolean_ObjectVariantVariantFunc callback;
+  GCClosure *cc = (GCClosure*) closure;
+  void *data1, *data2;
+  gboolean v_return;
+
+  g_return_if_fail (return_value != NULL);
+  g_return_if_fail (n_param_values == 4);
+
+  if (G_CCLOSURE_SWAP_DATA (closure))
+    {
+      data1 = closure->data;
+      data2 = g_value_peek_pointer (param_values + 0);
+    }
+  else
+    {
+      data1 = g_value_peek_pointer (param_values + 0);
+      data2 = closure->data;
+    }
+
+  callback = (_GDbusCodegenMarshalBoolean_ObjectVariantVariantFunc)
+    (marshal_data ? marshal_data : cc->callback);
+
+  v_return =
+    callback (data1,
+              g_marshal_value_peek_object (param_values + 1),
+              g_marshal_value_peek_variant (param_values + 2),
+              g_marshal_value_peek_variant (param_values + 3),
+              data2);
+
+  g_value_set_boolean (return_value, v_return);
+}
+
+static void
+_g_dbus_codegen_marshal_BOOLEAN__OBJECT_STRING_VARIANT (
+    GClosure     *closure,
+    GValue       *return_value,
+    unsigned int  n_param_values,
+    const GValue *param_values,
+    void         *invocation_hint G_GNUC_UNUSED,
+    void         *marshal_data)
+{
+  typedef gboolean (*_GDbusCodegenMarshalBoolean_ObjectStringVariantFunc)
+       (void *data1,
+        GDBusMethodInvocation *arg_method_invocation,
+        const gchar *arg_collection,
+        GVariant *arg_master,
+        void *data2);
+  _GDbusCodegenMarshalBoolean_ObjectStringVariantFunc callback;
+  GCClosure *cc = (GCClosure*) closure;
+  void *data1, *data2;
+  gboolean v_return;
+
+  g_return_if_fail (return_value != NULL);
+  g_return_if_fail (n_param_values == 4);
+
+  if (G_CCLOSURE_SWAP_DATA (closure))
+    {
+      data1 = closure->data;
+      data2 = g_value_peek_pointer (param_values + 0);
+    }
+  else
+    {
+      data1 = g_value_peek_pointer (param_values + 0);
+      data2 = closure->data;
+    }
+
+  callback = (_GDbusCodegenMarshalBoolean_ObjectStringVariantFunc)
+    (marshal_data ? marshal_data : cc->callback);
+
+  v_return =
+    callback (data1,
+              g_marshal_value_peek_object (param_values + 1),
+              g_marshal_value_peek_string (param_values + 2),
+              g_marshal_value_peek_variant (param_values + 3),
+              data2);
+
+  g_value_set_boolean (return_value, v_return);
 }
 
 /* ------------------------------------------------------------------------
@@ -415,11 +649,63 @@ gkd_exported_internal_interface_info (void)
  * Returns: The last property id.
  */
 guint
-gkd_exported_internal_override_properties (GObjectClass *klass, guint property_id_begin)
+gkd_exported_internal_override_properties (GObjectClass *klass G_GNUC_UNUSED, guint property_id_begin)
 {
   return property_id_begin - 1;
 }
 
+
+inline static void
+gkd_exported_internal_method_marshal_change_with_master_password (
+    GClosure     *closure,
+    GValue       *return_value,
+    unsigned int  n_param_values,
+    const GValue *param_values,
+    void         *invocation_hint,
+    void         *marshal_data)
+{
+  _g_dbus_codegen_marshal_BOOLEAN__OBJECT_STRING_VARIANT_VARIANT (closure,
+    return_value, n_param_values, param_values, invocation_hint, marshal_data);
+}
+
+inline static void
+gkd_exported_internal_method_marshal_change_with_prompt (
+    GClosure     *closure,
+    GValue       *return_value,
+    unsigned int  n_param_values,
+    const GValue *param_values,
+    void         *invocation_hint,
+    void         *marshal_data)
+{
+  _g_dbus_codegen_marshal_BOOLEAN__OBJECT_STRING (closure,
+    return_value, n_param_values, param_values, invocation_hint, marshal_data);
+}
+
+inline static void
+gkd_exported_internal_method_marshal_create_with_master_password (
+    GClosure     *closure,
+    GValue       *return_value,
+    unsigned int  n_param_values,
+    const GValue *param_values,
+    void         *invocation_hint,
+    void         *marshal_data)
+{
+  _g_dbus_codegen_marshal_BOOLEAN__OBJECT_VARIANT_VARIANT (closure,
+    return_value, n_param_values, param_values, invocation_hint, marshal_data);
+}
+
+inline static void
+gkd_exported_internal_method_marshal_unlock_with_master_password (
+    GClosure     *closure,
+    GValue       *return_value,
+    unsigned int  n_param_values,
+    const GValue *param_values,
+    void         *invocation_hint,
+    void         *marshal_data)
+{
+  _g_dbus_codegen_marshal_BOOLEAN__OBJECT_STRING_VARIANT (closure,
+    return_value, n_param_values, param_values, invocation_hint, marshal_data);
+}
 
 
 /**
@@ -456,9 +742,9 @@ gkd_exported_internal_default_init (GkdExportedInternalIface *iface)
    *
    * Signal emitted when a remote caller is invoking the <link linkend="gdbus-method-org-gnome-keyring-InternalUnsupportedGuiltRiddenInterface.ChangeWithMasterPassword">ChangeWithMasterPassword()</link> D-Bus method.
    *
-   * If a signal handler returns %TRUE, it means the signal handler will handle the invocation (e.g. take a reference to @invocation and eventually call gkd_exported_internal_complete_change_with_master_password() or e.g. g_dbus_method_invocation_return_error() on it) and no order signal handlers will run. If no signal handler handles the invocation, the %G_DBUS_ERROR_UNKNOWN_METHOD error is returned.
+   * If a signal handler returns %TRUE, it means the signal handler will handle the invocation (e.g. take a reference to @invocation and eventually call gkd_exported_internal_complete_change_with_master_password() or e.g. g_dbus_method_invocation_return_error() on it) and no other signal handlers will run. If no signal handler handles the invocation, the %G_DBUS_ERROR_UNKNOWN_METHOD error is returned.
    *
-   * Returns: %TRUE if the invocation was handled, %FALSE to let other signal handlers run.
+   * Returns: %G_DBUS_METHOD_INVOCATION_HANDLED or %TRUE if the invocation was handled, %G_DBUS_METHOD_INVOCATION_UNHANDLED or %FALSE to let other signal handlers run.
    */
   g_signal_new ("handle-change-with-master-password",
     G_TYPE_FROM_INTERFACE (iface),
@@ -466,7 +752,7 @@ gkd_exported_internal_default_init (GkdExportedInternalIface *iface)
     G_STRUCT_OFFSET (GkdExportedInternalIface, handle_change_with_master_password),
     g_signal_accumulator_true_handled,
     NULL,
-    g_cclosure_marshal_generic,
+      gkd_exported_internal_method_marshal_change_with_master_password,
     G_TYPE_BOOLEAN,
     4,
     G_TYPE_DBUS_METHOD_INVOCATION, G_TYPE_STRING, G_TYPE_VARIANT, G_TYPE_VARIANT);
@@ -479,9 +765,9 @@ gkd_exported_internal_default_init (GkdExportedInternalIface *iface)
    *
    * Signal emitted when a remote caller is invoking the <link linkend="gdbus-method-org-gnome-keyring-InternalUnsupportedGuiltRiddenInterface.ChangeWithPrompt">ChangeWithPrompt()</link> D-Bus method.
    *
-   * If a signal handler returns %TRUE, it means the signal handler will handle the invocation (e.g. take a reference to @invocation and eventually call gkd_exported_internal_complete_change_with_prompt() or e.g. g_dbus_method_invocation_return_error() on it) and no order signal handlers will run. If no signal handler handles the invocation, the %G_DBUS_ERROR_UNKNOWN_METHOD error is returned.
+   * If a signal handler returns %TRUE, it means the signal handler will handle the invocation (e.g. take a reference to @invocation and eventually call gkd_exported_internal_complete_change_with_prompt() or e.g. g_dbus_method_invocation_return_error() on it) and no other signal handlers will run. If no signal handler handles the invocation, the %G_DBUS_ERROR_UNKNOWN_METHOD error is returned.
    *
-   * Returns: %TRUE if the invocation was handled, %FALSE to let other signal handlers run.
+   * Returns: %G_DBUS_METHOD_INVOCATION_HANDLED or %TRUE if the invocation was handled, %G_DBUS_METHOD_INVOCATION_UNHANDLED or %FALSE to let other signal handlers run.
    */
   g_signal_new ("handle-change-with-prompt",
     G_TYPE_FROM_INTERFACE (iface),
@@ -489,7 +775,7 @@ gkd_exported_internal_default_init (GkdExportedInternalIface *iface)
     G_STRUCT_OFFSET (GkdExportedInternalIface, handle_change_with_prompt),
     g_signal_accumulator_true_handled,
     NULL,
-    g_cclosure_marshal_generic,
+      gkd_exported_internal_method_marshal_change_with_prompt,
     G_TYPE_BOOLEAN,
     2,
     G_TYPE_DBUS_METHOD_INVOCATION, G_TYPE_STRING);
@@ -503,9 +789,9 @@ gkd_exported_internal_default_init (GkdExportedInternalIface *iface)
    *
    * Signal emitted when a remote caller is invoking the <link linkend="gdbus-method-org-gnome-keyring-InternalUnsupportedGuiltRiddenInterface.CreateWithMasterPassword">CreateWithMasterPassword()</link> D-Bus method.
    *
-   * If a signal handler returns %TRUE, it means the signal handler will handle the invocation (e.g. take a reference to @invocation and eventually call gkd_exported_internal_complete_create_with_master_password() or e.g. g_dbus_method_invocation_return_error() on it) and no order signal handlers will run. If no signal handler handles the invocation, the %G_DBUS_ERROR_UNKNOWN_METHOD error is returned.
+   * If a signal handler returns %TRUE, it means the signal handler will handle the invocation (e.g. take a reference to @invocation and eventually call gkd_exported_internal_complete_create_with_master_password() or e.g. g_dbus_method_invocation_return_error() on it) and no other signal handlers will run. If no signal handler handles the invocation, the %G_DBUS_ERROR_UNKNOWN_METHOD error is returned.
    *
-   * Returns: %TRUE if the invocation was handled, %FALSE to let other signal handlers run.
+   * Returns: %G_DBUS_METHOD_INVOCATION_HANDLED or %TRUE if the invocation was handled, %G_DBUS_METHOD_INVOCATION_UNHANDLED or %FALSE to let other signal handlers run.
    */
   g_signal_new ("handle-create-with-master-password",
     G_TYPE_FROM_INTERFACE (iface),
@@ -513,7 +799,7 @@ gkd_exported_internal_default_init (GkdExportedInternalIface *iface)
     G_STRUCT_OFFSET (GkdExportedInternalIface, handle_create_with_master_password),
     g_signal_accumulator_true_handled,
     NULL,
-    g_cclosure_marshal_generic,
+      gkd_exported_internal_method_marshal_create_with_master_password,
     G_TYPE_BOOLEAN,
     3,
     G_TYPE_DBUS_METHOD_INVOCATION, G_TYPE_VARIANT, G_TYPE_VARIANT);
@@ -527,9 +813,9 @@ gkd_exported_internal_default_init (GkdExportedInternalIface *iface)
    *
    * Signal emitted when a remote caller is invoking the <link linkend="gdbus-method-org-gnome-keyring-InternalUnsupportedGuiltRiddenInterface.UnlockWithMasterPassword">UnlockWithMasterPassword()</link> D-Bus method.
    *
-   * If a signal handler returns %TRUE, it means the signal handler will handle the invocation (e.g. take a reference to @invocation and eventually call gkd_exported_internal_complete_unlock_with_master_password() or e.g. g_dbus_method_invocation_return_error() on it) and no order signal handlers will run. If no signal handler handles the invocation, the %G_DBUS_ERROR_UNKNOWN_METHOD error is returned.
+   * If a signal handler returns %TRUE, it means the signal handler will handle the invocation (e.g. take a reference to @invocation and eventually call gkd_exported_internal_complete_unlock_with_master_password() or e.g. g_dbus_method_invocation_return_error() on it) and no other signal handlers will run. If no signal handler handles the invocation, the %G_DBUS_ERROR_UNKNOWN_METHOD error is returned.
    *
-   * Returns: %TRUE if the invocation was handled, %FALSE to let other signal handlers run.
+   * Returns: %G_DBUS_METHOD_INVOCATION_HANDLED or %TRUE if the invocation was handled, %G_DBUS_METHOD_INVOCATION_UNHANDLED or %FALSE to let other signal handlers run.
    */
   g_signal_new ("handle-unlock-with-master-password",
     G_TYPE_FROM_INTERFACE (iface),
@@ -537,7 +823,7 @@ gkd_exported_internal_default_init (GkdExportedInternalIface *iface)
     G_STRUCT_OFFSET (GkdExportedInternalIface, handle_unlock_with_master_password),
     g_signal_accumulator_true_handled,
     NULL,
-    g_cclosure_marshal_generic,
+      gkd_exported_internal_method_marshal_unlock_with_master_password,
     G_TYPE_BOOLEAN,
     3,
     G_TYPE_DBUS_METHOD_INVOCATION, G_TYPE_STRING, G_TYPE_VARIANT);
@@ -983,7 +1269,7 @@ _out:
  */
 void
 gkd_exported_internal_complete_change_with_master_password (
-    GkdExportedInternal *object,
+    GkdExportedInternal *object G_GNUC_UNUSED,
     GDBusMethodInvocation *invocation)
 {
   g_dbus_method_invocation_return_value (invocation,
@@ -1002,7 +1288,7 @@ gkd_exported_internal_complete_change_with_master_password (
  */
 void
 gkd_exported_internal_complete_change_with_prompt (
-    GkdExportedInternal *object,
+    GkdExportedInternal *object G_GNUC_UNUSED,
     GDBusMethodInvocation *invocation,
     const gchar *prompt)
 {
@@ -1023,7 +1309,7 @@ gkd_exported_internal_complete_change_with_prompt (
  */
 void
 gkd_exported_internal_complete_create_with_master_password (
-    GkdExportedInternal *object,
+    GkdExportedInternal *object G_GNUC_UNUSED,
     GDBusMethodInvocation *invocation,
     const gchar *collection)
 {
@@ -1043,7 +1329,7 @@ gkd_exported_internal_complete_create_with_master_password (
  */
 void
 gkd_exported_internal_complete_unlock_with_master_password (
-    GkdExportedInternal *object,
+    GkdExportedInternal *object G_GNUC_UNUSED,
     GDBusMethodInvocation *invocation)
 {
   g_dbus_method_invocation_return_value (invocation,
@@ -1091,17 +1377,17 @@ gkd_exported_internal_proxy_finalize (GObject *object)
 }
 
 static void
-gkd_exported_internal_proxy_get_property (GObject      *object,
-  guint         prop_id,
-  GValue       *value,
+gkd_exported_internal_proxy_get_property (GObject      *object G_GNUC_UNUSED,
+  guint         prop_id G_GNUC_UNUSED,
+  GValue       *value G_GNUC_UNUSED,
   GParamSpec   *pspec G_GNUC_UNUSED)
 {
 }
 
 static void
-gkd_exported_internal_proxy_set_property (GObject      *object,
-  guint         prop_id,
-  const GValue *value,
+gkd_exported_internal_proxy_set_property (GObject      *object G_GNUC_UNUSED,
+  guint         prop_id G_GNUC_UNUSED,
+  const GValue *value G_GNUC_UNUSED,
   GParamSpec   *pspec G_GNUC_UNUSED)
 {
 }
@@ -1209,7 +1495,7 @@ gkd_exported_internal_proxy_class_init (GkdExportedInternalProxyClass *klass)
 }
 
 static void
-gkd_exported_internal_proxy_iface_init (GkdExportedInternalIface *iface)
+gkd_exported_internal_proxy_iface_init (GkdExportedInternalIface *iface G_GNUC_UNUSED)
 {
 }
 
@@ -1601,7 +1887,7 @@ out:
 }
 
 static void
-gkd_exported_internal_skeleton_dbus_interface_flush (GDBusInterfaceSkeleton *_skeleton)
+gkd_exported_internal_skeleton_dbus_interface_flush (GDBusInterfaceSkeleton *_skeleton G_GNUC_UNUSED)
 {
 }
 
@@ -1662,7 +1948,7 @@ gkd_exported_internal_skeleton_class_init (GkdExportedInternalSkeletonClass *kla
 }
 
 static void
-gkd_exported_internal_skeleton_iface_init (GkdExportedInternalIface *iface)
+gkd_exported_internal_skeleton_iface_init (GkdExportedInternalIface *iface G_GNUC_UNUSED)
 {
 }
 

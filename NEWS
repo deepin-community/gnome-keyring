@@ -1,3 +1,35 @@
+Changes in version 46.2 are:
+ * Don't use `bool` as variable name
+ * autogoo: replace AC_HELP_STRING with AS_HELP_STRING
+ * Default "automatically unlock" checkbox to false
+ * build: Fix distcheck with systemd unit
+ * rpc-layer: Fix undefined reference to g_strlcpy
+ * Updated translations
+
+Changes in version 46.1 are:
+ * ssh-agent: avoid deadlock when agent process dies before we connect to it [!65]
+ * gkm: fix test-sexp with GCC 14 [!62]
+ * Updated translations
+
+Changes in version 46.0 are:
+ * build: Remove build with ssh component from default build instructions [!60]
+ * main: Reduce scope of ssh_started variable [!59]
+ * desktop: Expand variables [!58]
+ * desktop: Remove obsolete Bugzilla entries [!55]
+ * configure.ac: Stop using deprecated pkgconfig variable in p11-kit [!54]
+ * pkcs11: Don't use strncpy when copying paths [!52]
+ * daemon: Add socket files to EXTRA_DIST [!51]
+ * Updated translations
+
+Changes in version 42.0 are:
+ * secret-portal: Properly check the default keyring [!49]
+ * Build fixes [!44, !48, !50]
+ * ssh-agent: Fix crash by uninitialized GMutex [!45]
+ * fix looping off the end of the operations array [#105, !47]
+ * readme: Mention libsecret instead of deprecated libgnome-keyring [!37]
+ * daemon: Make it systemd-activatable through the control socket [!35]
+ * Updated translations
+
 Changes in version 40.0 are:
  * Update libcap-ng capability handling [!33, !34]
  * Updated translations

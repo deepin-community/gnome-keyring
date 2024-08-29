@@ -1,0 +1,19 @@
+From: Jeremy Bicha <jeremy.bicha@canonical.com>
+Date: Tue, 24 May 2022 11:06:22 -0400
+Subject: systemd: Start with graphical-session instead of default
+
+https://gitlab.gnome.org/GNOME/gnome-keyring/-/merge_requests/53
+---
+ daemon/gnome-keyring-daemon.service.in | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/daemon/gnome-keyring-daemon.service.in b/daemon/gnome-keyring-daemon.service.in
+index fbce5ea..0919170 100644
+--- a/daemon/gnome-keyring-daemon.service.in
++++ b/daemon/gnome-keyring-daemon.service.in
+@@ -11,4 +11,4 @@ Restart=on-failure
+ 
+ [Install]
+ Also=gnome-keyring-daemon.socket
+-WantedBy=default.target
++WantedBy=graphical-session-pre.target

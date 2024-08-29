@@ -1,5 +1,5 @@
 AC_INIT(gnome-keyring,
-        40.0,
+        46.2,
         [gnome-keyring-list@gnome.org],
         [gnome-keyring],
         [https://wiki.gnome.org/Projects/GnomeKeyring])
@@ -227,7 +227,7 @@ AC_DEFINE(GCR_API_SUBJECT_TO_CHANGE, 1, [Nod nod])
 #
 
 AC_ARG_WITH(dbus-services,
-		  [AC_HELP_STRING([--with-dbus-services=<dir>],
+		  [AS_HELP_STRING([--with-dbus-services=<dir>],
 		  [where D-BUS session services directory is])])
 if ! test -z "$with_dbus_services" ; then
 	DBUS_SERVICES_DIR="$with_dbus_services"
@@ -241,7 +241,7 @@ AC_SUBST(DBUS_SERVICES_DIR)
 # PAM Checks
 
 AC_ARG_ENABLE(pam,
-	    AC_HELP_STRING([--disable-pam],
+	    AS_HELP_STRING([--disable-pam],
 	    [Build GNOME keyring PAM helper]))
 
 pam_status="no"
@@ -290,11 +290,11 @@ AC_SUBST(DL_LIBS)
 
 AC_MSG_CHECKING([where to put pkcs11 module configuration])
 AC_ARG_WITH(pkcs11-config, [
-            AC_HELP_STRING([--with-pkcs11-config=<dir>],
+            AS_HELP_STRING([--with-pkcs11-config=<dir>],
                            [directory to install PKCS#11 config])
             ])
 if test -z "$with_pkcs11_config" ; then
-	P11_SYSTEM_CONFIG_MODULES=$($PKG_CONFIG p11-kit-1 --variable=p11_system_config_modules)
+	P11_SYSTEM_CONFIG_MODULES=$($PKG_CONFIG p11-kit-1 --variable=p11_module_configs)
 else
 	P11_SYSTEM_CONFIG_MODULES="$with_pkcs11_config"
 fi
@@ -306,7 +306,7 @@ AC_SUBST(P11_SYSTEM_CONFIG_MODULES)
 
 AC_MSG_CHECKING([module path to install pkcs11 modules])
 AC_ARG_WITH(pkcs11-modules, [
-            AC_HELP_STRING([--with-pkcs11-modules=<dir>],
+            AS_HELP_STRING([--with-pkcs11-modules=<dir>],
                            [directory to install PKCS#11 modules])
             ])
 if test -z "$with_pkcs11_modules" ; then
@@ -327,7 +327,7 @@ AC_SUBST(pkcs11standalonedir)
 # PAM Module Directory
 
 AC_ARG_WITH([pam-dir],
-            [AC_HELP_STRING([--with-pam-dir=DIR],
+            [AS_HELP_STRING([--with-pam-dir=DIR],
                              [directory to install pam modules in])],
              [], [with_pam_dir='${libdir}/security'])
 PAM_DEST_DIR="$with_pam_dir"
@@ -343,9 +343,14 @@ fi
 # SSH Agent support
 #
 
+AC_MSG_CHECKING([whether to build with ssh-agent])
 AC_ARG_ENABLE([ssh-agent],
-		AC_HELP_STRING([--disable-ssh-agent],
-		[Don't include SSH agent in gnome-keyring]))
+              AS_HELP_STRING([--enable-ssh-agent],
+                             [Include SSH agent in gnome-keyring]),
+              [],
+              [enable_ssh_agent=no])
+
+AC_MSG_RESULT([$enable_ssh_agent])
 
 if test "$enable_ssh_agent" = "no"; then
 	SSH_AGENT=false
@@ -392,7 +397,7 @@ AC_SUBST([LIBGCRYPT_LIBS])
 #
 
 AC_ARG_WITH([libcap-ng],
-            [AC_HELP_STRING([--without-libcap-ng],
+            [AS_HELP_STRING([--without-libcap-ng],
                             [build without libcap-ng (disables Linux capabilities support)])],,
             [with_libcap_ng=auto])
 
@@ -422,7 +427,7 @@ libcapng_status="$with_libcap_ng"
 LIBSELINUX=""
 selinux_status="no"
 AC_ARG_ENABLE([selinux],
-        AC_HELP_STRING([--disable-selinux],[do not use SELinux]))
+        AS_HELP_STRING([--disable-selinux],[do not use SELinux]))
 if test "x$enable_selinux" != "xno"; then
     AC_CHECK_LIB([selinux],[getfilecon],
         [AC_CHECK_LIB([selinux],[setexeccon],
@@ -433,6 +438,30 @@ if test "x$enable_selinux" != "xno"; then
 fi
 AC_SUBST(LIBSELINUX)
 AM_CONDITIONAL([HAVE_LIBSELINUX], [test ! -z "$LIBSELINUX"])
+
+# ----------------------------------------------------------------------
+# systemd
+
+AC_ARG_WITH([systemd],
+            AS_HELP_STRING([--without-systemd],
+                           [Disable systemd socket activation]))
+
+AS_IF([test "$with_systemd" != "no"], [
+	PKG_CHECK_MODULES([LIBSYSTEMD], [libsystemd], [],
+		[with_systemd=no])
+
+	PKG_CHECK_VAR([systemduserunitdir], [systemd], [systemduserunitdir], [],
+		[with_systemd=no])
+
+	AS_IF([test "$with_systemd" != "no"], [
+		with_systemd=yes
+		AC_DEFINE_UNQUOTED(WITH_SYSTEMD, 1, [Build with systemd socket activation])
+		DAEMON_CFLAGS="$DAEMON_CFLAGS $LIBSYSTEMD_CFLAGS"
+		DAEMON_LIBS="$DAEMON_LIBS $LIBSYSTEMD_LIBS"
+	])
+])
+
+AM_CONDITIONAL(WITH_SYSTEMD, [test "$with_systemd" = "yes"])
 
 # ----------------------------------------------------------------------
 # dotlock.c support
@@ -446,7 +475,7 @@ AC_DEFINE_UNQUOTED(DOTLOCK_EXT_SYM_PREFIX,[_gkm_],
 # p11-tests
 
 AC_ARG_ENABLE(p11_tests,
-	AC_HELP_STRING([--disable-p11-tests],
+	AS_HELP_STRING([--disable-p11-tests],
 	[Build in p11-tests for testing PKCS#11 modules]))
 
 p11_tests_status="no"
@@ -467,7 +496,7 @@ fi
 
 AC_MSG_CHECKING([whether to build documentation])
 AC_ARG_ENABLE(doc,
-              AC_HELP_STRING([--enable-doc],
+              AS_HELP_STRING([--enable-doc],
                              [Disable building documentation])
              )
 
@@ -499,7 +528,7 @@ doc_status=$enable_doc
 
 AC_MSG_CHECKING([for debug mode])
 AC_ARG_ENABLE(debug,
-              AC_HELP_STRING([--enable-debug=no/default/yes],
+              AS_HELP_STRING([--enable-debug=no/default/yes],
               [Turn on or off debugging]))
 
 if test "$enable_debug" != "no"; then
@@ -613,7 +642,7 @@ AC_SUBST(GCOV)
 AC_SUBST(GENHTML)
 
 AC_ARG_ENABLE(valgrind,
-	AC_HELP_STRING([--enable-valgrind],
+	AS_HELP_STRING([--enable-valgrind],
 	[Run gnome-keyring-daemon using valgrind]))
 
 AC_MSG_CHECKING([valgrind])
@@ -662,6 +691,7 @@ echo "OPTIONAL DEPENDENCIES"
 echo "  PAM:                  $pam_status"
 echo "  Linux capabilities:   $libcapng_status"
 echo "  SELinux:              $selinux_status"
+echo "  systemd:              $with_systemd"
 echo
 echo "CONFIGURATION"
 echo "  SSH Agent:            $ssh_status"

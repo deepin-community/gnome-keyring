@@ -6,8 +6,8 @@
  * LGPL linking clauses.
  */
 
-#ifndef ____DAEMON_DBUS_GKD_INTERNAL_GENERATED_H__
-#define ____DAEMON_DBUS_GKD_INTERNAL_GENERATED_H__
+#ifndef _____DAEMON_DBUS_GKD_INTERNAL_GENERATED_H__
+#define _____DAEMON_DBUS_GKD_INTERNAL_GENERATED_H__
 
 #include <gio/gio.h>
 
@@ -276,4 +276,4 @@ GkdExportedInternal *gkd_exported_internal_skeleton_new (void);
 
 G_END_DECLS
 
-#endif /* ____DAEMON_DBUS_GKD_INTERNAL_GENERATED_H__ */
+#endif /* _____DAEMON_DBUS_GKD_INTERNAL_GENERATED_H__ */

@@ -28,13 +28,14 @@
 
 #include <stdarg.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 
 CK_RV
 gkm_attribute_get_bool (CK_ATTRIBUTE_PTR attr, gboolean *value)
 {
-	CK_BBOOL* bool;
+	CK_BBOOL* booly;
 
 	g_return_val_if_fail (attr, CKR_GENERAL_ERROR);
 	g_return_val_if_fail (value, CKR_GENERAL_ERROR);
@@ -42,8 +43,8 @@ gkm_attribute_get_bool (CK_ATTRIBUTE_PTR attr, gboolean *value)
 	if (attr->ulValueLen != sizeof (CK_BBOOL) || attr->pValue == NULL)
 		return CKR_ATTRIBUTE_VALUE_INVALID;
 
-	bool = attr->pValue;
-	*value = *bool ? TRUE : FALSE;
+	booly = attr->pValue;
+	*value = *booly ? TRUE : FALSE;
 	return CKR_OK;
 }
 
@@ -216,15 +217,18 @@ gkm_attribute_set_date (CK_ATTRIBUTE_PTR attr, time_t time)
 		g_return_val_if_reached (CKR_GENERAL_ERROR);
 
 	g_assert (sizeof (date.year) == 4);
-	snprintf ((char*)buf, 5, "%04d", 1900 + tm.tm_year);
+	if (G_UNLIKELY (snprintf ((char*)buf, 5, "%04d", 1900 + tm.tm_year) < 0))
+		abort ();
 	memcpy (date.year, buf, 4);
 
 	g_assert (sizeof (date.month) == 2);
-	snprintf ((char*)buf, 3, "%02d", tm.tm_mon + 1);
+	if (G_UNLIKELY (snprintf ((char*)buf, 3, "%02d", tm.tm_mon + 1) < 0))
+		abort ();
 	memcpy (date.month, buf, 2);
 
 	g_assert (sizeof (date.day) == 2);
-	snprintf ((char*)buf, 3, "%02d", tm.tm_mday);
+	if (G_UNLIKELY (snprintf ((char*)buf, 3, "%02d", tm.tm_mday) < 0))
+		abort ();
 	memcpy (date.day, buf, 2);
 
 	return gkm_attribute_set_data (attr, &date, sizeof (date));

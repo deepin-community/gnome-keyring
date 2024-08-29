@@ -48,7 +48,7 @@
 #define g_marshal_value_peek_variant(v)  (v)->data[0].v_pointer
 #endif /* !G_ENABLE_DEBUG */
 
-/* BOOLEAN:VOID (pkcs11/gkm/gkm-marshal.list:1) */
+/* BOOLEAN:VOID (../pkcs11/gkm/gkm-marshal.list:1) */
 void
 gkm_marshal_BOOLEAN__VOID (GClosure     *closure,
                            GValue       *return_value,
@@ -85,7 +85,7 @@ gkm_marshal_BOOLEAN__VOID (GClosure     *closure,
   g_value_set_boolean (return_value, v_return);
 }
 
-/* VOID:STRING,ULONG (pkcs11/gkm/gkm-marshal.list:2) */
+/* VOID:STRING,ULONG (../pkcs11/gkm/gkm-marshal.list:2) */
 void
 gkm_marshal_VOID__STRING_ULONG (GClosure     *closure,
                                 GValue       *return_value G_GNUC_UNUSED,
@@ -122,7 +122,7 @@ gkm_marshal_VOID__STRING_ULONG (GClosure     *closure,
             data2);
 }
 
-/* VOID:OBJECT,ULONG (pkcs11/gkm/gkm-marshal.list:3) */
+/* VOID:OBJECT,ULONG (../pkcs11/gkm/gkm-marshal.list:3) */
 void
 gkm_marshal_VOID__OBJECT_ULONG (GClosure     *closure,
                                 GValue       *return_value G_GNUC_UNUSED,

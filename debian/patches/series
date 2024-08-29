@@ -2,3 +2,4 @@ egg-secure-memory-Allocate-enough-space-for-the-guard-poi.patch
 egg-secure-memory-Add-a-warning-if-gnome-keyring-36-happe.patch
 03_kfreebsd.patch
 05_skip-known-test-failures.patch
+systemd-Start-with-graphical-session-instead-of-default.patch

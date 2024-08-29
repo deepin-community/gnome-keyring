@@ -10,12 +10,58 @@
 #  include "config.h"
 #endif
 
-#include "./daemon/dbus/gkd-portal-generated.h"
+#include "../daemon/dbus/gkd-portal-generated.h"
 
 #include <string.h>
 #ifdef G_OS_UNIX
 #  include <gio/gunixfdlist.h>
 #endif
+
+#ifdef G_ENABLE_DEBUG
+#define g_marshal_value_peek_boolean(v)  g_value_get_boolean (v)
+#define g_marshal_value_peek_char(v)     g_value_get_schar (v)
+#define g_marshal_value_peek_uchar(v)    g_value_get_uchar (v)
+#define g_marshal_value_peek_int(v)      g_value_get_int (v)
+#define g_marshal_value_peek_uint(v)     g_value_get_uint (v)
+#define g_marshal_value_peek_long(v)     g_value_get_long (v)
+#define g_marshal_value_peek_ulong(v)    g_value_get_ulong (v)
+#define g_marshal_value_peek_int64(v)    g_value_get_int64 (v)
+#define g_marshal_value_peek_uint64(v)   g_value_get_uint64 (v)
+#define g_marshal_value_peek_enum(v)     g_value_get_enum (v)
+#define g_marshal_value_peek_flags(v)    g_value_get_flags (v)
+#define g_marshal_value_peek_float(v)    g_value_get_float (v)
+#define g_marshal_value_peek_double(v)   g_value_get_double (v)
+#define g_marshal_value_peek_string(v)   (char*) g_value_get_string (v)
+#define g_marshal_value_peek_param(v)    g_value_get_param (v)
+#define g_marshal_value_peek_boxed(v)    g_value_get_boxed (v)
+#define g_marshal_value_peek_pointer(v)  g_value_get_pointer (v)
+#define g_marshal_value_peek_object(v)   g_value_get_object (v)
+#define g_marshal_value_peek_variant(v)  g_value_get_variant (v)
+#else /* !G_ENABLE_DEBUG */
+/* WARNING: This code accesses GValues directly, which is UNSUPPORTED API.
+ *          Do not access GValues directly in your code. Instead, use the
+ *          g_value_get_*() functions
+ */
+#define g_marshal_value_peek_boolean(v)  (v)->data[0].v_int
+#define g_marshal_value_peek_char(v)     (v)->data[0].v_int
+#define g_marshal_value_peek_uchar(v)    (v)->data[0].v_uint
+#define g_marshal_value_peek_int(v)      (v)->data[0].v_int
+#define g_marshal_value_peek_uint(v)     (v)->data[0].v_uint
+#define g_marshal_value_peek_long(v)     (v)->data[0].v_long
+#define g_marshal_value_peek_ulong(v)    (v)->data[0].v_ulong
+#define g_marshal_value_peek_int64(v)    (v)->data[0].v_int64
+#define g_marshal_value_peek_uint64(v)   (v)->data[0].v_uint64
+#define g_marshal_value_peek_enum(v)     (v)->data[0].v_long
+#define g_marshal_value_peek_flags(v)    (v)->data[0].v_ulong
+#define g_marshal_value_peek_float(v)    (v)->data[0].v_float
+#define g_marshal_value_peek_double(v)   (v)->data[0].v_double
+#define g_marshal_value_peek_string(v)   (v)->data[0].v_pointer
+#define g_marshal_value_peek_param(v)    (v)->data[0].v_pointer
+#define g_marshal_value_peek_boxed(v)    (v)->data[0].v_pointer
+#define g_marshal_value_peek_pointer(v)  (v)->data[0].v_pointer
+#define g_marshal_value_peek_object(v)   (v)->data[0].v_pointer
+#define g_marshal_value_peek_variant(v)  (v)->data[0].v_pointer
+#endif /* !G_ENABLE_DEBUG */
 
 typedef struct
 {
@@ -149,6 +195,59 @@ _g_value_equal (const GValue *a, const GValue *b)
         break;
     }
   return ret;
+}
+
+static void
+_g_dbus_codegen_marshal_BOOLEAN__OBJECT_OBJECT_STRING_STRING_VARIANT_VARIANT (
+    GClosure     *closure,
+    GValue       *return_value,
+    unsigned int  n_param_values,
+    const GValue *param_values,
+    void         *invocation_hint G_GNUC_UNUSED,
+    void         *marshal_data)
+{
+  typedef gboolean (*_GDbusCodegenMarshalBoolean_ObjectObjectStringStringVariantVariantFunc)
+       (void *data1,
+        GUnixFDList *arg_fd_list,
+        GDBusMethodInvocation *arg_method_invocation,
+        const gchar *arg_handle,
+        const gchar *arg_app_id,
+        GVariant *arg_fd,
+        GVariant *arg_options,
+        void *data2);
+  _GDbusCodegenMarshalBoolean_ObjectObjectStringStringVariantVariantFunc callback;
+  GCClosure *cc = (GCClosure*) closure;
+  void *data1, *data2;
+  gboolean v_return;
+
+  g_return_if_fail (return_value != NULL);
+  g_return_if_fail (n_param_values == 7);
+
+  if (G_CCLOSURE_SWAP_DATA (closure))
+    {
+      data1 = closure->data;
+      data2 = g_value_peek_pointer (param_values + 0);
+    }
+  else
+    {
+      data1 = g_value_peek_pointer (param_values + 0);
+      data2 = closure->data;
+    }
+
+  callback = (_GDbusCodegenMarshalBoolean_ObjectObjectStringStringVariantVariantFunc)
+    (marshal_data ? marshal_data : cc->callback);
+
+  v_return =
+    callback (data1,
+              g_marshal_value_peek_object (param_values + 1),
+              g_marshal_value_peek_object (param_values + 2),
+              g_marshal_value_peek_string (param_values + 3),
+              g_marshal_value_peek_string (param_values + 4),
+              g_marshal_value_peek_variant (param_values + 5),
+              g_marshal_value_peek_variant (param_values + 6),
+              data2);
+
+  g_value_set_boolean (return_value, v_return);
 }
 
 /* ------------------------------------------------------------------------
@@ -355,6 +454,19 @@ gkd_exported_portal_override_properties (GObjectClass *klass, guint property_id_
 }
 
 
+inline static void
+gkd_exported_portal_method_marshal_retrieve_secret (
+    GClosure     *closure,
+    GValue       *return_value,
+    unsigned int  n_param_values,
+    const GValue *param_values,
+    void         *invocation_hint,
+    void         *marshal_data)
+{
+  _g_dbus_codegen_marshal_BOOLEAN__OBJECT_OBJECT_STRING_STRING_VARIANT_VARIANT (closure,
+    return_value, n_param_values, param_values, invocation_hint, marshal_data);
+}
+
 
 /**
  * GkdExportedPortal:
@@ -390,9 +502,9 @@ gkd_exported_portal_default_init (GkdExportedPortalIface *iface)
    *
    * Signal emitted when a remote caller is invoking the <link linkend="gdbus-method-org-freedesktop-impl-portal-Secret.RetrieveSecret">RetrieveSecret()</link> D-Bus method.
    *
-   * If a signal handler returns %TRUE, it means the signal handler will handle the invocation (e.g. take a reference to @invocation and eventually call gkd_exported_portal_complete_retrieve_secret() or e.g. g_dbus_method_invocation_return_error() on it) and no order signal handlers will run. If no signal handler handles the invocation, the %G_DBUS_ERROR_UNKNOWN_METHOD error is returned.
+   * If a signal handler returns %TRUE, it means the signal handler will handle the invocation (e.g. take a reference to @invocation and eventually call gkd_exported_portal_complete_retrieve_secret() or e.g. g_dbus_method_invocation_return_error() on it) and no other signal handlers will run. If no signal handler handles the invocation, the %G_DBUS_ERROR_UNKNOWN_METHOD error is returned.
    *
-   * Returns: %TRUE if the invocation was handled, %FALSE to let other signal handlers run.
+   * Returns: %G_DBUS_METHOD_INVOCATION_HANDLED or %TRUE if the invocation was handled, %G_DBUS_METHOD_INVOCATION_UNHANDLED or %FALSE to let other signal handlers run.
    */
   g_signal_new ("handle-retrieve-secret",
     G_TYPE_FROM_INTERFACE (iface),
@@ -400,7 +512,7 @@ gkd_exported_portal_default_init (GkdExportedPortalIface *iface)
     G_STRUCT_OFFSET (GkdExportedPortalIface, handle_retrieve_secret),
     g_signal_accumulator_true_handled,
     NULL,
-    g_cclosure_marshal_generic,
+      gkd_exported_portal_method_marshal_retrieve_secret,
     G_TYPE_BOOLEAN,
     6,
     G_TYPE_DBUS_METHOD_INVOCATION, G_TYPE_UNIX_FD_LIST, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_VARIANT, G_TYPE_VARIANT);
@@ -430,6 +542,8 @@ gkd_exported_portal_default_init (GkdExportedPortalIface *iface)
 guint 
 gkd_exported_portal_get_version (GkdExportedPortal *object)
 {
+  g_return_val_if_fail (GKD_IS_EXPORTED_PORTAL (object), 0);
+
   return GKD_EXPORTED_PORTAL_GET_IFACE (object)->get_version (object);
 }
 
@@ -601,7 +715,7 @@ _out:
  */
 void
 gkd_exported_portal_complete_retrieve_secret (
-    GkdExportedPortal *object,
+    GkdExportedPortal *object G_GNUC_UNUSED,
     GDBusMethodInvocation *invocation,
     GUnixFDList *fd_list,
     guint response,
@@ -1444,7 +1558,7 @@ gkd_exported_portal_skeleton_get_version (GkdExportedPortal *object)
   GkdExportedPortalSkeleton *skeleton = GKD_EXPORTED_PORTAL_SKELETON (object);
   guint value;
   g_mutex_lock (&skeleton->priv->lock);
-  value = g_value_get_uint (&(skeleton->priv->properties[0]));
+  value = g_marshal_value_peek_uint (&(skeleton->priv->properties[0]));
   g_mutex_unlock (&skeleton->priv->lock);
   return value;
 }

@@ -1,1 +1,0 @@
-rm_conffile /etc/xdg/autostart/gnome-keyring-gpg.desktop 3.16.0-4~ gnome-keyring

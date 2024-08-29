@@ -1,5 +1,1466 @@
-gnome-keyring (40.0-deepin) stable; urgency=medium
+gnome-keyring (46.2-1) unstable; urgency=medium
 
-  * ['Rebuild  against by  current gcc 11.2']
+  * New upstream release
+  * Remove undefined reference patch: applied in new release
+  * Bump Standards Version to 4.7.0
 
- -- Deepin Packages Builder <packages@deepin.org>  Fri, 12 Aug 2022 15:57:43 +0800
+ -- Jeremy Bícha <jbicha@ubuntu.com>  Wed, 07 Aug 2024 13:32:21 -0400
+
+gnome-keyring (46.1-2) unstable; urgency=medium
+
+  * Stop using debian/control.in and dh_gnome_clean
+  * Add Build-Depends: systemd-dev
+
+ -- Jeremy Bícha <jbicha@ubuntu.com>  Fri, 22 Mar 2024 14:03:58 -0400
+
+gnome-keyring (46.1-1) unstable; urgency=medium
+
+  * New upstream release
+  * Add patch to fix undefined reference
+
+ -- Jeremy Bícha <jbicha@ubuntu.com>  Tue, 13 Feb 2024 12:11:04 -0500
+
+gnome-keyring (42.1-2) unstable; urgency=medium
+
+  [ Amin Bandali ]
+  * Change debian-branch from debian/master to debian/latest
+
+  [ Michael Biebl ]
+  * Install PAM module into /usr (Closes: #1061197)
+  * Do proper refcounting of the PAM module package on prerm
+    so that we don't drop the module from the PAM config when uninstalling
+    a foreign-arch package.
+  * Drop obsolete Breaks and Replaces from pre-oldstable
+  * Drop obsolete migration code from pre-oldstable
+  * Bump Standards-Version to 4.6.2
+
+ -- Michael Biebl <biebl@debian.org>  Sat, 20 Jan 2024 19:40:15 +0100
+
+gnome-keyring (42.1-1) unstable; urgency=medium
+
+  * New upstream release
+  * Build new systemd user service
+  * Add patch to start systemd service with graphical-session
+
+ -- Jeremy Bicha <jbicha@ubuntu.com>  Tue, 24 May 2022 11:53:29 -0400
+
+gnome-keyring (40.0-3) unstable; urgency=medium
+
+  * Team upload
+  * Don't add CAP_IPC_LOCK capability to gnome-keyring-daemon.
+    GNOME Keyring uses "memory locking" to prevent memory buffers from being
+    written out to swap, in an attempt to prevent passwords and other secrets
+    from being written to disk unencrypted. Since Linux 2.6.9 (Debian 4.0,
+    2007) it has been possible to lock memory up to the limit defined by
+    RLIMIT_MEMLOCK without requiring the CAP_IPC_LOCK capability.
+    Since GLib 2.70, security hardening in GLib means that this capability
+    interferes with the ability to connect to the D-Bus session bus, which
+    is required functionality for gnome-keyring.
+    RLIMIT_MEMLOCK defaults to 64 KiB, although it is considerably higher on
+    typical Debian systems due to #976373. If memory locking for larger
+    quantities of secret data is required, please configure a higher
+    RLIMIT_MEMLOCK in /etc/security/limits.conf.
+    Using encrypted swap, with an ephemeral key if suspend-to-disk is not
+    required, is recommended as a more robust way to prevent passwords
+    from reaching disk. Full-disk encryption is also recommended for
+    systems where confidentiality is important.
+    (Closes: #994961)
+  * Don't build with capabilities support on Linux architectures.
+    Now that we are not setting CAP_IPC_LOCK, this is not useful, and
+    disabling it silences some misleading warnings. gnome-keyring will still
+    log a warning if it cannot allocate enough locked memory for its needs.
+  * Add proposed patches to avoid unnecessary use of unlocked memory.
+    Older versions of gnome-keyring did not always prevent larger items of
+    secret data from being swapped out, even if they could, due to a logic
+    error when allocating new blocks of locked memory.
+
+ -- Simon McVittie <smcv@debian.org>  Sun, 26 Sep 2021 17:28:50 +0100
+
+gnome-keyring (40.0-2) unstable; urgency=medium
+
+  * Build-Depend on debhelper-compat 13
+  * Build-Depend on dh-sequence-gnome instead of gnome-pkg-tools
+  * debian/rules: clean up unneeded rules
+  * Release to unstable
+
+ -- Jeremy Bicha <jbicha@debian.org>  Sat, 21 Aug 2021 07:43:03 -0400
+
+gnome-keyring (40.0-1) experimental; urgency=medium
+
+  * New upstream release
+  * debian/watch:
+    - Update to follow the new GNOME version scheme
+
+ -- Sebastien Bacher <seb128@ubuntu.com>  Wed, 02 Jun 2021 17:06:23 +0200
+
+gnome-keyring (3.36.0-1) unstable; urgency=medium
+
+  * New upstream release
+
+ -- Sebastien Bacher <seb128@ubuntu.com>  Wed, 11 Mar 2020 10:00:29 +0100
+
+gnome-keyring (3.35.90-1) experimental; urgency=medium
+
+  [ Simon McVittie ]
+  * Build-depend on python3 instead of python.
+    build/tap-driver is now a python3 script, and Python 2 is deprecated.
+    (Closes: #943047)
+  * Qualify python3 build-dependency with :native for cross-compilation.
+    Thanks to Helmut Grohne. (Closes: #856507)
+  * Qualify dbus and python3 build-dependencies with <!nocheck>
+
+  [ Sebastien Bacher ]
+  * New upstream release
+  * debian/gnome-keyring.install:
+    - include the new xdg-desktop-portal files
+
+ -- Sebastien Bacher <seb128@ubuntu.com>  Mon, 24 Feb 2020 17:18:02 +0100
+
+gnome-keyring (3.34.0-1) unstable; urgency=medium
+
+  * New upstream release
+  * Drop patches applied in new release:
+    - Remove-tap-gtester-rely-on-GLib-2.38-built-in-TAP-output-.patch
+    - test-gkd-ssh-agent-service-Avoid-race-condition-with-serv.patch
+  * Release to unstable
+
+ -- Jeremy Bicha <jbicha@debian.org>  Mon, 30 Sep 2019 21:08:35 -0400
+
+gnome-keyring (3.31.91-2) experimental; urgency=medium
+
+  * Team upload
+  * d/p/test-gkd-ssh-agent-service-Avoid-race-condition-with-serv.patch:
+    Add proposed patch to avoid a race condition that can result in the
+    tests hanging, which seems to be particularly likely on a
+    single-CPU machine (Closes: #909416)
+  * d/p/Remove-tap-gtester-rely-on-GLib-2.38-built-in-TAP-output-.patch:
+    Fix FTBFS with GLib 2.62+ (Closes: #940157)
+
+ -- Simon McVittie <smcv@debian.org>  Fri, 13 Sep 2019 10:41:22 +0100
+
+gnome-keyring (3.31.91-1) experimental; urgency=medium
+
+  * New upstream development release
+    - Fix loging keyring not automatically unlocked on log in (LP: #1817128)
+
+ -- Jeremy Bicha <jbicha@debian.org>  Sat, 02 Mar 2019 07:59:49 -0500
+
+gnome-keyring (3.31.90-1) experimental; urgency=medium
+
+  * New upstream development release
+  * Revert "gnome-keyring-pkcs11.install: p11-kit configuration is no longer
+    provided"
+  * Use dh_missing --fail-missing
+  * Drop the 3 cherry-picked patches applied in new release
+
+ -- Jeremy Bicha <jbicha@debian.org>  Wed, 20 Feb 2019 15:06:13 -0500
+
+gnome-keyring (3.28.2-3) experimental; urgency=medium
+
+  [ Louis-Philippe Véronneau ]
+  * Update copyright file (Closes: #891297)
+
+  [ Iain Lane ]
+  * Cherry-pick some upstream patches to fix build failures with GLib 2.59
+    gnome-keyring assumed that hash table iteration order was stable. It's
+    not, and GLib exposed that.
+
+ -- Iain Lane <laney@debian.org>  Fri, 08 Feb 2019 17:46:06 +0000
+
+gnome-keyring (3.28.2-2) unstable; urgency=medium
+
+  * Run dh_auto_test instead of make check
+  * Restore -Wl,-O1 to our LDFLAGS
+  * Bump Standards-Version to 4.3.0
+
+ -- Jeremy Bicha <jbicha@debian.org>  Mon, 24 Dec 2018 09:54:29 -0500
+
+gnome-keyring (3.28.2-1) unstable; urgency=medium
+
+  * New upstream release 
+
+ -- Tim Lunn <tim@feathertop.org>  Tue, 15 May 2018 18:15:01 +1000
+
+gnome-keyring (3.28.0.2-1) unstable; urgency=medium
+
+  * New upstream release
+  * Drop git patches included in new release
+
+ -- Tim Lunn <tim@feathertop.org>  Thu, 29 Mar 2018 19:26:39 +1100
+
+gnome-keyring (3.28.0.1-1) unstable; urgency=medium
+
+  * New upstream release
+  * debian/rules: Build with -z,defs again
+  * Add 0003* - 0007* patches:
+    Cherry-pick patches to fix regressions introduced in gnome-keyring
+    3.28. Allow multiple simultaneous SSH connections. Support
+    older saved SSH passwords.
+
+ -- Jeremy Bicha <jbicha@debian.org>  Mon, 19 Mar 2018 12:15:39 -0400
+
+gnome-keyring (3.28.0-1) unstable; urgency=medium
+
+  * New upstream release
+  * Drop 04_nodisplay_autostart.patch: Applied in new release
+  * Bump minimum libgcr-3-dev to 3.27.90
+  * Build-Depend on openssh-client
+  * debian/rules: Temporarily build without -z,defs
+  * Set XDG_RUNTIME_DIR for build tests
+  * debian/gnome-keyring-pkcs11.install:
+    p11-kit configuration is no longer provided
+  * Release to unstable
+
+ -- Jeremy Bicha <jbicha@debian.org>  Mon, 12 Mar 2018 20:30:19 -0400
+
+gnome-keyring (3.27.4-2) experimental; urgency=medium
+
+  * Split gnome-keyring-pkcs11 to a separate package since it's useful
+    for running 32-bit apps in Wine from amd64. (Closes: #783961, #686843)
+
+ -- Jeremy Bicha <jbicha@debian.org>  Fri, 23 Feb 2018 17:58:23 -0500
+
+gnome-keyring (3.27.4-1) experimental; urgency=medium
+
+  * New upstream development release
+    - Support ECDSA for SSH (Closes: #704204)
+  * Update Vcs fields for migration to https://salsa.debian.org/
+  * Bump debhelper compat to 11
+  * Drop obsolete Build-Depends on intltool
+  * Cherry-pick 04_nodisplay_autostart.patch for Ubuntu
+  * On Ubuntu, have Ubiquity set cap_ipc_lock+ep for gnome-keyring-daemon
+
+ -- Jeremy Bicha <jbicha@debian.org>  Thu, 22 Feb 2018 05:47:32 -0500
+
+gnome-keyring (3.20.1-2) unstable; urgency=medium
+
+  * Update Vcs fields for conversion to git
+  * Add debian/gbp.conf
+  * Bump debhelper compat to 10
+  * Bump Standards-Version to 4.1.2
+
+ -- Jeremy Bicha <jbicha@debian.org>  Thu, 14 Dec 2017 21:43:50 -0500
+
+gnome-keyring (3.20.1-1) unstable; urgency=medium
+
+  * New upstream bugfix release.
+  * Drop 0001-man-Fix-.so-link-in-gnome-keyring-3.patch, applied upstream.
+  * Change build-dependency from libgcrypt11-dev to libgcrypt20-dev
+    (closes: #864105).
+  * Bump Standards-Version to 4.0.0, no changes needed.
+
+ -- Dmitry Shachnev <mitya57@debian.org>  Tue, 18 Jul 2017 16:54:45 +0300
+
+gnome-keyring (3.20.0-3) unstable; urgency=medium
+
+  [ Jeremy Bicha ]
+  * Enable parallel building and all hardening flags
+  * Add debian/patches/05_skip-known-test-failures.patch:
+    - Skip a few failing tests that have already been reported upstream.
+      Before the switch from cdbs to dh, these tests still failed but did
+      not fail the build and therefore were mostly unnoticed.
+  * Explicitly Build-Depend on python for tests (Closes: #832852)
+
+  [ Dmitry Shachnev ]
+  * Depend on default-dbus-session-bus | dbus-session-bus instead of
+    dbus-x11 (closes: #835885).
+
+ -- Michael Biebl <biebl@debian.org>  Wed, 07 Sep 2016 02:08:35 +0200
+
+gnome-keyring (3.20.0-2) unstable; urgency=medium
+
+  * Drop obsolete --disable-update-mime configure switch.
+  * Drop obsolete --enable-gtk-doc configure switch and gtk-doc-tools
+    Build-Depends. The package no longer ship any gtk-doc documentation.
+    To ensure the man pages are properly built, use --enable-doc and add a
+    Build-Depends on xsltproc and docbook-xsl.
+  * Set pkg-gnome-maintainers@lists.alioth.debian.org as Maintainer.
+  * Install gnome-keyring-3.1 man page and fix the .so link.
+  * Convert from cdbs to dh.
+  * Convert to multiarch. Mark gnome-keyring as Multi-Arch: foreign and
+    libpam-gnome-keyring as Multi-Arch: same. (Closes: #686843)
+
+ -- Michael Biebl <biebl@debian.org>  Wed, 01 Jun 2016 15:29:51 +0200
+
+gnome-keyring (3.20.0-1) unstable; urgency=medium
+
+  * New upstream release.
+  * Drop debian/patches/fix_conflicting_types.patch, merged upstream.
+  * Add Breaks: gnome-session (<< 3.20.0) to ensure we have a recent enough
+    version with support for PreDisplayServer autostart phase.
+  * Bump Standards-Version to 3.9.8.
+
+ -- Michael Biebl <biebl@debian.org>  Mon, 18 Apr 2016 01:08:56 +0200
+
+gnome-keyring (3.18.3-1) unstable; urgency=medium
+
+  * New upstream bugfix release.
+  * Drop handle_aliases.patch, applied upstream.
+  * Fix conflicting return types of function gkm_secret_binary_read, thanks
+    to Michael Tautschnig for the bug report (fix_conflicting_types.patch,
+    closes: #747182).
+
+ -- Dmitry Shachnev <mitya57@debian.org>  Sat, 02 Jan 2016 23:16:54 +0300
+
+gnome-keyring (3.18.2-1) unstable; urgency=medium
+
+  * New upstream bugfix release.
+  * Drop fix_object_path_regression.patch, applied upstream.
+  * Fix unlocking keyrings by aliases (handle_aliases.patch, closes: #802480).
+
+ -- Dmitry Shachnev <mitya57@debian.org>  Thu, 22 Oct 2015 11:05:41 +0300
+
+gnome-keyring (3.18.1-1) unstable; urgency=medium
+
+  * New upstream release.
+    - Now the problems with forking should be really fixed (closes:
+      #800617, the third attempt).
+  * Drop fix_tests_for_new_glib.patch, applied upstream.
+  * Drop init_secret_service.patch, applied upstream.
+  * Drop fork_before_using_dbus.patch, the issue has been fixed properly.
+  * Backport two post-release upstream commits to properly unexport
+    secret prompt objects (fix_object_path_regression.patch; closes:
+    #800660).
+
+ -- Dmitry Shachnev <mitya57@debian.org>  Sun, 18 Oct 2015 17:30:21 +0300
+
+gnome-keyring (3.18.0-4) unstable; urgency=medium
+
+  * Update fork_before_using_dbus.patch to make sure it does not break the
+    testsuite (should fix the build failure).
+
+ -- Dmitry Shachnev <mitya57@debian.org>  Mon, 12 Oct 2015 22:29:57 +0300
+
+gnome-keyring (3.18.0-3) unstable; urgency=medium
+
+  [ Michael Biebl ]
+  * Use https:// for Vcs-Browser.
+
+  [ Dmitry Shachnev ]
+  * Add another proposed upstream patch from Cosimo Cecchi to make
+    sure fork is done before attempting to use D-Bus connections
+    (fork_before_using_dbus.patch; closes: #800617).
+
+ -- Dmitry Shachnev <mitya57@debian.org>  Mon, 12 Oct 2015 13:45:21 +0300
+
+gnome-keyring (3.18.0-2) unstable; urgency=medium
+
+  * Add proposed upstream patch from Jan Alexander Steffens to fix
+    the D-Bus service activation race (hopefully closes: #800617).
+
+ -- Dmitry Shachnev <mitya57@debian.org>  Wed, 07 Oct 2015 18:38:06 +0300
+
+gnome-keyring (3.18.0-1) unstable; urgency=medium
+
+  * New upstream release.
+  * Drop fix_test_import_segfault.patch, applied upstream.
+  * Set $HOME to debian/testhome when running the tests.
+  * Make tests pass with GLib ≥ 2.45.7 (fix_tests_for_new_glib.patch).
+  * Upload to unstable.
+
+ -- Dmitry Shachnev <mitya57@debian.org>  Wed, 30 Sep 2015 15:05:54 +0300
+
+gnome-keyring (3.17.91-2) experimental; urgency=medium
+
+  * Replace Xvfb with dbus-run-session, it much better fits our needs.
+  * Fix segmentation fault in test-import (fix_test_import_segfault.patch).
+
+ -- Dmitry Shachnev <mitya57@debian.org>  Sun, 06 Sep 2015 12:30:14 +0300
+
+gnome-keyring (3.17.91-1) experimental; urgency=medium
+
+  * New upstream beta release.
+  * Drop libdbus-1-dev build-dependency, no longer needed.
+  * Drop --disable-gpg-agent option, GPG agent has been dropped upstream.
+  * Also drop code to remove gnome-keyring-gpg.desktop.
+  * Remove outdated information from README.Debian.
+  * Run tests in Xvfb to make them really run (and not hang because of
+    missing D-Bus). Still ignore the result because two tests fail.
+
+ -- Dmitry Shachnev <mitya57@debian.org>  Sat, 05 Sep 2015 10:29:00 +0300
+
+gnome-keyring (3.16.0-4) unstable; urgency=medium
+
+  * Fix the removal of /etc/xdg/autostart/gnome-keyring-gpg.desktop. This file
+    is installed even when compiled with --disable-gpg-agent, so remove it
+    manually.
+
+ -- Michael Biebl <biebl@debian.org>  Fri, 03 Jul 2015 22:01:47 +0200
+
+gnome-keyring (3.16.0-3) unstable; urgency=medium
+
+  * Drop obsolete Breaks from pre-wheezy.
+  * Disable gpg agent as it is incomplete and incompatible with many uses of
+    GnuPG 2.x. (Closes: #760102).
+  * Depend on pinentry-gnome3 instead to provide the system modal dialogs.
+    (Closes: #787786)
+  * Remove obsolete /etc/xdg/autostart/gnome-keyring-gpg.desktop on upgrades.
+
+ -- Michael Biebl <biebl@debian.org>  Thu, 02 Jul 2015 03:34:29 +0200
+
+gnome-keyring (3.16.0-2) unstable; urgency=medium
+
+  * Upload to unstable.
+
+ -- Dmitry Shachnev <mitya57@debian.org>  Mon, 04 May 2015 21:56:18 +0300
+
+gnome-keyring (3.16.0-1) experimental; urgency=medium
+
+  * New upstream release.
+    - Contains lots of memory leaks fixes.
+    - Fixes issues with logout from Plasma session.
+  * Fix a typo in README.debian (closes: #755367).
+  * Update Homepage field.
+  * Install manpages, now that is possible again.
+  * Bump Standards-Version to 3.9.6, no changes needed.
+
+ -- Dmitry Shachnev <mitya57@debian.org>  Fri, 17 Apr 2015 14:43:05 +0300
+
+gnome-keyring (3.14.0-1) unstable; urgency=medium
+
+  * New upstream release.
+
+ -- Andreas Henriksson <andreas@fatal.se>  Tue, 23 Sep 2014 20:20:23 +0200
+
+gnome-keyring (3.12.2-1) unstable; urgency=medium
+
+  [ Andreas Henriksson ]
+  * New upstream release.
+  * Bump Standards-Version to 3.9.5
+
+  [ Dmitry Shachnev ]
+  * Build with dh-autoreconf to support new archs (closes: #558553).
+
+  [ Andreas Metzler ]
+  * Build-depend on libtasn1-6-dev/libtasn1-bin instead of
+    libtasn1-3-dev/libtasn1-3-bin transitional packages. Closes: #743806
+
+  [ Andreas Henriksson ]
+  * Disable tests on kfreebsd for now.
+    - see corresponding change in libgnome-keyring (need kfreebsd-10).
+
+ -- Andreas Henriksson <andreas@fatal.se>  Thu, 28 Aug 2014 22:47:23 -0700
+
+gnome-keyring (3.12.0-2) unstable; urgency=medium
+
+  * Upload to unstable.
+
+ -- Emilio Pozuelo Monfort <pochu@debian.org>  Sat, 26 Apr 2014 20:21:24 +0200
+
+gnome-keyring (3.12.0-1) experimental; urgency=low
+
+  [ Dmitry Shachnev ]
+  * Use the new gnome-keyring-daemon man page provided by upstream.
+
+  [ Andreas Henriksson ]
+  * New upstream release.
+  * Bump glib build-dependency to >= 2.38.0 according to configure.ac
+  * Don't try to install /usr/share/man
+    - orig tarball not shipping docs subdir where manpages are generated from.
+
+ -- Andreas Henriksson <andreas@fatal.se>  Sun, 06 Apr 2014 23:26:34 +0200
+
+gnome-keyring (3.10.1-1) experimental; urgency=low
+
+  [ Jeremy Bicha ]
+  * Update homepage
+
+  [ Laurent Bigonville ]
+  * debian/rules: Use DEB_LDFLAGS_MAINT_APPEND instead of LDFLAGS to not
+    override hardening flags
+  * debian/control.in: Use canonical URL for Vcs-Svn field
+
+  [ Sjoerd Simons ]
+  * New upstream release
+
+ -- Sjoerd Simons <sjoerd@debian.org>  Sun, 27 Oct 2013 22:04:34 +0100
+
+gnome-keyring (3.8.2-2) unstable; urgency=low
+
+  [ Jeremy Bicha ]
+  * gnome-keyring.install:
+    - p11-kit now stores modules in /usr/share/p11-kit instead of
+      /etc/pkcs11
+
+  [ Michael Biebl ]
+  * Remove obsolete /etc/pkcs11/modules/gnome-keyring-module and
+    /etc/pkcs11/modules/gnome-keyring.module conffiles on upgrades.
+  * Bump Build-Depends on libp11-kit-dev to (>= 0.15.1) to ensure we get the
+    new modules path from p11-kit-1.pc.
+
+ -- Michael Biebl <biebl@debian.org>  Sun, 16 Jun 2013 19:11:14 +0200
+
+gnome-keyring (3.8.2-1) unstable; urgency=low
+
+  [ Emilio Pozuelo Monfort ]
+  * debian/control.in:
+    + Make gnome-keyring depend on p11-kit, required to read the CA
+      database.
+
+  [ Michael Biebl ]
+  * New upstream release.
+  * Upload to unstable.
+  * Refresh patches.
+  * Drop obsolete Conflicts/Replaces/Provides: libpam-keyring.
+  * Bump Standards-Version to 3.9.4. No further changes.
+  * Add Build-Depends on autotools-dev as lintian was complaining about
+    outdated config.{guess,sub}.
+
+ -- Michael Biebl <biebl@debian.org>  Sat, 15 Jun 2013 22:59:16 +0200
+
+gnome-keyring (3.8.0-1) experimental; urgency=low
+
+  * New upstream release.
+
+ -- Thomas Bechtold <thomasbechtold@jpberlin.de>  Mon, 25 Mar 2013 23:11:12 +0100
+
+gnome-keyring (3.7.91-1) experimental; urgency=low
+
+  * New upstream release
+  * Bumped build-dependency on libdbus-1-dev to >= 1.1.1
+  * Dropped build-dependency on libgtk-3-dev
+  * Dropped debian/patches/dont-reverse-searchitems.patch
+    - from upstream and now shipped in released version.
+
+ -- Andreas Henriksson <andreas@fatal.se>  Sun, 17 Mar 2013 03:06:20 +0100
+
+gnome-keyring (3.6.2-1) experimental; urgency=low
+
+  * New upstream release
+  * debian/patches/dont-reverse-searchitems.patch
+    + Added. Make sure the last updated secret is returned first.
+
+ -- Sjoerd Simons <sjoerd@debian.org>  Fri, 15 Feb 2013 21:35:04 +0100
+
+gnome-keyring (3.6.1-1) experimental; urgency=low
+
+  [ Simon McVittie ]
+  * New upstream release
+    - update build-dependencies
+    - drop patches that are in the upstream version
+    - deal with renamed PKCS#11 integration conffile with a mv_conffile
+      maintscript helper (LP: #1038577)
+
+  [ Sjoerd Simons ]
+  * Upload to Debian (Closes: #690965)
+
+ -- Sjoerd Simons <sjoerd@debian.org>  Sat, 20 Oct 2012 18:15:10 +0200
+
+gnome-keyring (3.4.1-5) unstable; urgency=low
+
+  * d/p/0001-schema-Update-description-for-gpg-cache-method.patch,
+    d/p/0002-gpg-agent-Hook-up-the-TTL-cache-option.patch,
+    d/p/0003-secret-store-Mark-a-secret-item-as-used-when-accesse.patch:
+    Properly expire caching of the GPG passphrases (Taken from upstream)
+    (Closes: #683655, CVE-2012-3466)
+
+ -- Laurent Bigonville <bigon@debian.org>  Sun, 19 Aug 2012 22:01:53 +0200
+
+gnome-keyring (3.4.1-4) unstable; urgency=low
+
+  * Add Depends on gcr (>= 3.4) for the SystemPrompter service which is
+    required by the ssh component. Closes: #673845
+
+ -- Michael Biebl <biebl@debian.org>  Thu, 24 May 2012 00:38:38 +0200
+
+gnome-keyring (3.4.1-3) unstable; urgency=low
+
+  * Upload to unstable.
+
+ -- Jordi Mallach <jordi@debian.org>  Sat, 19 May 2012 01:57:39 +0200
+
+gnome-keyring (3.4.1-2) experimental; urgency=low
+
+  * Build-Depend on libselinux1-dev only for linux-any.
+
+ -- Jordi Mallach <jordi@debian.org>  Thu, 17 May 2012 11:40:29 +0200
+
+gnome-keyring (3.4.1-1) experimental; urgency=low
+
+  [ Jeremy Bicha ]
+  * New upstream release.
+    - gck and gcr libraries have been split off to separate gcr source
+  * debian/control.in: Bump Standards-Version to 3.9.3. No further changes.
+  * Drop git patches as they've been applied upstream.
+  * Rewrite copyright file using the machine-readable format 1.0.
+
+  [ Jordi Mallach ]
+  * New upstream release.
+  * Fix some copyright notices in copyright file.
+  * Bump Build-Depends.
+  * Build-Depend on libselinux1-dev.
+  * Bump to debhelper v9.
+  * Stop configuring with --enable-static.
+
+ -- Jordi Mallach <jordi@debian.org>  Mon, 14 May 2012 22:13:02 +0200
+
+gnome-keyring (3.2.2-2) unstable; urgency=low
+
+  [ Martin Pitt ]
+  * Add 00git_gmodule_include.patch: Fix FTBFS due to missing gmodule package
+    check when building against glib 2.31.
+  * Add 00git_glib_2.31_deprecations.patch: Fix deprecated API for building
+    with glib 2.31. Backported from upstream git head. (LP: #911125)
+
+  [ Michael Biebl ]
+  * Add 00git_rpc-layer-Correctly-handle-case-where-gnome-keyring-.patch:
+    Correctly handle case where gnome-keyring-daemon is not running. Fixes the
+    infamous "gnome-keyring:: no socket to connect to" warning from the
+    gnome-keyring pam module. Closes: #649408
+  * Drop debian/patches/99_ltmain_as-needed.patch: It conflicts with
+    dh-autoreconf.
+
+ -- Michael Biebl <biebl@debian.org>  Wed, 25 Jan 2012 20:02:03 +0100
+
+gnome-keyring (3.2.2-1) unstable; urgency=low
+
+  [ Michael Biebl ]
+  * New upstream release.
+  * Drop libgcr0 and libgcr-dev again, upstream no longer supports GTK 2
+    builds.
+  * Bump debhelper compatibility level to 8.
+  * Add Build-Depends on libp11-kit-dev (>= 0.6).
+  * Change Build-Depends on libcap-dev to libcap-ng-dev.
+  * debian/watch: Track .xz tarballs.
+  * debian/rules: Don't run update-mime-database utility.
+
+  [ Jordi Mallach ]
+  * Update Vcs-* URLs.
+
+  [ Michael Biebl ]
+  * debian/gnome-keyring.install: Install icons, mime types, pkcs11 config
+    files and the pkcs11 modules from the multiarch paths.
+  * Update for the soname bumps of libgcr and libgck:
+    - Rename libgck0 → libgck-1-0.
+    - Rename libgck-dev → libgck-1-dev.
+    - Rename libgcr-3-0 → libgcr-3-1.
+    - Update symbols files.
+  * Split the API documentation into libgck-1-doc and libgcr-3-doc and add the
+    necessary Breaks/Replaces.
+  * Split the data files from libgcr-3-1 into a libgcr-3-common package and
+    make libgcr-3-1 depend on it.
+  * Make the -dev packages depend on libp11-kit-dev.
+
+ -- Michael Biebl <biebl@debian.org>  Fri, 18 Nov 2011 15:01:44 +0100
+
+gnome-keyring (3.0.3-2) unstable; urgency=low
+
+  * Re-add libgcr0 and libgcr-dev packages
+
+ -- Sjoerd Simons <sjoerd@debian.org>  Tue, 31 May 2011 19:59:00 -0700
+
+gnome-keyring (3.0.3-1) unstable; urgency=low
+
+  * New upstream release.
+  * debian/watch: Move to *.bz2, upstream does not release .gz tarballs any
+    more.
+
+ -- Martin Pitt <mpitt@debian.org>  Tue, 31 May 2011 07:17:56 +0200
+
+gnome-keyring (3.0.2-1) unstable; urgency=low
+
+  [ Laurent Bigonville ]
+  * debian/patches/04_expand_LIBEXECDIR.patch: Drop patch, applied from
+    upstream
+  * debian/rules: Enable tests
+  * debian/patches/01_fix_glib_link.patch: Fix FTBFS with --no-add-needed
+
+  [ Martin Pitt ]
+  * New upstream release.
+  * debian/libgcr-3-0.symbols: Add new symbols from this upstream release.
+  * Drop 01_fix_glib_link.patch, applied upstream.
+  * debian/rules: As the PKCS11 tests often fail right now, don't cause test
+    suite failures to fail the build. Let's see how well this works on the
+    Debian buildds first.
+
+ -- Martin Pitt <mpitt@debian.org>  Mon, 23 May 2011 11:34:04 +0200
+
+gnome-keyring (3.0.0-3) unstable; urgency=low
+
+  [ Josselin Mouette ]
+  * Break libgnome-keyring < 3.0.
+  * Fail gracefully when capabilities are not supported.
+    Closes: #622875, #623335.
+  * Break seahorse-plugins < 3.0, since it takes over the GPG
+    functionality.
+  * README.Debian: document how to disable gnome-keyring components.
+    Closes: #623539.
+
+ -- Jordi Mallach <jordi@debian.org>  Thu, 21 Apr 2011 19:36:47 +0200
+
+gnome-keyring (3.0.0-2) unstable; urgency=low
+
+  * Upload to unstable.
+  * Rename libgcr-dev to libgcr-3-dev, to allow for a future GTK+2-based
+    build, if needed.
+  * Bump Standards-Version to 3.9.2, with no changes required.
+
+ -- Jordi Mallach <jordi@debian.org>  Thu, 14 Apr 2011 23:18:31 +0200
+
+gnome-keyring (3.0.0-1) experimental; urgency=low
+
+  * New upstream release
+  * Drop debian/patches/01_pam-logging-less-verbose.patch,
+    debian/patches/05_use_in_xfce.patch: Applied upstream
+  * debian/libgcr-3-0.symbols: Adjust .symbols file
+  * debian/gnome-keyring.install: Also install /usr/share/applications/
+  * debian/patches/04_expand_LIBEXECDIR.patch: Correctly expand LIBEXECDIR
+    in gnome-keyring-prompt.desktop
+
+ -- Laurent Bigonville <bigon@debian.org>  Sun, 10 Apr 2011 23:25:25 +0200
+
+gnome-keyring (2.91.91-1) experimental; urgency=low
+
+  * New upstream release
+  * debian/control.in:
+    - Add libcap-dev as build-dependency for linux-any
+    - Make gnome-keyring Depends against libcap2-bin for linux-any
+    - Vcs-Browser: Use viewsvn instead the horrible wsvn
+  * debian/gnome-keyring.postinst:
+    - Set CAP_IPC_LOCK capability on gnome-keyring-daemon.
+      This would permit gnome-keyring to overcome limits on locked memory
+      and prevent private keys to be swapped out.
+    - Do not cleanup .desktop files from /etc/xdg/autostart as we are shipping
+      them again in that directory
+  * debian/libgcr-3-0.symbols, debian/libgck0.symbols: Adjusts symbols files
+  * debian/patches/04_link-libtasns1.patch,
+    d/p/0001-Link-directly-to-gmodule-for-the-modules-that-need-i.patch:
+    Drop patches, not needed anymore
+  * debian/patches/05_use_in_xfce.patch: Make gnome-keyring-daemon also start
+    for XFCE, taken from Ubuntu
+  * debian/gnome-keyring.install:
+    - Drop debian/tmp/usr/share/gnome-keyring/introspect,
+      debian/tmp/etc/xdg/pkcs11.conf.defaults
+    - Move back .desktop files to /etc/xdg/autostart to also startup
+      gnome-keyring-daemon for Lxde and Xfce (Closes: #599757)
+
+ -- Laurent Bigonville <bigon@debian.org>  Thu, 10 Mar 2011 22:20:24 +0100
+
+gnome-keyring (2.91.4-3) experimental; urgency=low
+
+  * debian/control.in:
+    - Update for the new gtk+ package names.
+
+ -- Emilio Pozuelo Monfort <pochu@debian.org>  Sat, 19 Feb 2011 14:33:53 +0000
+
+gnome-keyring (2.91.4-2) experimental; urgency=low
+
+  * debian/rules,
+    debian/control.in:
+    - Don't add quilt support, source format 3.0 (quilt) does that for us.
+    - Build depend on ca-certificates and let the configure script
+      autodetect the certificates dir. Closes: #608003.
+  * debian/rules:
+    - Reorder includes a bit.
+  * debian/libgcr-3-0.symbols:
+    - Add a Build-Depends-Package line to get proper dependencies when a
+      package build-depends on a higher version of libgcr-dev than what
+      it gets from the used symbols.
+  * debian/libgcr-3-0.shlibs,
+    debian/libgck0.shlibs,
+    debian/rules:
+    - Generate the shlibs files at build time, and make them depend on the
+      upstream version. We have .symbols files anyway, and updating the
+      shlibs version is error prone. This puts us on the safe side.
+  * debian/control.in:
+    - Bump libgtk3.0-dev build dependency.
+
+ -- Emilio Pozuelo Monfort <pochu@debian.org>  Wed, 12 Jan 2011 22:50:20 +0000
+
+gnome-keyring (2.91.4-1) experimental; urgency=low
+
+  [ Josselin Mouette ]
+  * Install gnome-keyring-prompt-3. Closes: #607192.
+
+  [ Sjoerd Simons ]
+  * New upstream release
+  * patches/0001-Link-directly-to-gmodule-for-the-modules-that-need-i.patch
+    + Added. Fix build with -Wl,--as-needed
+  * gnome-keyring.install: Install pkcs11 modules and config files
+  * libgck0.symbols, libgcr-3-0.symbols: Update symbols file
+  * debian/rules: Add quilt patchsys and use list-missing
+
+ -- Sjoerd Simons <sjoerd@debian.org>  Sat, 25 Dec 2010 21:30:35 +0100
+
+gnome-keyring (2.91.3-1) experimental; urgency=low
+
+  * New upstream release
+    - Drop debian/patches/06_init_timeout.patch: Merged upstream
+  * debian/control.in:
+    - Bump Standards-Version to 3.9.1 (no further changes)
+    - Remove duplicate Section to please lintian
+    - Bump glib {build-}dependencies to 2.25.0
+
+ -- Laurent Bigonville <bigon@debian.org>  Sat, 04 Dec 2010 17:34:49 +0100
+
+gnome-keyring (2.91.1-1) experimental; urgency=low
+
+  [ Sjoerd Simons ]
+  * New upstream release
+  * Update soname of libgcr
+  * Update install files
+  * debian/patches/02_uidir_relocate.patch:
+    + Removed, merged upstream
+  * debian/patches/05_hurd_maxpathlen.patch:
+    + Removed, merged upstream
+  * debian/patches/10_debugging_output.patch:
+    + Removed, no longer needed
+  * debian/patches/06_init_timeout.patch
+    + Updated
+  * Drop libgp11, it has been replaced by libgck
+
+  [ Emilio Pozuelo Monfort ]
+  * debian/rules:
+    - Drop libgp11 stuff, not needed anymore.
+    - Update libgcr package name so it has an effect.
+    - Also make the symbols check strict for libgck.
+    - Include check-dist.mk to prevent accidental uploads to unstable.
+  * debian/libgcr-3-0.shlibs:
+    - Updated for the new SONAME.
+  * debian/control,
+    debian/libgck-0.*,
+    debian/libgcr3.*:
+    - Rename libgck-0 to libgck0 so the package matches the SONAME, and
+      libgcr3 to libgcr-3-0 so it embeds the SONAME in the package name.
+  * debian/libgck0.symbols:
+    - Remove debian revision from every symbol.
+
+ -- Emilio Pozuelo Monfort <pochu@debian.org>  Sat, 20 Nov 2010 11:25:16 +0100
+
+gnome-keyring (2.30.3-5) unstable; urgency=low
+
+  * 07_keyring_encoding.patch: patch from upstream git. Correctly handle
+    keyring names with non-ascii characters.
+    Closes: #591659, LP: #553759.
+
+ -- Josselin Mouette <joss@debian.org>  Tue, 11 Jan 2011 20:28:48 +0100
+
+gnome-keyring (2.30.3-4) unstable; urgency=low
+
+  * 06_init_timeout.patch: follow upstream and use a 120 second timeout
+    instead of 10. Closes: #603387.
+
+ -- Josselin Mouette <joss@debian.org>  Mon, 15 Nov 2010 17:46:27 +0100
+
+gnome-keyring (2.30.3-3) unstable; urgency=low
+
+  * 06_init_timeout.patch: new patch. Exit the daemon when started
+    through the PAM module if it is not initialized in 10 seconds. This
+    avoids leaking gnome-keyring-daemon processes everywhere.
+
+ -- Josselin Mouette <joss@debian.org>  Sat, 09 Oct 2010 09:50:46 +0200
+
+gnome-keyring (2.30.3-2) unstable; urgency=high
+
+  * 10_debugging_output.patch: new patch. Stop spewing sensitive
+    information in the system logs. Note that it does *not* spew actual
+    keys or passphrases. This bug was introduced in 2.30.
+    Credits go to Romain Françoise for the discovery.
+
+ -- Josselin Mouette <joss@debian.org>  Tue, 05 Oct 2010 19:20:54 +0200
+
+gnome-keyring (2.30.3-1) unstable; urgency=low
+
+  * New upstream stable release.
+  * Refresh patches for new upstream release.
+  * Remove debian/org.freedesktop.secrets.service, merged upstream.
+  * debian/control.in
+    - Bump Standards-Version to 3.9.0. No further changes.
+    - Add Vcs-Browser and Vcs-Svn fields.
+    - Add Homepage field.
+
+ -- Michael Biebl <biebl@debian.org>  Tue, 20 Jul 2010 04:36:32 +0200
+
+gnome-keyring (2.30.1-2) unstable; urgency=low
+
+  [ Josselin Mouette ]
+  * Update README.Debian to match reality.
+
+  [ Sjoerd Simons ]
+  * Add service file for org.freedesktop.secrets to ensure gnome-keyring gets
+    autolaunched when it's needed.
+
+ -- Sjoerd Simons <sjoerd@debian.org>  Tue, 27 Apr 2010 23:11:24 +0100
+
+gnome-keyring (2.30.1-1) unstable; urgency=low
+
+  * New upstream bugfix release:
+    + debian/control.in:
+      - Required GTK+ >= 2.20.0.
+
+ -- Sebastian Dröge <slomo@debian.org>  Tue, 27 Apr 2010 09:35:21 +0200
+
+gnome-keyring (2.30.0-2) unstable; urgency=low
+
+  [ Emilio Pozuelo Monfort ]
+  * debian/patches/05_hurd_maxpathlen.patch:
+    - Fix build on Hurd, again (MAXPATHLEN reintroduced).
+  * debian/control.in,
+    debian/rules,
+    debian/patches/*,
+    debian/source/format:
+    - Switch to source format 3.0 (quilt).
+  * debian/rules:
+    - Pass -c4 to dpkg-gensymbols for stricter checks.
+
+  [ Josselin Mouette ]
+  * Break libgnome-keyring0 < 2.30. Closes: #577624.
+
+ -- Josselin Mouette <joss@debian.org>  Tue, 13 Apr 2010 21:27:28 +0200
+
+gnome-keyring (2.30.0-1) unstable; urgency=low
+
+  [ Josselin Mouette ]
+  * The library only suggests the daemon. Closes: #563358.
+  * 03_kfreebsd.patch: new version of the patch. Closes: #558406 again.
+
+  [ Sebastian Dröge ]
+  * New upstream stable release:
+    + debian/control.in,
+      debian/libgnome-keyring*:
+      - Dropped libgnome-keyring package, it has its own source package now.
+    + debian/control.in:
+      - Drop GConf build dependency.
+    + debian/patches/04_maxpathlen_hurd.patch:
+      - Dropped, merged upstream.
+    + debian/patches/10_whitelist_system.patch:
+      - Dropped, relevant code does not exist anymore.
+    + debian/patches/04_link-libtasns1.patch:
+      - Fix linking with libtasn1.
+
+ -- Sebastian Dröge <slomo@debian.org>  Mon, 12 Apr 2010 12:49:53 +0200
+
+gnome-keyring (2.28.2-1) unstable; urgency=low
+
+  [ Josselin Mouette ]
+  * 03_kfreebsd.patch: patch from Emmanuel Bouthenot to add kFreeBSD
+    support. Closes: #558406.
+
+  [ Emilio Pozuelo Monfort ]
+  * Switch to quilt, refresh patches.
+  * debian/patches/04_maxpathlen_hurd.patch:
+    - New patch, switch to dynamic allocation to avoid using
+      MAXPATHLEN. Fixes FTBFS on GNU/Hurd.
+  * New upstream bugfix release.
+
+ -- Emilio Pozuelo Monfort <pochu@debian.org>  Mon, 14 Dec 2009 19:50:03 +0100
+
+gnome-keyring (2.28.1-2) unstable; urgency=low
+
+  * 10_whitelist_system.patch: new patch. Whitelist some system
+    directories (/usr/bin and /usr/lib) to avoid drowning the user under
+    useless dialogs. If anything evil can be installed in these
+    directories, all users on the system are doomed and we can give up
+    on any kind of security.
+
+ -- Josselin Mouette <joss@debian.org>  Fri, 20 Nov 2009 18:09:05 +0100
+
+gnome-keyring (2.28.1-1) unstable; urgency=low
+
+  [ Josselin Mouette ]
+  * Install the autostart file in /usr/share/gnome, not /etc/xdg.
+  * Remove the old file in the postinst.
+  * Remove .la file, it’s not references anywhere anymore.
+  * Drop clean-la.mk include as well.
+
+  [ Emilio Pozuelo Monfort ]
+  * New upstream release.
+    - Wait until env variables are set on startup. Closes: #516230.
+    - debian/control.in:
+      + Don't build depend on libhal-storage-dev nor suggest hal,
+        we now use libgio to monitor volumes.
+      + Only require libtasn1-3-dev >= 0.3.4, not >= 1.0.
+    - debian/patches/02_uidir_relocate.patch:
+      + Updated.
+  * Standards-Version is 3.8.3, no changes needed.
+  * debian/watch: Don't uupdate.
+
+ -- Emilio Pozuelo Monfort <pochu@debian.org>  Tue, 20 Oct 2009 14:22:49 +0200
+
+gnome-keyring (2.26.1-1) unstable; urgency=low
+
+  * New upstream release.
+    + Fixes numerous crashes in the memory allocator.
+      Hopefully closes: #522826 for good.
+  * Update build-dependencies.
+  * Install API documentation for libgcr.
+  * 03_secure-mem_crash.patch: dropped, merged upstream.
+  * 04_full_path_in_service.patch: dropped, fixed upstream in another
+    way.
+  * Fix FSF address in copyright file.
+
+ -- Josselin Mouette <joss@debian.org>  Fri, 15 May 2009 11:25:28 +0200
+
+gnome-keyring (2.26.0-4) unstable; urgency=low
+
+  * debian/patches/04_full_path_in_service.patch: Added. Put the full path to
+    gnome-keyring-daemon in the .service file. Fixes dbus autostarting the
+    daemon on demand
+
+ -- Sjoerd Simons <sjoerd@debian.org>  Sat, 18 Apr 2009 15:34:17 +0100
+
+gnome-keyring (2.26.0-3) unstable; urgency=low
+
+  * libgp11-0.shlibs: add shlibs file for libgp11. Closes: #522381.
+  * libgcr0.symbols, libgnome-keyring0.symbols: add
+    Build-Depends-Package fields.
+  * libgp11-0.symbols: also add symbols file for libgp11.
+  * Add missing build-dep on intltool.
+  * Pass /etc/ssl/certs as the directory for root certificates.
+  * Update glib dependency for libgnome-keyring-dev.
+  * Standards version is 3.8.1.
+  * 03_secure-mem_crash.patch: new patch, stolen upstream. Fixes
+    assertion error in the secure memory allocator. Closes: #522266.
+  * pam-configs/gnome-keyring: ship a PAM configuration for the Password
+    stanzas.
+  * libpam-gnome-keyring.install: install it.
+  * libpam-gnome-keyring.{postinst,prerm}: run pam-auth-update.
+  * Depend on libpam-runtime (>= 1.0.1-6).
+  * libpam-gnome-keyring.README.Debian: remove the documentation for the
+    passwd module.
+
+ -- Josselin Mouette <joss@debian.org>  Wed, 08 Apr 2009 15:39:31 +0200
+
+gnome-keyring (2.26.0-2) unstable; urgency=low
+
+  * debian/libgnome-keyring0.shlibs:
+  - revert bumping shlibs version to 2.26.0, not needed and harmful now
+    that we are in unstable
+  * debian/libgnome-keyring0.symbols:
+  - add a symbols file for libgnome-keyring0
+  * debian/libgcr0.symbols:
+  - add symbols file for libgcr0
+
+ -- Gustavo Noronha Silva <kov@debian.org>  Thu, 02 Apr 2009 10:17:30 -0300
+
+gnome-keyring (2.26.0-1) unstable; urgency=low
+
+  * New upstream release
+  * debian/libgnome-keyring0.shlibs:
+  - bumped shlibs version to 2.26.0
+  * debian/copyright:
+  - complete rewrite
+  * debian/patches/02_uidir_relocate.patch:
+  - change the directory where .ui files are installed, so that it
+    contains the soversion, to allow for parallel installability of
+    binary-incompatible versions
+  * debian/rules:
+  - do not enable tests, since they aren't really run, and may cause
+    problems in some architectures, according to seb128
+  * debian/control.in:
+  - sync Replaces with the Ubuntu package, for their convenience
+
+  Changes imported from/based on the Ubuntu package (thanks!):
+  * debian/control.in, debian/libgcr*:
+  - added packages for the libgcr library
+  * debian/control.in:
+  - adjust libtasn1-3-dev build-dependency to require >= 1.0, and add
+    build-dep on libtasn1-bin
+  * debian/gnome-keyring.install:
+  - also install the new .so files gnome-keyring puts in
+    /usr/lib/gnome-keyring/{devel,standalone}, and the XDG autostart file
+
+ -- Gustavo Noronha Silva <kov@debian.org>  Sat, 28 Mar 2009 17:15:29 -0300
+
+gnome-keyring (2.24.1-3) UNRELEASED; urgency=low
+
+  [ Loic Minier ]
+  * Suggest hal as gnome-keyring attempts to contact it by default and logs a
+    warning if it can't.
+
+  [ Josselin Mouette ]
+  * Build-depend on libglib2.0-doc to ensure proper xrefs.
+
+ -- Loic Minier <lool@dooz.org>  Sun, 15 Mar 2009 14:50:04 +0100
+
+gnome-keyring (2.24.1-2) unstable; urgency=low
+
+  * gnome-keyring depends on dbus-x11. Closes: #509308.
+
+ -- Josselin Mouette <joss@debian.org>  Sun, 08 Mar 2009 19:22:34 +0100
+
+gnome-keyring (2.24.1-1) experimental; urgency=low
+
+  * New upstream release.
+    + Uses id_rsa.pub to read public key information. Closes: #431544.
+  * Bump glib build-dependency.
+  * Bump shlibs for libgnome-keyring0 to 2.23.5.
+  * 01_pam-logging-less-verbose.patch: refreshed.
+  * 02_dbus_crash.patch: dropped, merged upstream.
+  * New packages: libgp11-0 and libgp11-dev.
+  * libgnome-keyring-dev.docs: updated for the new source layout.
+  * Don’t install the .a and .la for the gnome-keyring pkcs11 module.
+  * Don’t run dh_makeshlibs on gnome-keyring package.
+  * Pass -O1 -z defs --as-needed to the linker.
+  * 99_ltmain_as-needed.patch: make it work on libraries.
+
+ -- Josselin Mouette <joss@debian.org>  Sat, 22 Nov 2008 11:02:45 +0100
+
+gnome-keyring (2.22.3-2) unstable; urgency=low
+
+  * 02_dbus_crash.patch: patch from upstream to fix a crash that happens
+    after dbus restarts. Closes: #474418.
+
+ -- Josselin Mouette <joss@debian.org>  Tue, 23 Sep 2008 12:42:14 +0200
+
+gnome-keyring (2.22.3-1) unstable; urgency=low
+
+  * New upstream bugfix release.
+  * debian/control.in:
+    + Updated Standards-Version to 3.8.0, no additional changes needed.
+
+ -- Sebastian Dröge <slomo@debian.org>  Tue, 01 Jul 2008 08:23:46 +0200
+
+gnome-keyring (2.22.2-1) unstable; urgency=low
+
+  [ Josselin Mouette ]
+  * README.Debian: document how passwords are stored, how to disable the
+    SSH agent, and how the login keyring works. Closes: #473864.
+
+  [ Sebastian Dröge ]
+  * New upstream bugfix release.
+
+ -- Sebastian Dröge <slomo@debian.org>  Mon, 02 Jun 2008 11:50:21 +0200
+
+gnome-keyring (2.22.1-1) unstable; urgency=low
+
+  [ Michael Banck ]
+  * debian/patches/03_fix_symbol_exporting.patch
+    - Added. Fix symbol export to include upper case GNOME_KEYRING_
+      symbols as well. Taken from upstream svn, thanks to Andrea Del
+      Signore.
+
+  [ Sebastian Dröge ]
+  * New upstream bugfix release:
+    + debian/patches/02_handle_dbus_restart.patch,
+      debian/patches/03_fix_symbol_exporting.patch:
+      - Dropped, merged upstream.
+
+ -- Sebastian Dröge <slomo@debian.org>  Mon, 07 Apr 2008 06:38:43 +0200
+
+gnome-keyring (2.22.0-2) unstable; urgency=low
+
+  * debian/patches/02_handle_dbus_restart.patch
+    - Added. Handle the restart of the system dbus (Closes: #456362)
+
+ -- Sjoerd Simons <sjoerd@debian.org>  Fri, 14 Mar 2008 14:36:07 +0100
+
+gnome-keyring (2.22.0-1) unstable; urgency=low
+
+  [ Emilio Pozuelo Monfort ]
+  * New upstream release.
+    - Build-Depend on libglib2.0-dev, libgconf2-dev and libtasn1-3-dev.
+    - debian/gnome-keyring.docs:
+      + Updated to match new keyring-intro.txt location.
+    - debian/libgnome-keyring-dev.docs:
+      + Likewise for file-format.txt.
+    - debian/gnome-keyring.install:
+      + Install new files, stolen from the Ubuntu package.
+  * Build the test suite.
+
+  [ Josselin Mouette ]
+  * libpam-gnome-keyring recommends gnome-keyring.
+
+  [ Sebastian Dröge ]
+  * debian/libgnome-keyring0.shlibs:
+    + Update shlibs to >= 2.22.0 because of new API.
+  * debian/control.in:
+    + Cleanup dependencies of the -dev package.
+
+ -- Sebastian Dröge <slomo@debian.org>  Wed, 12 Mar 2008 11:31:11 +0100
+
+gnome-keyring (2.20.3-1) unstable; urgency=low
+
+  [ Loic Minier ]
+  * Downgrade libgnomekeyring dep on gnome-keyring to a Recommends;
+    closes: #455203.
+  * Wrap build-deps and deps.
+  * Add a ${misc:Depends}.
+
+  [ Sam Morris ]
+  * Add fix_evolution_crash.patch (closes: #456967).
+
+  [ Josselin Mouette ]
+  * Rework libpam-gnome-keyring description. Closes: #455491.
+
+  [ Sebastian Dröge ]
+  * New upstream bugfix release:
+    + debian/patches/fix_evolution_crash.patch:
+      - Dropped, merged upstream.
+  * debian/control.in:
+    + Update Standards-Version to 3.7.3, no additional changes needed.
+  * debian/patches/01_pam-logging-less-verbose.patch:
+    + Don't log unknown user names to syslog as they could be accidentally
+      typed in password (Closes: #459631).
+
+ -- Sebastian Dröge <slomo@debian.org>  Tue, 08 Jan 2008 20:01:07 +0100
+
+gnome-keyring (2.20.2-1) unstable; urgency=low
+
+  [ Sebastien Bacher ]
+
+  * debian/control.in:
+    - libpam-gnome-keyring Conflicts,Provides,Replaces libpam-keyring
+
+  [ Josselin Mouette ]
+  * libpam-gnome-keyring.README.Debian: document how to configure
+    pam_gnome_keyring in Debian. Closes: #452731.
+  * gnome-keyring recommends libpam-gnome-keyring.
+
+  [ Sebastian Dröge ]
+  * New upstream bugfix release.
+
+ -- Sebastian Dröge <slomo@debian.org>  Sun, 25 Nov 2007 14:40:12 +0100
+
+gnome-keyring (2.20.1-1) unstable; urgency=low
+
+  * New upstream bugfix release:
+    + Dropped patch 01_add-new-keyrings.diff, merged upstream.
+    + debian/rules,
+      debian/libpam-gnome-keyring.install:
+      - The PAM module is automatically installed now, no need to do it by
+        hand.
+    + debian/libgnome-keyring0.shlibs:
+      - Bump shlibs to >= 2.20.1 because of a new possible return value of a
+        function.
+
+ -- Sebastian Dröge <slomo@debian.org>  Sun, 21 Oct 2007 21:46:57 +0200
+
+gnome-keyring (2.20.0-3) unstable; urgency=low
+
+  * New patch, 01_add-new-keyrings.diff from upstream svn, to get newly
+    created keyrings to list of loaded keyrings; GNOME #476644.
+
+ -- Norbert Tretkowski <nobse@debian.org>  Sat, 06 Oct 2007 17:36:20 +0200
+
+gnome-keyring (2.20.0-2) unstable; urgency=low
+
+  * Upload to unstable.
+  * debian/control.in:
+    + Use ${binary:Version} instead of ${Source-Version} to make lintian happy.
+
+ -- Sebastian Dröge <slomo@debian.org>  Sat, 29 Sep 2007 17:16:09 +0200
+
+gnome-keyring (2.20.0-1) experimental; urgency=low
+
+  [ Sven Arvidsson ]
+  * Add a (very basic) man page for gnome-keyring-daemon
+    (Closes: #355667)
+  * Ship keyring-intro.txt and file-format.txt in the -dev package
+    (Closes: #434718)
+
+  [ Loic Minier ]
+  * Don't include autotools.mk as it's already included by gnome.mk.
+
+  [ Sebastian Dröge ]
+  * New upstrem release, most packaging changes taken from Ubuntu.
+    Thanks to Sebastien Bacher, Aron Sisak, Baptiste Mille-Mathias
+    and Martin Pitt for their work.
+  * debian/control.in:
+    + Add libgcrypt11-dev, libhal-storage-dev and libpam0g-dev to build
+      dependencies and update the libgnome-keyring-dev dependencies.
+    + Add a new libpam-gnome-keyring package that contains a PAM module
+      to automatically unlock keyrings on login.
+  * debian/rules:
+    + Build and install the PAM module.
+  * debian/libgnome-keyring0.shlibs:
+    + Update shlibs to >= 2.19.6.
+  * debian/gnome-keyring.docs,
+    debian/libgnome-keyring-dev.docs:
+    + Update docs that should be shipped.
+
+ -- Sebastian Dröge <slomo@debian.org>  Sat, 22 Sep 2007 10:00:51 +0200
+
+gnome-keyring (0.8.1-2) unstable; urgency=low
+
+  * Upload to unstable, remove check-dist include.
+
+ -- Sebastian Dröge <slomo@debian.org>  Thu, 19 Apr 2007 08:49:25 +0200
+
+gnome-keyring (0.8.1-1) experimental; urgency=low
+
+  * New upstream stable release; no API change; bug fix.
+  * Fix watch file to track all stable versions and use HTTP.
+  * Bump up Debhelper compatibility level to 5.
+  * Drop useless debian/*dirs.
+  * Add ${misc:Depends}.
+
+ -- Loic Minier <lool@dooz.org>  Sun, 08 Apr 2007 09:07:52 +0200
+
+gnome-keyring (0.8-1) experimental; urgency=low
+
+  [ Loic Minier ]
+  * Add a get-orig-source target to retrieve the upstream tarball.
+
+  [ Marc 'HE' Brockschmidt ]
+  * Remove unneeded debian/*.files, .install files are in use.
+  * New upstream release:
+    + Bumped shlibs, new functions available
+    + Added build-dep on dbus, to make use of new dbus features
+    + debian/patches/30_kfreebsd.patch: Dropped, merged upstream
+    + Install gtk-doc documentation to libgnome-keyring-dev
+
+  [ Loic Minier ]
+  * Don't overwrite DEB_CONFIGURE_EXTRA_FLAGS.
+  * Include the new check-dist Makefile to prevent accidental uploads to
+    unstable; bump build-dep on gnome-pkg-tools to >= 0.10.
+
+ -- Loic Minier <lool@dooz.org>  Tue, 27 Mar 2007 22:20:24 +0200
+
+gnome-keyring (0.6.0-3) unstable; urgency=low
+
+  * New patch, 30_kfreebsd, fixes build under kfreesbd; thanks Petr Salinger;
+    GNOME #382773; closes: #401720.
+
+ -- Loic Minier <lool@dooz.org>  Tue,  5 Dec 2006 22:35:15 +0100
+
+gnome-keyring (0.6.0-2) unstable; urgency=low
+
+  * Upload to unstable.
+  * Call clean-la.mk; require gnome-pkg-tools 0.7.
+
+ -- Loic Minier <lool@dooz.org>  Sun, 22 Oct 2006 20:06:57 +0200
+
+gnome-keyring (0.6.0-1) experimental; urgency=low
+
+  * New upstream release.
+  * Update build-dependencies.
+  * Standards version is 3.7.2.
+  * Bump libgnome-keyring0.shlibs.
+
+ -- Josselin Mouette <joss@debian.org>  Tue,  5 Sep 2006 23:14:37 +0200
+
+gnome-keyring (0.4.9-1) unstable; urgency=low
+
+  * New upstream release (bugfix and updated translations).
+
+ -- J.H.M. Dassen (Ray) <jdassen@debian.org>  Thu, 16 Mar 2006 09:48:14 +0100
+
+gnome-keyring (0.4.8-1) unstable; urgency=medium
+
+  * New upstream release (bugfix and updated translations).
+
+ -- J.H.M. Dassen (Ray) <jdassen@debian.org>  Tue, 28 Feb 2006 07:03:41 +0100
+
+gnome-keyring (0.4.7-1) unstable; urgency=low
+
+  * New upstream release (bugfix and translation updates).
+
+ -- J.H.M. Dassen (Ray) <jdassen@debian.org>  Thu, 16 Feb 2006 21:40:14 +0100
+
+gnome-keyring (0.4.6-2) unstable; urgency=low
+
+  * Upload to unstable.
+
+ -- Ondřej Surý <ondrej@sury.org>  Fri, 30 Dec 2005 15:02:56 +0100
+
+gnome-keyring (0.4.6-1) unstable; urgency=low
+
+  [ Sebastien Bacher ]
+  * New upstream version:
+  - confirm password when selecting new password.
+
+  [ Loic Minier ]
+  * Update watch file. [debian/watch]
+
+ -- Ondřej Surý <ondrej@sury.org>  Fri, 30 Dec 2005 15:02:39 +0100
+
+gnome-keyring (0.4.5-1) unstable; urgency=low
+
+  * New upstream release
+  * debian/control.in:
+  - added Section field to source package part
+  - removed dependencies on unused ${misc:Depends}
+  - updated to Standards-Version 3.6.2.1 with no changes
+  * debian/patches/00_relibtoolise.patch:
+  - dropped; no longer necessary
+
+ -- Guilherme de S. Pastore <guilherme.pastore@terra.com.br>  Fri, 16 Sep 2005 17:00:20 -0300
+
+gnome-keyring (0.4.3-2) unstable; urgency=low
+
+  * Add dependency on libglib2.0-dev to libgnome-keyring-dev.
+    (Closes: #323310) [debian/control, debian/control.in]
+  * Update FSF address. [debian/copyright]
+  * Bump Standards-Version to 3.6.2. [debian/control, debian/control.in]
+
+ -- Loic Minier <lool@dooz.org>  Sat,  3 Sep 2005 11:26:50 +0200
+
+gnome-keyring (0.4.3-1) unstable; urgency=low
+
+  * New upstream version:
+    - Translation updates.
+    - Fix bug in acl functions.
+    - implement gnome_keyring_set_info.
+    - add sync function for all operations.
+    - fix leaks.
+  * debian/libgnome-keyring0.shlibs:
+    - set to the current version.
+
+ -- Sebastien Bacher <seb128@debian.org>  Fri,  1 Jul 2005 23:30:27 +0200
+
+gnome-keyring (0.4.2-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Sebastien Bacher <seb128@debian.org>  Thu,  7 Apr 2005 18:22:43 +0200
+
+gnome-keyring (0.4.1-1) unstable; urgency=low
+
+  * New upstream release.
+  * debian/patches/00_relibtoolise.patch: use updated seb128's work
+
+ -- Ondřej Surý <ondrej@sury.org>  Wed, 12 Jan 2005 11:51:59 +0100
+
+gnome-keyring (0.4.0-2) unstable; urgency=low
+
+  * GNOME team upload.
+  * Upload to unstable.
+
+ -- Jordi Mallach <jordi@debian.org>  Wed, 17 Nov 2004 14:10:30 +0100
+
+gnome-keyring (0.4.0-1) experimental; urgency=low
+
+  * GNOME team upload.
+  * New upstream release.
+  * debian/control.in: s/informations/information/g.
+  * debian/libgnome-keyring0.shlibs: bumped to 0.4.0, new symbols added.
+  * debian/patches/00_relibtoolise.patch: updated.
+
+ -- Jordi Mallach <jordi@debian.org>  Tue, 14 Sep 2004 23:47:27 +0200
+
+gnome-keyring (0.2.1-3) unstable; urgency=low
+
+  * Add relibtoolize patch to fix FTBFS on on k*bsd-gnu (Closes: #266763)
+
+ -- Ondřej Surý <ondrej@debian.org>  Thu, 19 Aug 2004 08:35:24 +0200
+
+gnome-keyring (0.2.1-2) unstable; urgency=low
+
+  * Upload to unstable.
+
+ -- Ondřej Surý <ondrej@debian.org>  Mon, 24 May 2004 14:55:38 +0200
+
+gnome-keyring (0.2.1-1) experimental; urgency=low
+
+  * New upstream release.
+
+ -- Ondřej Surý <ondrej@debian.org>  Tue, 20 Apr 2004 11:10:30 +0200
+
+gnome-keyring (0.2.0-3) experimental; urgency=low
+
+  * Add build depends on cdbs, docbook-xml and gtk-doc-tools.
+
+ -- Ondřej Surý <ondrej@debian.org>  Fri, 26 Mar 2004 23:16:28 +0100
+
+gnome-keyring (0.2.0-2) experimental; urgency=low
+
+  * Renamed libgnome-keyring-0 to libgnome-keyring0.
+
+ -- Ondřej Surý <ondrej@debian.org>  Wed, 24 Mar 2004 15:22:32 +0100
+
+gnome-keyring (0.2.0-1) experimental; urgency=low
+
+  * Initial Release.
+
+ -- Ondřej Surý <ondrej@debian.org>  Tue, 23 Mar 2004 12:21:43 +0100

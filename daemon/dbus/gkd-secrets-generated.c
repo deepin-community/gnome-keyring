@@ -10,12 +10,58 @@
 #  include "config.h"
 #endif
 
-#include "./daemon/dbus/gkd-secrets-generated.h"
+#include "../daemon/dbus/gkd-secrets-generated.h"
 
 #include <string.h>
 #ifdef G_OS_UNIX
 #  include <gio/gunixfdlist.h>
 #endif
+
+#ifdef G_ENABLE_DEBUG
+#define g_marshal_value_peek_boolean(v)  g_value_get_boolean (v)
+#define g_marshal_value_peek_char(v)     g_value_get_schar (v)
+#define g_marshal_value_peek_uchar(v)    g_value_get_uchar (v)
+#define g_marshal_value_peek_int(v)      g_value_get_int (v)
+#define g_marshal_value_peek_uint(v)     g_value_get_uint (v)
+#define g_marshal_value_peek_long(v)     g_value_get_long (v)
+#define g_marshal_value_peek_ulong(v)    g_value_get_ulong (v)
+#define g_marshal_value_peek_int64(v)    g_value_get_int64 (v)
+#define g_marshal_value_peek_uint64(v)   g_value_get_uint64 (v)
+#define g_marshal_value_peek_enum(v)     g_value_get_enum (v)
+#define g_marshal_value_peek_flags(v)    g_value_get_flags (v)
+#define g_marshal_value_peek_float(v)    g_value_get_float (v)
+#define g_marshal_value_peek_double(v)   g_value_get_double (v)
+#define g_marshal_value_peek_string(v)   (char*) g_value_get_string (v)
+#define g_marshal_value_peek_param(v)    g_value_get_param (v)
+#define g_marshal_value_peek_boxed(v)    g_value_get_boxed (v)
+#define g_marshal_value_peek_pointer(v)  g_value_get_pointer (v)
+#define g_marshal_value_peek_object(v)   g_value_get_object (v)
+#define g_marshal_value_peek_variant(v)  g_value_get_variant (v)
+#else /* !G_ENABLE_DEBUG */
+/* WARNING: This code accesses GValues directly, which is UNSUPPORTED API.
+ *          Do not access GValues directly in your code. Instead, use the
+ *          g_value_get_*() functions
+ */
+#define g_marshal_value_peek_boolean(v)  (v)->data[0].v_int
+#define g_marshal_value_peek_char(v)     (v)->data[0].v_int
+#define g_marshal_value_peek_uchar(v)    (v)->data[0].v_uint
+#define g_marshal_value_peek_int(v)      (v)->data[0].v_int
+#define g_marshal_value_peek_uint(v)     (v)->data[0].v_uint
+#define g_marshal_value_peek_long(v)     (v)->data[0].v_long
+#define g_marshal_value_peek_ulong(v)    (v)->data[0].v_ulong
+#define g_marshal_value_peek_int64(v)    (v)->data[0].v_int64
+#define g_marshal_value_peek_uint64(v)   (v)->data[0].v_uint64
+#define g_marshal_value_peek_enum(v)     (v)->data[0].v_long
+#define g_marshal_value_peek_flags(v)    (v)->data[0].v_ulong
+#define g_marshal_value_peek_float(v)    (v)->data[0].v_float
+#define g_marshal_value_peek_double(v)   (v)->data[0].v_double
+#define g_marshal_value_peek_string(v)   (v)->data[0].v_pointer
+#define g_marshal_value_peek_param(v)    (v)->data[0].v_pointer
+#define g_marshal_value_peek_boxed(v)    (v)->data[0].v_pointer
+#define g_marshal_value_peek_pointer(v)  (v)->data[0].v_pointer
+#define g_marshal_value_peek_object(v)   (v)->data[0].v_pointer
+#define g_marshal_value_peek_variant(v)  (v)->data[0].v_pointer
+#endif /* !G_ENABLE_DEBUG */
 
 typedef struct
 {
@@ -151,6 +197,461 @@ _g_value_equal (const GValue *a, const GValue *b)
   return ret;
 }
 
+static void
+_g_dbus_codegen_marshal_BOOLEAN__OBJECT_STRING_VARIANT (
+    GClosure     *closure,
+    GValue       *return_value,
+    unsigned int  n_param_values,
+    const GValue *param_values,
+    void         *invocation_hint G_GNUC_UNUSED,
+    void         *marshal_data)
+{
+  typedef gboolean (*_GDbusCodegenMarshalBoolean_ObjectStringVariantFunc)
+       (void *data1,
+        GDBusMethodInvocation *arg_method_invocation,
+        const gchar *arg_algorithm,
+        GVariant *arg_input,
+        void *data2);
+  _GDbusCodegenMarshalBoolean_ObjectStringVariantFunc callback;
+  GCClosure *cc = (GCClosure*) closure;
+  void *data1, *data2;
+  gboolean v_return;
+
+  g_return_if_fail (return_value != NULL);
+  g_return_if_fail (n_param_values == 4);
+
+  if (G_CCLOSURE_SWAP_DATA (closure))
+    {
+      data1 = closure->data;
+      data2 = g_value_peek_pointer (param_values + 0);
+    }
+  else
+    {
+      data1 = g_value_peek_pointer (param_values + 0);
+      data2 = closure->data;
+    }
+
+  callback = (_GDbusCodegenMarshalBoolean_ObjectStringVariantFunc)
+    (marshal_data ? marshal_data : cc->callback);
+
+  v_return =
+    callback (data1,
+              g_marshal_value_peek_object (param_values + 1),
+              g_marshal_value_peek_string (param_values + 2),
+              g_marshal_value_peek_variant (param_values + 3),
+              data2);
+
+  g_value_set_boolean (return_value, v_return);
+}
+
+static void
+_g_dbus_codegen_marshal_BOOLEAN__OBJECT_VARIANT_STRING (
+    GClosure     *closure,
+    GValue       *return_value,
+    unsigned int  n_param_values,
+    const GValue *param_values,
+    void         *invocation_hint G_GNUC_UNUSED,
+    void         *marshal_data)
+{
+  typedef gboolean (*_GDbusCodegenMarshalBoolean_ObjectVariantStringFunc)
+       (void *data1,
+        GDBusMethodInvocation *arg_method_invocation,
+        GVariant *arg_properties,
+        const gchar *arg_alias,
+        void *data2);
+  _GDbusCodegenMarshalBoolean_ObjectVariantStringFunc callback;
+  GCClosure *cc = (GCClosure*) closure;
+  void *data1, *data2;
+  gboolean v_return;
+
+  g_return_if_fail (return_value != NULL);
+  g_return_if_fail (n_param_values == 4);
+
+  if (G_CCLOSURE_SWAP_DATA (closure))
+    {
+      data1 = closure->data;
+      data2 = g_value_peek_pointer (param_values + 0);
+    }
+  else
+    {
+      data1 = g_value_peek_pointer (param_values + 0);
+      data2 = closure->data;
+    }
+
+  callback = (_GDbusCodegenMarshalBoolean_ObjectVariantStringFunc)
+    (marshal_data ? marshal_data : cc->callback);
+
+  v_return =
+    callback (data1,
+              g_marshal_value_peek_object (param_values + 1),
+              g_marshal_value_peek_variant (param_values + 2),
+              g_marshal_value_peek_string (param_values + 3),
+              data2);
+
+  g_value_set_boolean (return_value, v_return);
+}
+
+static void
+_g_dbus_codegen_marshal_BOOLEAN__OBJECT_VARIANT (
+    GClosure     *closure,
+    GValue       *return_value,
+    unsigned int  n_param_values,
+    const GValue *param_values,
+    void         *invocation_hint G_GNUC_UNUSED,
+    void         *marshal_data)
+{
+  typedef gboolean (*_GDbusCodegenMarshalBoolean_ObjectVariantFunc)
+       (void *data1,
+        GDBusMethodInvocation *arg_method_invocation,
+        GVariant *arg_attributes,
+        void *data2);
+  _GDbusCodegenMarshalBoolean_ObjectVariantFunc callback;
+  GCClosure *cc = (GCClosure*) closure;
+  void *data1, *data2;
+  gboolean v_return;
+
+  g_return_if_fail (return_value != NULL);
+  g_return_if_fail (n_param_values == 3);
+
+  if (G_CCLOSURE_SWAP_DATA (closure))
+    {
+      data1 = closure->data;
+      data2 = g_value_peek_pointer (param_values + 0);
+    }
+  else
+    {
+      data1 = g_value_peek_pointer (param_values + 0);
+      data2 = closure->data;
+    }
+
+  callback = (_GDbusCodegenMarshalBoolean_ObjectVariantFunc)
+    (marshal_data ? marshal_data : cc->callback);
+
+  v_return =
+    callback (data1,
+              g_marshal_value_peek_object (param_values + 1),
+              g_marshal_value_peek_variant (param_values + 2),
+              data2);
+
+  g_value_set_boolean (return_value, v_return);
+}
+
+static void
+_g_dbus_codegen_marshal_BOOLEAN__OBJECT_BOXED (
+    GClosure     *closure,
+    GValue       *return_value,
+    unsigned int  n_param_values,
+    const GValue *param_values,
+    void         *invocation_hint G_GNUC_UNUSED,
+    void         *marshal_data)
+{
+  typedef gboolean (*_GDbusCodegenMarshalBoolean_ObjectBoxedFunc)
+       (void *data1,
+        GDBusMethodInvocation *arg_method_invocation,
+        const gchar *const *arg_objects,
+        void *data2);
+  _GDbusCodegenMarshalBoolean_ObjectBoxedFunc callback;
+  GCClosure *cc = (GCClosure*) closure;
+  void *data1, *data2;
+  gboolean v_return;
+
+  g_return_if_fail (return_value != NULL);
+  g_return_if_fail (n_param_values == 3);
+
+  if (G_CCLOSURE_SWAP_DATA (closure))
+    {
+      data1 = closure->data;
+      data2 = g_value_peek_pointer (param_values + 0);
+    }
+  else
+    {
+      data1 = g_value_peek_pointer (param_values + 0);
+      data2 = closure->data;
+    }
+
+  callback = (_GDbusCodegenMarshalBoolean_ObjectBoxedFunc)
+    (marshal_data ? marshal_data : cc->callback);
+
+  v_return =
+    callback (data1,
+              g_marshal_value_peek_object (param_values + 1),
+              g_marshal_value_peek_boxed (param_values + 2),
+              data2);
+
+  g_value_set_boolean (return_value, v_return);
+}
+
+static void
+_g_dbus_codegen_marshal_BOOLEAN__OBJECT (
+    GClosure     *closure,
+    GValue       *return_value,
+    unsigned int  n_param_values,
+    const GValue *param_values,
+    void         *invocation_hint G_GNUC_UNUSED,
+    void         *marshal_data)
+{
+  typedef gboolean (*_GDbusCodegenMarshalBoolean_ObjectFunc)
+       (void *data1,
+        GDBusMethodInvocation *arg_method_invocation,
+        void *data2);
+  _GDbusCodegenMarshalBoolean_ObjectFunc callback;
+  GCClosure *cc = (GCClosure*) closure;
+  void *data1, *data2;
+  gboolean v_return;
+
+  g_return_if_fail (return_value != NULL);
+  g_return_if_fail (n_param_values == 2);
+
+  if (G_CCLOSURE_SWAP_DATA (closure))
+    {
+      data1 = closure->data;
+      data2 = g_value_peek_pointer (param_values + 0);
+    }
+  else
+    {
+      data1 = g_value_peek_pointer (param_values + 0);
+      data2 = closure->data;
+    }
+
+  callback = (_GDbusCodegenMarshalBoolean_ObjectFunc)
+    (marshal_data ? marshal_data : cc->callback);
+
+  v_return =
+    callback (data1,
+              g_marshal_value_peek_object (param_values + 1),
+              data2);
+
+  g_value_set_boolean (return_value, v_return);
+}
+
+static void
+_g_dbus_codegen_marshal_BOOLEAN__OBJECT_STRING (
+    GClosure     *closure,
+    GValue       *return_value,
+    unsigned int  n_param_values,
+    const GValue *param_values,
+    void         *invocation_hint G_GNUC_UNUSED,
+    void         *marshal_data)
+{
+  typedef gboolean (*_GDbusCodegenMarshalBoolean_ObjectStringFunc)
+       (void *data1,
+        GDBusMethodInvocation *arg_method_invocation,
+        const gchar *arg_collection,
+        void *data2);
+  _GDbusCodegenMarshalBoolean_ObjectStringFunc callback;
+  GCClosure *cc = (GCClosure*) closure;
+  void *data1, *data2;
+  gboolean v_return;
+
+  g_return_if_fail (return_value != NULL);
+  g_return_if_fail (n_param_values == 3);
+
+  if (G_CCLOSURE_SWAP_DATA (closure))
+    {
+      data1 = closure->data;
+      data2 = g_value_peek_pointer (param_values + 0);
+    }
+  else
+    {
+      data1 = g_value_peek_pointer (param_values + 0);
+      data2 = closure->data;
+    }
+
+  callback = (_GDbusCodegenMarshalBoolean_ObjectStringFunc)
+    (marshal_data ? marshal_data : cc->callback);
+
+  v_return =
+    callback (data1,
+              g_marshal_value_peek_object (param_values + 1),
+              g_marshal_value_peek_string (param_values + 2),
+              data2);
+
+  g_value_set_boolean (return_value, v_return);
+}
+
+static void
+_g_dbus_codegen_marshal_BOOLEAN__OBJECT_BOXED_STRING (
+    GClosure     *closure,
+    GValue       *return_value,
+    unsigned int  n_param_values,
+    const GValue *param_values,
+    void         *invocation_hint G_GNUC_UNUSED,
+    void         *marshal_data)
+{
+  typedef gboolean (*_GDbusCodegenMarshalBoolean_ObjectBoxedStringFunc)
+       (void *data1,
+        GDBusMethodInvocation *arg_method_invocation,
+        const gchar *const *arg_items,
+        const gchar *arg_session,
+        void *data2);
+  _GDbusCodegenMarshalBoolean_ObjectBoxedStringFunc callback;
+  GCClosure *cc = (GCClosure*) closure;
+  void *data1, *data2;
+  gboolean v_return;
+
+  g_return_if_fail (return_value != NULL);
+  g_return_if_fail (n_param_values == 4);
+
+  if (G_CCLOSURE_SWAP_DATA (closure))
+    {
+      data1 = closure->data;
+      data2 = g_value_peek_pointer (param_values + 0);
+    }
+  else
+    {
+      data1 = g_value_peek_pointer (param_values + 0);
+      data2 = closure->data;
+    }
+
+  callback = (_GDbusCodegenMarshalBoolean_ObjectBoxedStringFunc)
+    (marshal_data ? marshal_data : cc->callback);
+
+  v_return =
+    callback (data1,
+              g_marshal_value_peek_object (param_values + 1),
+              g_marshal_value_peek_boxed (param_values + 2),
+              g_marshal_value_peek_string (param_values + 3),
+              data2);
+
+  g_value_set_boolean (return_value, v_return);
+}
+
+static void
+_g_dbus_codegen_marshal_BOOLEAN__OBJECT_STRING_STRING (
+    GClosure     *closure,
+    GValue       *return_value,
+    unsigned int  n_param_values,
+    const GValue *param_values,
+    void         *invocation_hint G_GNUC_UNUSED,
+    void         *marshal_data)
+{
+  typedef gboolean (*_GDbusCodegenMarshalBoolean_ObjectStringStringFunc)
+       (void *data1,
+        GDBusMethodInvocation *arg_method_invocation,
+        const gchar *arg_name,
+        const gchar *arg_collection,
+        void *data2);
+  _GDbusCodegenMarshalBoolean_ObjectStringStringFunc callback;
+  GCClosure *cc = (GCClosure*) closure;
+  void *data1, *data2;
+  gboolean v_return;
+
+  g_return_if_fail (return_value != NULL);
+  g_return_if_fail (n_param_values == 4);
+
+  if (G_CCLOSURE_SWAP_DATA (closure))
+    {
+      data1 = closure->data;
+      data2 = g_value_peek_pointer (param_values + 0);
+    }
+  else
+    {
+      data1 = g_value_peek_pointer (param_values + 0);
+      data2 = closure->data;
+    }
+
+  callback = (_GDbusCodegenMarshalBoolean_ObjectStringStringFunc)
+    (marshal_data ? marshal_data : cc->callback);
+
+  v_return =
+    callback (data1,
+              g_marshal_value_peek_object (param_values + 1),
+              g_marshal_value_peek_string (param_values + 2),
+              g_marshal_value_peek_string (param_values + 3),
+              data2);
+
+  g_value_set_boolean (return_value, v_return);
+}
+
+static void
+_g_dbus_codegen_marshal_BOOLEAN__OBJECT_VARIANT_VARIANT_BOOLEAN (
+    GClosure     *closure,
+    GValue       *return_value,
+    unsigned int  n_param_values,
+    const GValue *param_values,
+    void         *invocation_hint G_GNUC_UNUSED,
+    void         *marshal_data)
+{
+  typedef gboolean (*_GDbusCodegenMarshalBoolean_ObjectVariantVariantBooleanFunc)
+       (void *data1,
+        GDBusMethodInvocation *arg_method_invocation,
+        GVariant *arg_properties,
+        GVariant *arg_secret,
+        gboolean arg_replace,
+        void *data2);
+  _GDbusCodegenMarshalBoolean_ObjectVariantVariantBooleanFunc callback;
+  GCClosure *cc = (GCClosure*) closure;
+  void *data1, *data2;
+  gboolean v_return;
+
+  g_return_if_fail (return_value != NULL);
+  g_return_if_fail (n_param_values == 5);
+
+  if (G_CCLOSURE_SWAP_DATA (closure))
+    {
+      data1 = closure->data;
+      data2 = g_value_peek_pointer (param_values + 0);
+    }
+  else
+    {
+      data1 = g_value_peek_pointer (param_values + 0);
+      data2 = closure->data;
+    }
+
+  callback = (_GDbusCodegenMarshalBoolean_ObjectVariantVariantBooleanFunc)
+    (marshal_data ? marshal_data : cc->callback);
+
+  v_return =
+    callback (data1,
+              g_marshal_value_peek_object (param_values + 1),
+              g_marshal_value_peek_variant (param_values + 2),
+              g_marshal_value_peek_variant (param_values + 3),
+              g_marshal_value_peek_boolean (param_values + 4),
+              data2);
+
+  g_value_set_boolean (return_value, v_return);
+}
+
+static void
+_g_dbus_codegen_marshal_VOID__BOOLEAN_VARIANT (
+    GClosure     *closure,
+    GValue       *return_value G_GNUC_UNUSED,
+    unsigned int  n_param_values,
+    const GValue *param_values,
+    void         *invocation_hint G_GNUC_UNUSED,
+    void         *marshal_data)
+{
+  typedef void (*_GDbusCodegenMarshalVoid_BooleanVariantFunc)
+       (void *data1,
+        gboolean arg_dismissed,
+        GVariant *arg_result,
+        void *data2);
+  _GDbusCodegenMarshalVoid_BooleanVariantFunc callback;
+  GCClosure *cc = (GCClosure*) closure;
+  void *data1, *data2;
+
+  g_return_if_fail (n_param_values == 3);
+
+  if (G_CCLOSURE_SWAP_DATA (closure))
+    {
+      data1 = closure->data;
+      data2 = g_value_peek_pointer (param_values + 0);
+    }
+  else
+    {
+      data1 = g_value_peek_pointer (param_values + 0);
+      data2 = closure->data;
+    }
+
+  callback = (_GDbusCodegenMarshalVoid_BooleanVariantFunc)
+    (marshal_data ? marshal_data : cc->callback);
+
+  callback (data1,
+            g_marshal_value_peek_boolean (param_values + 1),
+            g_marshal_value_peek_variant (param_values + 2),
+            data2);
+}
+
 /* ------------------------------------------------------------------------
  * Code for interface org.freedesktop.Secret.Service
  * ------------------------------------------------------------------------
@@ -163,6 +664,15 @@ _g_value_equal (const GValue *a, const GValue *b)
  *
  * This section contains code for working with the <link linkend="gdbus-interface-org-freedesktop-Secret-Service.top_of_page">org.freedesktop.Secret.Service</link> D-Bus interface in C.
  */
+
+enum
+{
+  GKD__EXPORTED_SERVICE_COLLECTION_CREATED,
+  GKD__EXPORTED_SERVICE_COLLECTION_DELETED,
+  GKD__EXPORTED_SERVICE_COLLECTION_CHANGED,
+};
+
+static unsigned GKD__EXPORTED_SERVICE_SIGNALS[3] = { 0 };
 
 /* ---- Introspection data for org.freedesktop.Secret.Service ---- */
 
@@ -865,6 +1375,175 @@ gkd_exported_service_override_properties (GObjectClass *klass, guint property_id
 }
 
 
+inline static void
+gkd_exported_service_signal_marshal_collection_created (
+    GClosure     *closure,
+    GValue       *return_value,
+    unsigned int  n_param_values,
+    const GValue *param_values,
+    void         *invocation_hint,
+    void         *marshal_data)
+{
+  g_cclosure_marshal_VOID__STRING (closure,
+    return_value, n_param_values, param_values, invocation_hint, marshal_data);
+}
+
+inline static void
+gkd_exported_service_signal_marshal_collection_deleted (
+    GClosure     *closure,
+    GValue       *return_value,
+    unsigned int  n_param_values,
+    const GValue *param_values,
+    void         *invocation_hint,
+    void         *marshal_data)
+{
+  g_cclosure_marshal_VOID__STRING (closure,
+    return_value, n_param_values, param_values, invocation_hint, marshal_data);
+}
+
+inline static void
+gkd_exported_service_signal_marshal_collection_changed (
+    GClosure     *closure,
+    GValue       *return_value,
+    unsigned int  n_param_values,
+    const GValue *param_values,
+    void         *invocation_hint,
+    void         *marshal_data)
+{
+  g_cclosure_marshal_VOID__STRING (closure,
+    return_value, n_param_values, param_values, invocation_hint, marshal_data);
+}
+
+inline static void
+gkd_exported_service_method_marshal_open_session (
+    GClosure     *closure,
+    GValue       *return_value,
+    unsigned int  n_param_values,
+    const GValue *param_values,
+    void         *invocation_hint,
+    void         *marshal_data)
+{
+  _g_dbus_codegen_marshal_BOOLEAN__OBJECT_STRING_VARIANT (closure,
+    return_value, n_param_values, param_values, invocation_hint, marshal_data);
+}
+
+inline static void
+gkd_exported_service_method_marshal_create_collection (
+    GClosure     *closure,
+    GValue       *return_value,
+    unsigned int  n_param_values,
+    const GValue *param_values,
+    void         *invocation_hint,
+    void         *marshal_data)
+{
+  _g_dbus_codegen_marshal_BOOLEAN__OBJECT_VARIANT_STRING (closure,
+    return_value, n_param_values, param_values, invocation_hint, marshal_data);
+}
+
+inline static void
+gkd_exported_service_method_marshal_search_items (
+    GClosure     *closure,
+    GValue       *return_value,
+    unsigned int  n_param_values,
+    const GValue *param_values,
+    void         *invocation_hint,
+    void         *marshal_data)
+{
+  _g_dbus_codegen_marshal_BOOLEAN__OBJECT_VARIANT (closure,
+    return_value, n_param_values, param_values, invocation_hint, marshal_data);
+}
+
+inline static void
+gkd_exported_service_method_marshal_unlock (
+    GClosure     *closure,
+    GValue       *return_value,
+    unsigned int  n_param_values,
+    const GValue *param_values,
+    void         *invocation_hint,
+    void         *marshal_data)
+{
+  _g_dbus_codegen_marshal_BOOLEAN__OBJECT_BOXED (closure,
+    return_value, n_param_values, param_values, invocation_hint, marshal_data);
+}
+
+inline static void
+gkd_exported_service_method_marshal_lock (
+    GClosure     *closure,
+    GValue       *return_value,
+    unsigned int  n_param_values,
+    const GValue *param_values,
+    void         *invocation_hint,
+    void         *marshal_data)
+{
+  _g_dbus_codegen_marshal_BOOLEAN__OBJECT_BOXED (closure,
+    return_value, n_param_values, param_values, invocation_hint, marshal_data);
+}
+
+inline static void
+gkd_exported_service_method_marshal_lock_service (
+    GClosure     *closure,
+    GValue       *return_value,
+    unsigned int  n_param_values,
+    const GValue *param_values,
+    void         *invocation_hint,
+    void         *marshal_data)
+{
+  _g_dbus_codegen_marshal_BOOLEAN__OBJECT (closure,
+    return_value, n_param_values, param_values, invocation_hint, marshal_data);
+}
+
+inline static void
+gkd_exported_service_method_marshal_change_lock (
+    GClosure     *closure,
+    GValue       *return_value,
+    unsigned int  n_param_values,
+    const GValue *param_values,
+    void         *invocation_hint,
+    void         *marshal_data)
+{
+  _g_dbus_codegen_marshal_BOOLEAN__OBJECT_STRING (closure,
+    return_value, n_param_values, param_values, invocation_hint, marshal_data);
+}
+
+inline static void
+gkd_exported_service_method_marshal_get_secrets (
+    GClosure     *closure,
+    GValue       *return_value,
+    unsigned int  n_param_values,
+    const GValue *param_values,
+    void         *invocation_hint,
+    void         *marshal_data)
+{
+  _g_dbus_codegen_marshal_BOOLEAN__OBJECT_BOXED_STRING (closure,
+    return_value, n_param_values, param_values, invocation_hint, marshal_data);
+}
+
+inline static void
+gkd_exported_service_method_marshal_read_alias (
+    GClosure     *closure,
+    GValue       *return_value,
+    unsigned int  n_param_values,
+    const GValue *param_values,
+    void         *invocation_hint,
+    void         *marshal_data)
+{
+  _g_dbus_codegen_marshal_BOOLEAN__OBJECT_STRING (closure,
+    return_value, n_param_values, param_values, invocation_hint, marshal_data);
+}
+
+inline static void
+gkd_exported_service_method_marshal_set_alias (
+    GClosure     *closure,
+    GValue       *return_value,
+    unsigned int  n_param_values,
+    const GValue *param_values,
+    void         *invocation_hint,
+    void         *marshal_data)
+{
+  _g_dbus_codegen_marshal_BOOLEAN__OBJECT_STRING_STRING (closure,
+    return_value, n_param_values, param_values, invocation_hint, marshal_data);
+}
+
 
 /**
  * GkdExportedService:
@@ -909,9 +1588,9 @@ gkd_exported_service_default_init (GkdExportedServiceIface *iface)
    *
    * Signal emitted when a remote caller is invoking the <link linkend="gdbus-method-org-freedesktop-Secret-Service.OpenSession">OpenSession()</link> D-Bus method.
    *
-   * If a signal handler returns %TRUE, it means the signal handler will handle the invocation (e.g. take a reference to @invocation and eventually call gkd_exported_service_complete_open_session() or e.g. g_dbus_method_invocation_return_error() on it) and no order signal handlers will run. If no signal handler handles the invocation, the %G_DBUS_ERROR_UNKNOWN_METHOD error is returned.
+   * If a signal handler returns %TRUE, it means the signal handler will handle the invocation (e.g. take a reference to @invocation and eventually call gkd_exported_service_complete_open_session() or e.g. g_dbus_method_invocation_return_error() on it) and no other signal handlers will run. If no signal handler handles the invocation, the %G_DBUS_ERROR_UNKNOWN_METHOD error is returned.
    *
-   * Returns: %TRUE if the invocation was handled, %FALSE to let other signal handlers run.
+   * Returns: %G_DBUS_METHOD_INVOCATION_HANDLED or %TRUE if the invocation was handled, %G_DBUS_METHOD_INVOCATION_UNHANDLED or %FALSE to let other signal handlers run.
    */
   g_signal_new ("handle-open-session",
     G_TYPE_FROM_INTERFACE (iface),
@@ -919,7 +1598,7 @@ gkd_exported_service_default_init (GkdExportedServiceIface *iface)
     G_STRUCT_OFFSET (GkdExportedServiceIface, handle_open_session),
     g_signal_accumulator_true_handled,
     NULL,
-    g_cclosure_marshal_generic,
+      gkd_exported_service_method_marshal_open_session,
     G_TYPE_BOOLEAN,
     3,
     G_TYPE_DBUS_METHOD_INVOCATION, G_TYPE_STRING, G_TYPE_VARIANT);
@@ -933,9 +1612,9 @@ gkd_exported_service_default_init (GkdExportedServiceIface *iface)
    *
    * Signal emitted when a remote caller is invoking the <link linkend="gdbus-method-org-freedesktop-Secret-Service.CreateCollection">CreateCollection()</link> D-Bus method.
    *
-   * If a signal handler returns %TRUE, it means the signal handler will handle the invocation (e.g. take a reference to @invocation and eventually call gkd_exported_service_complete_create_collection() or e.g. g_dbus_method_invocation_return_error() on it) and no order signal handlers will run. If no signal handler handles the invocation, the %G_DBUS_ERROR_UNKNOWN_METHOD error is returned.
+   * If a signal handler returns %TRUE, it means the signal handler will handle the invocation (e.g. take a reference to @invocation and eventually call gkd_exported_service_complete_create_collection() or e.g. g_dbus_method_invocation_return_error() on it) and no other signal handlers will run. If no signal handler handles the invocation, the %G_DBUS_ERROR_UNKNOWN_METHOD error is returned.
    *
-   * Returns: %TRUE if the invocation was handled, %FALSE to let other signal handlers run.
+   * Returns: %G_DBUS_METHOD_INVOCATION_HANDLED or %TRUE if the invocation was handled, %G_DBUS_METHOD_INVOCATION_UNHANDLED or %FALSE to let other signal handlers run.
    */
   g_signal_new ("handle-create-collection",
     G_TYPE_FROM_INTERFACE (iface),
@@ -943,7 +1622,7 @@ gkd_exported_service_default_init (GkdExportedServiceIface *iface)
     G_STRUCT_OFFSET (GkdExportedServiceIface, handle_create_collection),
     g_signal_accumulator_true_handled,
     NULL,
-    g_cclosure_marshal_generic,
+      gkd_exported_service_method_marshal_create_collection,
     G_TYPE_BOOLEAN,
     3,
     G_TYPE_DBUS_METHOD_INVOCATION, G_TYPE_VARIANT, G_TYPE_STRING);
@@ -956,9 +1635,9 @@ gkd_exported_service_default_init (GkdExportedServiceIface *iface)
    *
    * Signal emitted when a remote caller is invoking the <link linkend="gdbus-method-org-freedesktop-Secret-Service.SearchItems">SearchItems()</link> D-Bus method.
    *
-   * If a signal handler returns %TRUE, it means the signal handler will handle the invocation (e.g. take a reference to @invocation and eventually call gkd_exported_service_complete_search_items() or e.g. g_dbus_method_invocation_return_error() on it) and no order signal handlers will run. If no signal handler handles the invocation, the %G_DBUS_ERROR_UNKNOWN_METHOD error is returned.
+   * If a signal handler returns %TRUE, it means the signal handler will handle the invocation (e.g. take a reference to @invocation and eventually call gkd_exported_service_complete_search_items() or e.g. g_dbus_method_invocation_return_error() on it) and no other signal handlers will run. If no signal handler handles the invocation, the %G_DBUS_ERROR_UNKNOWN_METHOD error is returned.
    *
-   * Returns: %TRUE if the invocation was handled, %FALSE to let other signal handlers run.
+   * Returns: %G_DBUS_METHOD_INVOCATION_HANDLED or %TRUE if the invocation was handled, %G_DBUS_METHOD_INVOCATION_UNHANDLED or %FALSE to let other signal handlers run.
    */
   g_signal_new ("handle-search-items",
     G_TYPE_FROM_INTERFACE (iface),
@@ -966,7 +1645,7 @@ gkd_exported_service_default_init (GkdExportedServiceIface *iface)
     G_STRUCT_OFFSET (GkdExportedServiceIface, handle_search_items),
     g_signal_accumulator_true_handled,
     NULL,
-    g_cclosure_marshal_generic,
+      gkd_exported_service_method_marshal_search_items,
     G_TYPE_BOOLEAN,
     2,
     G_TYPE_DBUS_METHOD_INVOCATION, G_TYPE_VARIANT);
@@ -979,9 +1658,9 @@ gkd_exported_service_default_init (GkdExportedServiceIface *iface)
    *
    * Signal emitted when a remote caller is invoking the <link linkend="gdbus-method-org-freedesktop-Secret-Service.Unlock">Unlock()</link> D-Bus method.
    *
-   * If a signal handler returns %TRUE, it means the signal handler will handle the invocation (e.g. take a reference to @invocation and eventually call gkd_exported_service_complete_unlock() or e.g. g_dbus_method_invocation_return_error() on it) and no order signal handlers will run. If no signal handler handles the invocation, the %G_DBUS_ERROR_UNKNOWN_METHOD error is returned.
+   * If a signal handler returns %TRUE, it means the signal handler will handle the invocation (e.g. take a reference to @invocation and eventually call gkd_exported_service_complete_unlock() or e.g. g_dbus_method_invocation_return_error() on it) and no other signal handlers will run. If no signal handler handles the invocation, the %G_DBUS_ERROR_UNKNOWN_METHOD error is returned.
    *
-   * Returns: %TRUE if the invocation was handled, %FALSE to let other signal handlers run.
+   * Returns: %G_DBUS_METHOD_INVOCATION_HANDLED or %TRUE if the invocation was handled, %G_DBUS_METHOD_INVOCATION_UNHANDLED or %FALSE to let other signal handlers run.
    */
   g_signal_new ("handle-unlock",
     G_TYPE_FROM_INTERFACE (iface),
@@ -989,7 +1668,7 @@ gkd_exported_service_default_init (GkdExportedServiceIface *iface)
     G_STRUCT_OFFSET (GkdExportedServiceIface, handle_unlock),
     g_signal_accumulator_true_handled,
     NULL,
-    g_cclosure_marshal_generic,
+      gkd_exported_service_method_marshal_unlock,
     G_TYPE_BOOLEAN,
     2,
     G_TYPE_DBUS_METHOD_INVOCATION, G_TYPE_STRV);
@@ -1002,9 +1681,9 @@ gkd_exported_service_default_init (GkdExportedServiceIface *iface)
    *
    * Signal emitted when a remote caller is invoking the <link linkend="gdbus-method-org-freedesktop-Secret-Service.Lock">Lock()</link> D-Bus method.
    *
-   * If a signal handler returns %TRUE, it means the signal handler will handle the invocation (e.g. take a reference to @invocation and eventually call gkd_exported_service_complete_lock() or e.g. g_dbus_method_invocation_return_error() on it) and no order signal handlers will run. If no signal handler handles the invocation, the %G_DBUS_ERROR_UNKNOWN_METHOD error is returned.
+   * If a signal handler returns %TRUE, it means the signal handler will handle the invocation (e.g. take a reference to @invocation and eventually call gkd_exported_service_complete_lock() or e.g. g_dbus_method_invocation_return_error() on it) and no other signal handlers will run. If no signal handler handles the invocation, the %G_DBUS_ERROR_UNKNOWN_METHOD error is returned.
    *
-   * Returns: %TRUE if the invocation was handled, %FALSE to let other signal handlers run.
+   * Returns: %G_DBUS_METHOD_INVOCATION_HANDLED or %TRUE if the invocation was handled, %G_DBUS_METHOD_INVOCATION_UNHANDLED or %FALSE to let other signal handlers run.
    */
   g_signal_new ("handle-lock",
     G_TYPE_FROM_INTERFACE (iface),
@@ -1012,7 +1691,7 @@ gkd_exported_service_default_init (GkdExportedServiceIface *iface)
     G_STRUCT_OFFSET (GkdExportedServiceIface, handle_lock),
     g_signal_accumulator_true_handled,
     NULL,
-    g_cclosure_marshal_generic,
+      gkd_exported_service_method_marshal_lock,
     G_TYPE_BOOLEAN,
     2,
     G_TYPE_DBUS_METHOD_INVOCATION, G_TYPE_STRV);
@@ -1024,9 +1703,9 @@ gkd_exported_service_default_init (GkdExportedServiceIface *iface)
    *
    * Signal emitted when a remote caller is invoking the <link linkend="gdbus-method-org-freedesktop-Secret-Service.LockService">LockService()</link> D-Bus method.
    *
-   * If a signal handler returns %TRUE, it means the signal handler will handle the invocation (e.g. take a reference to @invocation and eventually call gkd_exported_service_complete_lock_service() or e.g. g_dbus_method_invocation_return_error() on it) and no order signal handlers will run. If no signal handler handles the invocation, the %G_DBUS_ERROR_UNKNOWN_METHOD error is returned.
+   * If a signal handler returns %TRUE, it means the signal handler will handle the invocation (e.g. take a reference to @invocation and eventually call gkd_exported_service_complete_lock_service() or e.g. g_dbus_method_invocation_return_error() on it) and no other signal handlers will run. If no signal handler handles the invocation, the %G_DBUS_ERROR_UNKNOWN_METHOD error is returned.
    *
-   * Returns: %TRUE if the invocation was handled, %FALSE to let other signal handlers run.
+   * Returns: %G_DBUS_METHOD_INVOCATION_HANDLED or %TRUE if the invocation was handled, %G_DBUS_METHOD_INVOCATION_UNHANDLED or %FALSE to let other signal handlers run.
    */
   g_signal_new ("handle-lock-service",
     G_TYPE_FROM_INTERFACE (iface),
@@ -1034,7 +1713,7 @@ gkd_exported_service_default_init (GkdExportedServiceIface *iface)
     G_STRUCT_OFFSET (GkdExportedServiceIface, handle_lock_service),
     g_signal_accumulator_true_handled,
     NULL,
-    g_cclosure_marshal_generic,
+      gkd_exported_service_method_marshal_lock_service,
     G_TYPE_BOOLEAN,
     1,
     G_TYPE_DBUS_METHOD_INVOCATION);
@@ -1047,9 +1726,9 @@ gkd_exported_service_default_init (GkdExportedServiceIface *iface)
    *
    * Signal emitted when a remote caller is invoking the <link linkend="gdbus-method-org-freedesktop-Secret-Service.ChangeLock">ChangeLock()</link> D-Bus method.
    *
-   * If a signal handler returns %TRUE, it means the signal handler will handle the invocation (e.g. take a reference to @invocation and eventually call gkd_exported_service_complete_change_lock() or e.g. g_dbus_method_invocation_return_error() on it) and no order signal handlers will run. If no signal handler handles the invocation, the %G_DBUS_ERROR_UNKNOWN_METHOD error is returned.
+   * If a signal handler returns %TRUE, it means the signal handler will handle the invocation (e.g. take a reference to @invocation and eventually call gkd_exported_service_complete_change_lock() or e.g. g_dbus_method_invocation_return_error() on it) and no other signal handlers will run. If no signal handler handles the invocation, the %G_DBUS_ERROR_UNKNOWN_METHOD error is returned.
    *
-   * Returns: %TRUE if the invocation was handled, %FALSE to let other signal handlers run.
+   * Returns: %G_DBUS_METHOD_INVOCATION_HANDLED or %TRUE if the invocation was handled, %G_DBUS_METHOD_INVOCATION_UNHANDLED or %FALSE to let other signal handlers run.
    */
   g_signal_new ("handle-change-lock",
     G_TYPE_FROM_INTERFACE (iface),
@@ -1057,7 +1736,7 @@ gkd_exported_service_default_init (GkdExportedServiceIface *iface)
     G_STRUCT_OFFSET (GkdExportedServiceIface, handle_change_lock),
     g_signal_accumulator_true_handled,
     NULL,
-    g_cclosure_marshal_generic,
+      gkd_exported_service_method_marshal_change_lock,
     G_TYPE_BOOLEAN,
     2,
     G_TYPE_DBUS_METHOD_INVOCATION, G_TYPE_STRING);
@@ -1071,9 +1750,9 @@ gkd_exported_service_default_init (GkdExportedServiceIface *iface)
    *
    * Signal emitted when a remote caller is invoking the <link linkend="gdbus-method-org-freedesktop-Secret-Service.GetSecrets">GetSecrets()</link> D-Bus method.
    *
-   * If a signal handler returns %TRUE, it means the signal handler will handle the invocation (e.g. take a reference to @invocation and eventually call gkd_exported_service_complete_get_secrets() or e.g. g_dbus_method_invocation_return_error() on it) and no order signal handlers will run. If no signal handler handles the invocation, the %G_DBUS_ERROR_UNKNOWN_METHOD error is returned.
+   * If a signal handler returns %TRUE, it means the signal handler will handle the invocation (e.g. take a reference to @invocation and eventually call gkd_exported_service_complete_get_secrets() or e.g. g_dbus_method_invocation_return_error() on it) and no other signal handlers will run. If no signal handler handles the invocation, the %G_DBUS_ERROR_UNKNOWN_METHOD error is returned.
    *
-   * Returns: %TRUE if the invocation was handled, %FALSE to let other signal handlers run.
+   * Returns: %G_DBUS_METHOD_INVOCATION_HANDLED or %TRUE if the invocation was handled, %G_DBUS_METHOD_INVOCATION_UNHANDLED or %FALSE to let other signal handlers run.
    */
   g_signal_new ("handle-get-secrets",
     G_TYPE_FROM_INTERFACE (iface),
@@ -1081,7 +1760,7 @@ gkd_exported_service_default_init (GkdExportedServiceIface *iface)
     G_STRUCT_OFFSET (GkdExportedServiceIface, handle_get_secrets),
     g_signal_accumulator_true_handled,
     NULL,
-    g_cclosure_marshal_generic,
+      gkd_exported_service_method_marshal_get_secrets,
     G_TYPE_BOOLEAN,
     3,
     G_TYPE_DBUS_METHOD_INVOCATION, G_TYPE_STRV, G_TYPE_STRING);
@@ -1094,9 +1773,9 @@ gkd_exported_service_default_init (GkdExportedServiceIface *iface)
    *
    * Signal emitted when a remote caller is invoking the <link linkend="gdbus-method-org-freedesktop-Secret-Service.ReadAlias">ReadAlias()</link> D-Bus method.
    *
-   * If a signal handler returns %TRUE, it means the signal handler will handle the invocation (e.g. take a reference to @invocation and eventually call gkd_exported_service_complete_read_alias() or e.g. g_dbus_method_invocation_return_error() on it) and no order signal handlers will run. If no signal handler handles the invocation, the %G_DBUS_ERROR_UNKNOWN_METHOD error is returned.
+   * If a signal handler returns %TRUE, it means the signal handler will handle the invocation (e.g. take a reference to @invocation and eventually call gkd_exported_service_complete_read_alias() or e.g. g_dbus_method_invocation_return_error() on it) and no other signal handlers will run. If no signal handler handles the invocation, the %G_DBUS_ERROR_UNKNOWN_METHOD error is returned.
    *
-   * Returns: %TRUE if the invocation was handled, %FALSE to let other signal handlers run.
+   * Returns: %G_DBUS_METHOD_INVOCATION_HANDLED or %TRUE if the invocation was handled, %G_DBUS_METHOD_INVOCATION_UNHANDLED or %FALSE to let other signal handlers run.
    */
   g_signal_new ("handle-read-alias",
     G_TYPE_FROM_INTERFACE (iface),
@@ -1104,7 +1783,7 @@ gkd_exported_service_default_init (GkdExportedServiceIface *iface)
     G_STRUCT_OFFSET (GkdExportedServiceIface, handle_read_alias),
     g_signal_accumulator_true_handled,
     NULL,
-    g_cclosure_marshal_generic,
+      gkd_exported_service_method_marshal_read_alias,
     G_TYPE_BOOLEAN,
     2,
     G_TYPE_DBUS_METHOD_INVOCATION, G_TYPE_STRING);
@@ -1118,9 +1797,9 @@ gkd_exported_service_default_init (GkdExportedServiceIface *iface)
    *
    * Signal emitted when a remote caller is invoking the <link linkend="gdbus-method-org-freedesktop-Secret-Service.SetAlias">SetAlias()</link> D-Bus method.
    *
-   * If a signal handler returns %TRUE, it means the signal handler will handle the invocation (e.g. take a reference to @invocation and eventually call gkd_exported_service_complete_set_alias() or e.g. g_dbus_method_invocation_return_error() on it) and no order signal handlers will run. If no signal handler handles the invocation, the %G_DBUS_ERROR_UNKNOWN_METHOD error is returned.
+   * If a signal handler returns %TRUE, it means the signal handler will handle the invocation (e.g. take a reference to @invocation and eventually call gkd_exported_service_complete_set_alias() or e.g. g_dbus_method_invocation_return_error() on it) and no other signal handlers will run. If no signal handler handles the invocation, the %G_DBUS_ERROR_UNKNOWN_METHOD error is returned.
    *
-   * Returns: %TRUE if the invocation was handled, %FALSE to let other signal handlers run.
+   * Returns: %G_DBUS_METHOD_INVOCATION_HANDLED or %TRUE if the invocation was handled, %G_DBUS_METHOD_INVOCATION_UNHANDLED or %FALSE to let other signal handlers run.
    */
   g_signal_new ("handle-set-alias",
     G_TYPE_FROM_INTERFACE (iface),
@@ -1128,7 +1807,7 @@ gkd_exported_service_default_init (GkdExportedServiceIface *iface)
     G_STRUCT_OFFSET (GkdExportedServiceIface, handle_set_alias),
     g_signal_accumulator_true_handled,
     NULL,
-    g_cclosure_marshal_generic,
+      gkd_exported_service_method_marshal_set_alias,
     G_TYPE_BOOLEAN,
     3,
     G_TYPE_DBUS_METHOD_INVOCATION, G_TYPE_STRING, G_TYPE_STRING);
@@ -1143,15 +1822,16 @@ gkd_exported_service_default_init (GkdExportedServiceIface *iface)
    *
    * On the service-side, this signal can be used with e.g. g_signal_emit_by_name() to make the object emit the D-Bus signal.
    */
-  g_signal_new ("collection-created",
-    G_TYPE_FROM_INTERFACE (iface),
-    G_SIGNAL_RUN_LAST,
-    G_STRUCT_OFFSET (GkdExportedServiceIface, collection_created),
-    NULL,
-    NULL,
-    g_cclosure_marshal_generic,
-    G_TYPE_NONE,
-    1, G_TYPE_STRING);
+  GKD__EXPORTED_SERVICE_SIGNALS[GKD__EXPORTED_SERVICE_COLLECTION_CREATED] =
+    g_signal_new ("collection-created",
+      G_TYPE_FROM_INTERFACE (iface),
+      G_SIGNAL_RUN_LAST,
+      G_STRUCT_OFFSET (GkdExportedServiceIface, collection_created),
+      NULL,
+      NULL,
+      gkd_exported_service_signal_marshal_collection_created,
+      G_TYPE_NONE,
+      1, G_TYPE_STRING);
 
   /**
    * GkdExportedService::collection-deleted:
@@ -1162,15 +1842,16 @@ gkd_exported_service_default_init (GkdExportedServiceIface *iface)
    *
    * On the service-side, this signal can be used with e.g. g_signal_emit_by_name() to make the object emit the D-Bus signal.
    */
-  g_signal_new ("collection-deleted",
-    G_TYPE_FROM_INTERFACE (iface),
-    G_SIGNAL_RUN_LAST,
-    G_STRUCT_OFFSET (GkdExportedServiceIface, collection_deleted),
-    NULL,
-    NULL,
-    g_cclosure_marshal_generic,
-    G_TYPE_NONE,
-    1, G_TYPE_STRING);
+  GKD__EXPORTED_SERVICE_SIGNALS[GKD__EXPORTED_SERVICE_COLLECTION_DELETED] =
+    g_signal_new ("collection-deleted",
+      G_TYPE_FROM_INTERFACE (iface),
+      G_SIGNAL_RUN_LAST,
+      G_STRUCT_OFFSET (GkdExportedServiceIface, collection_deleted),
+      NULL,
+      NULL,
+      gkd_exported_service_signal_marshal_collection_deleted,
+      G_TYPE_NONE,
+      1, G_TYPE_STRING);
 
   /**
    * GkdExportedService::collection-changed:
@@ -1181,15 +1862,16 @@ gkd_exported_service_default_init (GkdExportedServiceIface *iface)
    *
    * On the service-side, this signal can be used with e.g. g_signal_emit_by_name() to make the object emit the D-Bus signal.
    */
-  g_signal_new ("collection-changed",
-    G_TYPE_FROM_INTERFACE (iface),
-    G_SIGNAL_RUN_LAST,
-    G_STRUCT_OFFSET (GkdExportedServiceIface, collection_changed),
-    NULL,
-    NULL,
-    g_cclosure_marshal_generic,
-    G_TYPE_NONE,
-    1, G_TYPE_STRING);
+  GKD__EXPORTED_SERVICE_SIGNALS[GKD__EXPORTED_SERVICE_COLLECTION_CHANGED] =
+    g_signal_new ("collection-changed",
+      G_TYPE_FROM_INTERFACE (iface),
+      G_SIGNAL_RUN_LAST,
+      G_STRUCT_OFFSET (GkdExportedServiceIface, collection_changed),
+      NULL,
+      NULL,
+      gkd_exported_service_signal_marshal_collection_changed,
+      G_TYPE_NONE,
+      1, G_TYPE_STRING);
 
   /* GObject properties for D-Bus properties: */
   /**
@@ -1218,6 +1900,8 @@ gkd_exported_service_default_init (GkdExportedServiceIface *iface)
 const gchar *const *
 gkd_exported_service_get_collections (GkdExportedService *object)
 {
+  g_return_val_if_fail (GKD_IS_EXPORTED_SERVICE (object), NULL);
+
   return GKD_EXPORTED_SERVICE_GET_IFACE (object)->get_collections (object);
 }
 
@@ -1266,7 +1950,7 @@ gkd_exported_service_emit_collection_created (
     GkdExportedService *object,
     const gchar *arg_collection)
 {
-  g_signal_emit_by_name (object, "collection-created", arg_collection);
+  g_signal_emit (object, GKD__EXPORTED_SERVICE_SIGNALS[GKD__EXPORTED_SERVICE_COLLECTION_CREATED], 0, arg_collection);
 }
 
 /**
@@ -1281,7 +1965,7 @@ gkd_exported_service_emit_collection_deleted (
     GkdExportedService *object,
     const gchar *arg_collection)
 {
-  g_signal_emit_by_name (object, "collection-deleted", arg_collection);
+  g_signal_emit (object, GKD__EXPORTED_SERVICE_SIGNALS[GKD__EXPORTED_SERVICE_COLLECTION_DELETED], 0, arg_collection);
 }
 
 /**
@@ -1296,7 +1980,7 @@ gkd_exported_service_emit_collection_changed (
     GkdExportedService *object,
     const gchar *arg_collection)
 {
-  g_signal_emit_by_name (object, "collection-changed", arg_collection);
+  g_signal_emit (object, GKD__EXPORTED_SERVICE_SIGNALS[GKD__EXPORTED_SERVICE_COLLECTION_CHANGED], 0, arg_collection);
 }
 
 /**
@@ -2388,7 +3072,7 @@ _out:
  */
 void
 gkd_exported_service_complete_open_session (
-    GkdExportedService *object,
+    GkdExportedService *object G_GNUC_UNUSED,
     GDBusMethodInvocation *invocation,
     GVariant *output,
     const gchar *result)
@@ -2412,7 +3096,7 @@ gkd_exported_service_complete_open_session (
  */
 void
 gkd_exported_service_complete_create_collection (
-    GkdExportedService *object,
+    GkdExportedService *object G_GNUC_UNUSED,
     GDBusMethodInvocation *invocation,
     const gchar *collection,
     const gchar *prompt)
@@ -2436,7 +3120,7 @@ gkd_exported_service_complete_create_collection (
  */
 void
 gkd_exported_service_complete_search_items (
-    GkdExportedService *object,
+    GkdExportedService *object G_GNUC_UNUSED,
     GDBusMethodInvocation *invocation,
     const gchar *const *unlocked,
     const gchar *const *locked)
@@ -2460,7 +3144,7 @@ gkd_exported_service_complete_search_items (
  */
 void
 gkd_exported_service_complete_unlock (
-    GkdExportedService *object,
+    GkdExportedService *object G_GNUC_UNUSED,
     GDBusMethodInvocation *invocation,
     const gchar *const *unlocked,
     const gchar *prompt)
@@ -2484,7 +3168,7 @@ gkd_exported_service_complete_unlock (
  */
 void
 gkd_exported_service_complete_lock (
-    GkdExportedService *object,
+    GkdExportedService *object G_GNUC_UNUSED,
     GDBusMethodInvocation *invocation,
     const gchar *const *locked,
     const gchar *Prompt)
@@ -2506,7 +3190,7 @@ gkd_exported_service_complete_lock (
  */
 void
 gkd_exported_service_complete_lock_service (
-    GkdExportedService *object,
+    GkdExportedService *object G_GNUC_UNUSED,
     GDBusMethodInvocation *invocation)
 {
   g_dbus_method_invocation_return_value (invocation,
@@ -2525,7 +3209,7 @@ gkd_exported_service_complete_lock_service (
  */
 void
 gkd_exported_service_complete_change_lock (
-    GkdExportedService *object,
+    GkdExportedService *object G_GNUC_UNUSED,
     GDBusMethodInvocation *invocation,
     const gchar *prompt)
 {
@@ -2546,7 +3230,7 @@ gkd_exported_service_complete_change_lock (
  */
 void
 gkd_exported_service_complete_get_secrets (
-    GkdExportedService *object,
+    GkdExportedService *object G_GNUC_UNUSED,
     GDBusMethodInvocation *invocation,
     GVariant *secrets)
 {
@@ -2567,7 +3251,7 @@ gkd_exported_service_complete_get_secrets (
  */
 void
 gkd_exported_service_complete_read_alias (
-    GkdExportedService *object,
+    GkdExportedService *object G_GNUC_UNUSED,
     GDBusMethodInvocation *invocation,
     const gchar *collection)
 {
@@ -2587,7 +3271,7 @@ gkd_exported_service_complete_read_alias (
  */
 void
 gkd_exported_service_complete_set_alias (
-    GkdExportedService *object,
+    GkdExportedService *object G_GNUC_UNUSED,
     GDBusMethodInvocation *invocation)
 {
   g_dbus_method_invocation_return_value (invocation,
@@ -3500,7 +4184,7 @@ gkd_exported_service_skeleton_get_collections (GkdExportedService *object)
   GkdExportedServiceSkeleton *skeleton = GKD_EXPORTED_SERVICE_SKELETON (object);
   const gchar *const *value;
   g_mutex_lock (&skeleton->priv->lock);
-  value = g_value_get_boxed (&(skeleton->priv->properties[0]));
+  value = g_marshal_value_peek_boxed (&(skeleton->priv->properties[0]));
   g_mutex_unlock (&skeleton->priv->lock);
   return value;
 }
@@ -3565,6 +4249,15 @@ gkd_exported_service_skeleton_new (void)
  *
  * This section contains code for working with the <link linkend="gdbus-interface-org-freedesktop-Secret-Collection.top_of_page">org.freedesktop.Secret.Collection</link> D-Bus interface in C.
  */
+
+enum
+{
+  GKD__EXPORTED_COLLECTION_ITEM_CREATED,
+  GKD__EXPORTED_COLLECTION_ITEM_DELETED,
+  GKD__EXPORTED_COLLECTION_ITEM_CHANGED,
+};
+
+static unsigned GKD__EXPORTED_COLLECTION_SIGNALS[3] = { 0 };
 
 /* ---- Introspection data for org.freedesktop.Secret.Collection ---- */
 
@@ -3957,6 +4650,84 @@ gkd_exported_collection_override_properties (GObjectClass *klass, guint property
 }
 
 
+inline static void
+gkd_exported_collection_signal_marshal_item_created (
+    GClosure     *closure,
+    GValue       *return_value,
+    unsigned int  n_param_values,
+    const GValue *param_values,
+    void         *invocation_hint,
+    void         *marshal_data)
+{
+  g_cclosure_marshal_VOID__STRING (closure,
+    return_value, n_param_values, param_values, invocation_hint, marshal_data);
+}
+
+inline static void
+gkd_exported_collection_signal_marshal_item_deleted (
+    GClosure     *closure,
+    GValue       *return_value,
+    unsigned int  n_param_values,
+    const GValue *param_values,
+    void         *invocation_hint,
+    void         *marshal_data)
+{
+  g_cclosure_marshal_VOID__STRING (closure,
+    return_value, n_param_values, param_values, invocation_hint, marshal_data);
+}
+
+inline static void
+gkd_exported_collection_signal_marshal_item_changed (
+    GClosure     *closure,
+    GValue       *return_value,
+    unsigned int  n_param_values,
+    const GValue *param_values,
+    void         *invocation_hint,
+    void         *marshal_data)
+{
+  g_cclosure_marshal_VOID__STRING (closure,
+    return_value, n_param_values, param_values, invocation_hint, marshal_data);
+}
+
+inline static void
+gkd_exported_collection_method_marshal_delete (
+    GClosure     *closure,
+    GValue       *return_value,
+    unsigned int  n_param_values,
+    const GValue *param_values,
+    void         *invocation_hint,
+    void         *marshal_data)
+{
+  _g_dbus_codegen_marshal_BOOLEAN__OBJECT (closure,
+    return_value, n_param_values, param_values, invocation_hint, marshal_data);
+}
+
+inline static void
+gkd_exported_collection_method_marshal_search_items (
+    GClosure     *closure,
+    GValue       *return_value,
+    unsigned int  n_param_values,
+    const GValue *param_values,
+    void         *invocation_hint,
+    void         *marshal_data)
+{
+  _g_dbus_codegen_marshal_BOOLEAN__OBJECT_VARIANT (closure,
+    return_value, n_param_values, param_values, invocation_hint, marshal_data);
+}
+
+inline static void
+gkd_exported_collection_method_marshal_create_item (
+    GClosure     *closure,
+    GValue       *return_value,
+    unsigned int  n_param_values,
+    const GValue *param_values,
+    void         *invocation_hint,
+    void         *marshal_data)
+{
+  _g_dbus_codegen_marshal_BOOLEAN__OBJECT_VARIANT_VARIANT_BOOLEAN (closure,
+    return_value, n_param_values, param_values, invocation_hint, marshal_data);
+}
+
 
 /**
  * GkdExportedCollection:
@@ -3996,9 +4767,9 @@ gkd_exported_collection_default_init (GkdExportedCollectionIface *iface)
    *
    * Signal emitted when a remote caller is invoking the <link linkend="gdbus-method-org-freedesktop-Secret-Collection.Delete">Delete()</link> D-Bus method.
    *
-   * If a signal handler returns %TRUE, it means the signal handler will handle the invocation (e.g. take a reference to @invocation and eventually call gkd_exported_collection_complete_delete() or e.g. g_dbus_method_invocation_return_error() on it) and no order signal handlers will run. If no signal handler handles the invocation, the %G_DBUS_ERROR_UNKNOWN_METHOD error is returned.
+   * If a signal handler returns %TRUE, it means the signal handler will handle the invocation (e.g. take a reference to @invocation and eventually call gkd_exported_collection_complete_delete() or e.g. g_dbus_method_invocation_return_error() on it) and no other signal handlers will run. If no signal handler handles the invocation, the %G_DBUS_ERROR_UNKNOWN_METHOD error is returned.
    *
-   * Returns: %TRUE if the invocation was handled, %FALSE to let other signal handlers run.
+   * Returns: %G_DBUS_METHOD_INVOCATION_HANDLED or %TRUE if the invocation was handled, %G_DBUS_METHOD_INVOCATION_UNHANDLED or %FALSE to let other signal handlers run.
    */
   g_signal_new ("handle-delete",
     G_TYPE_FROM_INTERFACE (iface),
@@ -4006,7 +4777,7 @@ gkd_exported_collection_default_init (GkdExportedCollectionIface *iface)
     G_STRUCT_OFFSET (GkdExportedCollectionIface, handle_delete),
     g_signal_accumulator_true_handled,
     NULL,
-    g_cclosure_marshal_generic,
+      gkd_exported_collection_method_marshal_delete,
     G_TYPE_BOOLEAN,
     1,
     G_TYPE_DBUS_METHOD_INVOCATION);
@@ -4019,9 +4790,9 @@ gkd_exported_collection_default_init (GkdExportedCollectionIface *iface)
    *
    * Signal emitted when a remote caller is invoking the <link linkend="gdbus-method-org-freedesktop-Secret-Collection.SearchItems">SearchItems()</link> D-Bus method.
    *
-   * If a signal handler returns %TRUE, it means the signal handler will handle the invocation (e.g. take a reference to @invocation and eventually call gkd_exported_collection_complete_search_items() or e.g. g_dbus_method_invocation_return_error() on it) and no order signal handlers will run. If no signal handler handles the invocation, the %G_DBUS_ERROR_UNKNOWN_METHOD error is returned.
+   * If a signal handler returns %TRUE, it means the signal handler will handle the invocation (e.g. take a reference to @invocation and eventually call gkd_exported_collection_complete_search_items() or e.g. g_dbus_method_invocation_return_error() on it) and no other signal handlers will run. If no signal handler handles the invocation, the %G_DBUS_ERROR_UNKNOWN_METHOD error is returned.
    *
-   * Returns: %TRUE if the invocation was handled, %FALSE to let other signal handlers run.
+   * Returns: %G_DBUS_METHOD_INVOCATION_HANDLED or %TRUE if the invocation was handled, %G_DBUS_METHOD_INVOCATION_UNHANDLED or %FALSE to let other signal handlers run.
    */
   g_signal_new ("handle-search-items",
     G_TYPE_FROM_INTERFACE (iface),
@@ -4029,7 +4800,7 @@ gkd_exported_collection_default_init (GkdExportedCollectionIface *iface)
     G_STRUCT_OFFSET (GkdExportedCollectionIface, handle_search_items),
     g_signal_accumulator_true_handled,
     NULL,
-    g_cclosure_marshal_generic,
+      gkd_exported_collection_method_marshal_search_items,
     G_TYPE_BOOLEAN,
     2,
     G_TYPE_DBUS_METHOD_INVOCATION, G_TYPE_VARIANT);
@@ -4044,9 +4815,9 @@ gkd_exported_collection_default_init (GkdExportedCollectionIface *iface)
    *
    * Signal emitted when a remote caller is invoking the <link linkend="gdbus-method-org-freedesktop-Secret-Collection.CreateItem">CreateItem()</link> D-Bus method.
    *
-   * If a signal handler returns %TRUE, it means the signal handler will handle the invocation (e.g. take a reference to @invocation and eventually call gkd_exported_collection_complete_create_item() or e.g. g_dbus_method_invocation_return_error() on it) and no order signal handlers will run. If no signal handler handles the invocation, the %G_DBUS_ERROR_UNKNOWN_METHOD error is returned.
+   * If a signal handler returns %TRUE, it means the signal handler will handle the invocation (e.g. take a reference to @invocation and eventually call gkd_exported_collection_complete_create_item() or e.g. g_dbus_method_invocation_return_error() on it) and no other signal handlers will run. If no signal handler handles the invocation, the %G_DBUS_ERROR_UNKNOWN_METHOD error is returned.
    *
-   * Returns: %TRUE if the invocation was handled, %FALSE to let other signal handlers run.
+   * Returns: %G_DBUS_METHOD_INVOCATION_HANDLED or %TRUE if the invocation was handled, %G_DBUS_METHOD_INVOCATION_UNHANDLED or %FALSE to let other signal handlers run.
    */
   g_signal_new ("handle-create-item",
     G_TYPE_FROM_INTERFACE (iface),
@@ -4054,7 +4825,7 @@ gkd_exported_collection_default_init (GkdExportedCollectionIface *iface)
     G_STRUCT_OFFSET (GkdExportedCollectionIface, handle_create_item),
     g_signal_accumulator_true_handled,
     NULL,
-    g_cclosure_marshal_generic,
+      gkd_exported_collection_method_marshal_create_item,
     G_TYPE_BOOLEAN,
     4,
     G_TYPE_DBUS_METHOD_INVOCATION, G_TYPE_VARIANT, G_TYPE_VARIANT, G_TYPE_BOOLEAN);
@@ -4069,15 +4840,16 @@ gkd_exported_collection_default_init (GkdExportedCollectionIface *iface)
    *
    * On the service-side, this signal can be used with e.g. g_signal_emit_by_name() to make the object emit the D-Bus signal.
    */
-  g_signal_new ("item-created",
-    G_TYPE_FROM_INTERFACE (iface),
-    G_SIGNAL_RUN_LAST,
-    G_STRUCT_OFFSET (GkdExportedCollectionIface, item_created),
-    NULL,
-    NULL,
-    g_cclosure_marshal_generic,
-    G_TYPE_NONE,
-    1, G_TYPE_STRING);
+  GKD__EXPORTED_COLLECTION_SIGNALS[GKD__EXPORTED_COLLECTION_ITEM_CREATED] =
+    g_signal_new ("item-created",
+      G_TYPE_FROM_INTERFACE (iface),
+      G_SIGNAL_RUN_LAST,
+      G_STRUCT_OFFSET (GkdExportedCollectionIface, item_created),
+      NULL,
+      NULL,
+      gkd_exported_collection_signal_marshal_item_created,
+      G_TYPE_NONE,
+      1, G_TYPE_STRING);
 
   /**
    * GkdExportedCollection::item-deleted:
@@ -4088,15 +4860,16 @@ gkd_exported_collection_default_init (GkdExportedCollectionIface *iface)
    *
    * On the service-side, this signal can be used with e.g. g_signal_emit_by_name() to make the object emit the D-Bus signal.
    */
-  g_signal_new ("item-deleted",
-    G_TYPE_FROM_INTERFACE (iface),
-    G_SIGNAL_RUN_LAST,
-    G_STRUCT_OFFSET (GkdExportedCollectionIface, item_deleted),
-    NULL,
-    NULL,
-    g_cclosure_marshal_generic,
-    G_TYPE_NONE,
-    1, G_TYPE_STRING);
+  GKD__EXPORTED_COLLECTION_SIGNALS[GKD__EXPORTED_COLLECTION_ITEM_DELETED] =
+    g_signal_new ("item-deleted",
+      G_TYPE_FROM_INTERFACE (iface),
+      G_SIGNAL_RUN_LAST,
+      G_STRUCT_OFFSET (GkdExportedCollectionIface, item_deleted),
+      NULL,
+      NULL,
+      gkd_exported_collection_signal_marshal_item_deleted,
+      G_TYPE_NONE,
+      1, G_TYPE_STRING);
 
   /**
    * GkdExportedCollection::item-changed:
@@ -4107,15 +4880,16 @@ gkd_exported_collection_default_init (GkdExportedCollectionIface *iface)
    *
    * On the service-side, this signal can be used with e.g. g_signal_emit_by_name() to make the object emit the D-Bus signal.
    */
-  g_signal_new ("item-changed",
-    G_TYPE_FROM_INTERFACE (iface),
-    G_SIGNAL_RUN_LAST,
-    G_STRUCT_OFFSET (GkdExportedCollectionIface, item_changed),
-    NULL,
-    NULL,
-    g_cclosure_marshal_generic,
-    G_TYPE_NONE,
-    1, G_TYPE_STRING);
+  GKD__EXPORTED_COLLECTION_SIGNALS[GKD__EXPORTED_COLLECTION_ITEM_CHANGED] =
+    g_signal_new ("item-changed",
+      G_TYPE_FROM_INTERFACE (iface),
+      G_SIGNAL_RUN_LAST,
+      G_STRUCT_OFFSET (GkdExportedCollectionIface, item_changed),
+      NULL,
+      NULL,
+      gkd_exported_collection_signal_marshal_item_changed,
+      G_TYPE_NONE,
+      1, G_TYPE_STRING);
 
   /* GObject properties for D-Bus properties: */
   /**
@@ -4180,6 +4954,8 @@ gkd_exported_collection_default_init (GkdExportedCollectionIface *iface)
 const gchar *const *
 gkd_exported_collection_get_items (GkdExportedCollection *object)
 {
+  g_return_val_if_fail (GKD_IS_EXPORTED_COLLECTION (object), NULL);
+
   return GKD_EXPORTED_COLLECTION_GET_IFACE (object)->get_items (object);
 }
 
@@ -4231,6 +5007,8 @@ gkd_exported_collection_set_items (GkdExportedCollection *object, const gchar *c
 const gchar *
 gkd_exported_collection_get_label (GkdExportedCollection *object)
 {
+  g_return_val_if_fail (GKD_IS_EXPORTED_COLLECTION (object), NULL);
+
   return GKD_EXPORTED_COLLECTION_GET_IFACE (object)->get_label (object);
 }
 
@@ -4280,6 +5058,8 @@ gkd_exported_collection_set_label (GkdExportedCollection *object, const gchar *v
 gboolean 
 gkd_exported_collection_get_locked (GkdExportedCollection *object)
 {
+  g_return_val_if_fail (GKD_IS_EXPORTED_COLLECTION (object), FALSE);
+
   return GKD_EXPORTED_COLLECTION_GET_IFACE (object)->get_locked (object);
 }
 
@@ -4311,6 +5091,8 @@ gkd_exported_collection_set_locked (GkdExportedCollection *object, gboolean valu
 guint64 
 gkd_exported_collection_get_created (GkdExportedCollection *object)
 {
+  g_return_val_if_fail (GKD_IS_EXPORTED_COLLECTION (object), 0);
+
   return GKD_EXPORTED_COLLECTION_GET_IFACE (object)->get_created (object);
 }
 
@@ -4342,6 +5124,8 @@ gkd_exported_collection_set_created (GkdExportedCollection *object, guint64 valu
 guint64 
 gkd_exported_collection_get_modified (GkdExportedCollection *object)
 {
+  g_return_val_if_fail (GKD_IS_EXPORTED_COLLECTION (object), 0);
+
   return GKD_EXPORTED_COLLECTION_GET_IFACE (object)->get_modified (object);
 }
 
@@ -4372,7 +5156,7 @@ gkd_exported_collection_emit_item_created (
     GkdExportedCollection *object,
     const gchar *arg_item)
 {
-  g_signal_emit_by_name (object, "item-created", arg_item);
+  g_signal_emit (object, GKD__EXPORTED_COLLECTION_SIGNALS[GKD__EXPORTED_COLLECTION_ITEM_CREATED], 0, arg_item);
 }
 
 /**
@@ -4387,7 +5171,7 @@ gkd_exported_collection_emit_item_deleted (
     GkdExportedCollection *object,
     const gchar *arg_item)
 {
-  g_signal_emit_by_name (object, "item-deleted", arg_item);
+  g_signal_emit (object, GKD__EXPORTED_COLLECTION_SIGNALS[GKD__EXPORTED_COLLECTION_ITEM_DELETED], 0, arg_item);
 }
 
 /**
@@ -4402,7 +5186,7 @@ gkd_exported_collection_emit_item_changed (
     GkdExportedCollection *object,
     const gchar *arg_item)
 {
-  g_signal_emit_by_name (object, "item-changed", arg_item);
+  g_signal_emit (object, GKD__EXPORTED_COLLECTION_SIGNALS[GKD__EXPORTED_COLLECTION_ITEM_CHANGED], 0, arg_item);
 }
 
 /**
@@ -4741,7 +5525,7 @@ _out:
  */
 void
 gkd_exported_collection_complete_delete (
-    GkdExportedCollection *object,
+    GkdExportedCollection *object G_GNUC_UNUSED,
     GDBusMethodInvocation *invocation,
     const gchar *prompt)
 {
@@ -4762,7 +5546,7 @@ gkd_exported_collection_complete_delete (
  */
 void
 gkd_exported_collection_complete_search_items (
-    GkdExportedCollection *object,
+    GkdExportedCollection *object G_GNUC_UNUSED,
     GDBusMethodInvocation *invocation,
     const gchar *const *results)
 {
@@ -4784,7 +5568,7 @@ gkd_exported_collection_complete_search_items (
  */
 void
 gkd_exported_collection_complete_create_item (
-    GkdExportedCollection *object,
+    GkdExportedCollection *object G_GNUC_UNUSED,
     GDBusMethodInvocation *invocation,
     const gchar *item,
     const gchar *prompt)
@@ -5011,7 +5795,7 @@ gkd_exported_collection_proxy_get_locked (GkdExportedCollection *object)
 {
   GkdExportedCollectionProxy *proxy = GKD_EXPORTED_COLLECTION_PROXY (object);
   GVariant *variant;
-  gboolean value = 0;
+  gboolean value = FALSE;
   variant = g_dbus_proxy_get_cached_property (G_DBUS_PROXY (proxy), "Locked");
   if (variant != NULL)
     {
@@ -5769,7 +6553,7 @@ gkd_exported_collection_skeleton_get_items (GkdExportedCollection *object)
   GkdExportedCollectionSkeleton *skeleton = GKD_EXPORTED_COLLECTION_SKELETON (object);
   const gchar *const *value;
   g_mutex_lock (&skeleton->priv->lock);
-  value = g_value_get_boxed (&(skeleton->priv->properties[0]));
+  value = g_marshal_value_peek_boxed (&(skeleton->priv->properties[0]));
   g_mutex_unlock (&skeleton->priv->lock);
   return value;
 }
@@ -5780,7 +6564,7 @@ gkd_exported_collection_skeleton_get_label (GkdExportedCollection *object)
   GkdExportedCollectionSkeleton *skeleton = GKD_EXPORTED_COLLECTION_SKELETON (object);
   const gchar *value;
   g_mutex_lock (&skeleton->priv->lock);
-  value = g_value_get_string (&(skeleton->priv->properties[1]));
+  value = g_marshal_value_peek_string (&(skeleton->priv->properties[1]));
   g_mutex_unlock (&skeleton->priv->lock);
   return value;
 }
@@ -5791,7 +6575,7 @@ gkd_exported_collection_skeleton_get_locked (GkdExportedCollection *object)
   GkdExportedCollectionSkeleton *skeleton = GKD_EXPORTED_COLLECTION_SKELETON (object);
   gboolean value;
   g_mutex_lock (&skeleton->priv->lock);
-  value = g_value_get_boolean (&(skeleton->priv->properties[2]));
+  value = g_marshal_value_peek_boolean (&(skeleton->priv->properties[2]));
   g_mutex_unlock (&skeleton->priv->lock);
   return value;
 }
@@ -5802,7 +6586,7 @@ gkd_exported_collection_skeleton_get_created (GkdExportedCollection *object)
   GkdExportedCollectionSkeleton *skeleton = GKD_EXPORTED_COLLECTION_SKELETON (object);
   guint64 value;
   g_mutex_lock (&skeleton->priv->lock);
-  value = g_value_get_uint64 (&(skeleton->priv->properties[3]));
+  value = g_marshal_value_peek_uint64 (&(skeleton->priv->properties[3]));
   g_mutex_unlock (&skeleton->priv->lock);
   return value;
 }
@@ -5813,7 +6597,7 @@ gkd_exported_collection_skeleton_get_modified (GkdExportedCollection *object)
   GkdExportedCollectionSkeleton *skeleton = GKD_EXPORTED_COLLECTION_SKELETON (object);
   guint64 value;
   g_mutex_lock (&skeleton->priv->lock);
-  value = g_value_get_uint64 (&(skeleton->priv->properties[4]));
+  value = g_marshal_value_peek_uint64 (&(skeleton->priv->properties[4]));
   g_mutex_unlock (&skeleton->priv->lock);
   return value;
 }
@@ -6145,6 +6929,45 @@ gkd_exported_item_override_properties (GObjectClass *klass, guint property_id_be
 }
 
 
+inline static void
+gkd_exported_item_method_marshal_delete (
+    GClosure     *closure,
+    GValue       *return_value,
+    unsigned int  n_param_values,
+    const GValue *param_values,
+    void         *invocation_hint,
+    void         *marshal_data)
+{
+  _g_dbus_codegen_marshal_BOOLEAN__OBJECT (closure,
+    return_value, n_param_values, param_values, invocation_hint, marshal_data);
+}
+
+inline static void
+gkd_exported_item_method_marshal_get_secret (
+    GClosure     *closure,
+    GValue       *return_value,
+    unsigned int  n_param_values,
+    const GValue *param_values,
+    void         *invocation_hint,
+    void         *marshal_data)
+{
+  _g_dbus_codegen_marshal_BOOLEAN__OBJECT_STRING (closure,
+    return_value, n_param_values, param_values, invocation_hint, marshal_data);
+}
+
+inline static void
+gkd_exported_item_method_marshal_set_secret (
+    GClosure     *closure,
+    GValue       *return_value,
+    unsigned int  n_param_values,
+    const GValue *param_values,
+    void         *invocation_hint,
+    void         *marshal_data)
+{
+  _g_dbus_codegen_marshal_BOOLEAN__OBJECT_VARIANT (closure,
+    return_value, n_param_values, param_values, invocation_hint, marshal_data);
+}
+
 
 /**
  * GkdExportedItem:
@@ -6182,9 +7005,9 @@ gkd_exported_item_default_init (GkdExportedItemIface *iface)
    *
    * Signal emitted when a remote caller is invoking the <link linkend="gdbus-method-org-freedesktop-Secret-Item.Delete">Delete()</link> D-Bus method.
    *
-   * If a signal handler returns %TRUE, it means the signal handler will handle the invocation (e.g. take a reference to @invocation and eventually call gkd_exported_item_complete_delete() or e.g. g_dbus_method_invocation_return_error() on it) and no order signal handlers will run. If no signal handler handles the invocation, the %G_DBUS_ERROR_UNKNOWN_METHOD error is returned.
+   * If a signal handler returns %TRUE, it means the signal handler will handle the invocation (e.g. take a reference to @invocation and eventually call gkd_exported_item_complete_delete() or e.g. g_dbus_method_invocation_return_error() on it) and no other signal handlers will run. If no signal handler handles the invocation, the %G_DBUS_ERROR_UNKNOWN_METHOD error is returned.
    *
-   * Returns: %TRUE if the invocation was handled, %FALSE to let other signal handlers run.
+   * Returns: %G_DBUS_METHOD_INVOCATION_HANDLED or %TRUE if the invocation was handled, %G_DBUS_METHOD_INVOCATION_UNHANDLED or %FALSE to let other signal handlers run.
    */
   g_signal_new ("handle-delete",
     G_TYPE_FROM_INTERFACE (iface),
@@ -6192,7 +7015,7 @@ gkd_exported_item_default_init (GkdExportedItemIface *iface)
     G_STRUCT_OFFSET (GkdExportedItemIface, handle_delete),
     g_signal_accumulator_true_handled,
     NULL,
-    g_cclosure_marshal_generic,
+      gkd_exported_item_method_marshal_delete,
     G_TYPE_BOOLEAN,
     1,
     G_TYPE_DBUS_METHOD_INVOCATION);
@@ -6205,9 +7028,9 @@ gkd_exported_item_default_init (GkdExportedItemIface *iface)
    *
    * Signal emitted when a remote caller is invoking the <link linkend="gdbus-method-org-freedesktop-Secret-Item.GetSecret">GetSecret()</link> D-Bus method.
    *
-   * If a signal handler returns %TRUE, it means the signal handler will handle the invocation (e.g. take a reference to @invocation and eventually call gkd_exported_item_complete_get_secret() or e.g. g_dbus_method_invocation_return_error() on it) and no order signal handlers will run. If no signal handler handles the invocation, the %G_DBUS_ERROR_UNKNOWN_METHOD error is returned.
+   * If a signal handler returns %TRUE, it means the signal handler will handle the invocation (e.g. take a reference to @invocation and eventually call gkd_exported_item_complete_get_secret() or e.g. g_dbus_method_invocation_return_error() on it) and no other signal handlers will run. If no signal handler handles the invocation, the %G_DBUS_ERROR_UNKNOWN_METHOD error is returned.
    *
-   * Returns: %TRUE if the invocation was handled, %FALSE to let other signal handlers run.
+   * Returns: %G_DBUS_METHOD_INVOCATION_HANDLED or %TRUE if the invocation was handled, %G_DBUS_METHOD_INVOCATION_UNHANDLED or %FALSE to let other signal handlers run.
    */
   g_signal_new ("handle-get-secret",
     G_TYPE_FROM_INTERFACE (iface),
@@ -6215,7 +7038,7 @@ gkd_exported_item_default_init (GkdExportedItemIface *iface)
     G_STRUCT_OFFSET (GkdExportedItemIface, handle_get_secret),
     g_signal_accumulator_true_handled,
     NULL,
-    g_cclosure_marshal_generic,
+      gkd_exported_item_method_marshal_get_secret,
     G_TYPE_BOOLEAN,
     2,
     G_TYPE_DBUS_METHOD_INVOCATION, G_TYPE_STRING);
@@ -6228,9 +7051,9 @@ gkd_exported_item_default_init (GkdExportedItemIface *iface)
    *
    * Signal emitted when a remote caller is invoking the <link linkend="gdbus-method-org-freedesktop-Secret-Item.SetSecret">SetSecret()</link> D-Bus method.
    *
-   * If a signal handler returns %TRUE, it means the signal handler will handle the invocation (e.g. take a reference to @invocation and eventually call gkd_exported_item_complete_set_secret() or e.g. g_dbus_method_invocation_return_error() on it) and no order signal handlers will run. If no signal handler handles the invocation, the %G_DBUS_ERROR_UNKNOWN_METHOD error is returned.
+   * If a signal handler returns %TRUE, it means the signal handler will handle the invocation (e.g. take a reference to @invocation and eventually call gkd_exported_item_complete_set_secret() or e.g. g_dbus_method_invocation_return_error() on it) and no other signal handlers will run. If no signal handler handles the invocation, the %G_DBUS_ERROR_UNKNOWN_METHOD error is returned.
    *
-   * Returns: %TRUE if the invocation was handled, %FALSE to let other signal handlers run.
+   * Returns: %G_DBUS_METHOD_INVOCATION_HANDLED or %TRUE if the invocation was handled, %G_DBUS_METHOD_INVOCATION_UNHANDLED or %FALSE to let other signal handlers run.
    */
   g_signal_new ("handle-set-secret",
     G_TYPE_FROM_INTERFACE (iface),
@@ -6238,7 +7061,7 @@ gkd_exported_item_default_init (GkdExportedItemIface *iface)
     G_STRUCT_OFFSET (GkdExportedItemIface, handle_set_secret),
     g_signal_accumulator_true_handled,
     NULL,
-    g_cclosure_marshal_generic,
+      gkd_exported_item_method_marshal_set_secret,
     G_TYPE_BOOLEAN,
     2,
     G_TYPE_DBUS_METHOD_INVOCATION, G_TYPE_VARIANT);
@@ -6313,6 +7136,8 @@ gkd_exported_item_default_init (GkdExportedItemIface *iface)
 gboolean 
 gkd_exported_item_get_locked (GkdExportedItem *object)
 {
+  g_return_val_if_fail (GKD_IS_EXPORTED_ITEM (object), FALSE);
+
   return GKD_EXPORTED_ITEM_GET_IFACE (object)->get_locked (object);
 }
 
@@ -6346,6 +7171,8 @@ gkd_exported_item_set_locked (GkdExportedItem *object, gboolean value)
 GVariant *
 gkd_exported_item_get_attributes (GkdExportedItem *object)
 {
+  g_return_val_if_fail (GKD_IS_EXPORTED_ITEM (object), NULL);
+
   return GKD_EXPORTED_ITEM_GET_IFACE (object)->get_attributes (object);
 }
 
@@ -6397,6 +7224,8 @@ gkd_exported_item_set_attributes (GkdExportedItem *object, GVariant *value)
 const gchar *
 gkd_exported_item_get_label (GkdExportedItem *object)
 {
+  g_return_val_if_fail (GKD_IS_EXPORTED_ITEM (object), NULL);
+
   return GKD_EXPORTED_ITEM_GET_IFACE (object)->get_label (object);
 }
 
@@ -6448,6 +7277,8 @@ gkd_exported_item_set_label (GkdExportedItem *object, const gchar *value)
 const gchar *
 gkd_exported_item_get_type_ (GkdExportedItem *object)
 {
+  g_return_val_if_fail (GKD_IS_EXPORTED_ITEM (object), NULL);
+
   return GKD_EXPORTED_ITEM_GET_IFACE (object)->get_type_ (object);
 }
 
@@ -6497,6 +7328,8 @@ gkd_exported_item_set_type_ (GkdExportedItem *object, const gchar *value)
 guint64 
 gkd_exported_item_get_created (GkdExportedItem *object)
 {
+  g_return_val_if_fail (GKD_IS_EXPORTED_ITEM (object), 0);
+
   return GKD_EXPORTED_ITEM_GET_IFACE (object)->get_created (object);
 }
 
@@ -6528,6 +7361,8 @@ gkd_exported_item_set_created (GkdExportedItem *object, guint64 value)
 guint64 
 gkd_exported_item_get_modified (GkdExportedItem *object)
 {
+  g_return_val_if_fail (GKD_IS_EXPORTED_ITEM (object), 0);
+
   return GKD_EXPORTED_ITEM_GET_IFACE (object)->get_modified (object);
 }
 
@@ -6858,7 +7693,7 @@ _out:
  */
 void
 gkd_exported_item_complete_delete (
-    GkdExportedItem *object,
+    GkdExportedItem *object G_GNUC_UNUSED,
     GDBusMethodInvocation *invocation,
     const gchar *Prompt)
 {
@@ -6879,7 +7714,7 @@ gkd_exported_item_complete_delete (
  */
 void
 gkd_exported_item_complete_get_secret (
-    GkdExportedItem *object,
+    GkdExportedItem *object G_GNUC_UNUSED,
     GDBusMethodInvocation *invocation,
     GVariant *secret)
 {
@@ -6899,7 +7734,7 @@ gkd_exported_item_complete_get_secret (
  */
 void
 gkd_exported_item_complete_set_secret (
-    GkdExportedItem *object,
+    GkdExportedItem *object G_GNUC_UNUSED,
     GDBusMethodInvocation *invocation)
 {
   g_dbus_method_invocation_return_value (invocation,
@@ -7088,7 +7923,7 @@ gkd_exported_item_proxy_get_locked (GkdExportedItem *object)
 {
   GkdExportedItemProxy *proxy = GKD_EXPORTED_ITEM_PROXY (object);
   GVariant *variant;
-  gboolean value = 0;
+  gboolean value = FALSE;
   variant = g_dbus_proxy_get_cached_property (G_DBUS_PROXY (proxy), "Locked");
   if (variant != NULL)
     {
@@ -7819,7 +8654,7 @@ gkd_exported_item_skeleton_get_locked (GkdExportedItem *object)
   GkdExportedItemSkeleton *skeleton = GKD_EXPORTED_ITEM_SKELETON (object);
   gboolean value;
   g_mutex_lock (&skeleton->priv->lock);
-  value = g_value_get_boolean (&(skeleton->priv->properties[0]));
+  value = g_marshal_value_peek_boolean (&(skeleton->priv->properties[0]));
   g_mutex_unlock (&skeleton->priv->lock);
   return value;
 }
@@ -7830,7 +8665,7 @@ gkd_exported_item_skeleton_get_attributes (GkdExportedItem *object)
   GkdExportedItemSkeleton *skeleton = GKD_EXPORTED_ITEM_SKELETON (object);
   GVariant *value;
   g_mutex_lock (&skeleton->priv->lock);
-  value = g_value_get_variant (&(skeleton->priv->properties[1]));
+  value = g_marshal_value_peek_variant (&(skeleton->priv->properties[1]));
   g_mutex_unlock (&skeleton->priv->lock);
   return value;
 }
@@ -7841,7 +8676,7 @@ gkd_exported_item_skeleton_get_label (GkdExportedItem *object)
   GkdExportedItemSkeleton *skeleton = GKD_EXPORTED_ITEM_SKELETON (object);
   const gchar *value;
   g_mutex_lock (&skeleton->priv->lock);
-  value = g_value_get_string (&(skeleton->priv->properties[2]));
+  value = g_marshal_value_peek_string (&(skeleton->priv->properties[2]));
   g_mutex_unlock (&skeleton->priv->lock);
   return value;
 }
@@ -7852,7 +8687,7 @@ gkd_exported_item_skeleton_get_type_ (GkdExportedItem *object)
   GkdExportedItemSkeleton *skeleton = GKD_EXPORTED_ITEM_SKELETON (object);
   const gchar *value;
   g_mutex_lock (&skeleton->priv->lock);
-  value = g_value_get_string (&(skeleton->priv->properties[3]));
+  value = g_marshal_value_peek_string (&(skeleton->priv->properties[3]));
   g_mutex_unlock (&skeleton->priv->lock);
   return value;
 }
@@ -7863,7 +8698,7 @@ gkd_exported_item_skeleton_get_created (GkdExportedItem *object)
   GkdExportedItemSkeleton *skeleton = GKD_EXPORTED_ITEM_SKELETON (object);
   guint64 value;
   g_mutex_lock (&skeleton->priv->lock);
-  value = g_value_get_uint64 (&(skeleton->priv->properties[4]));
+  value = g_marshal_value_peek_uint64 (&(skeleton->priv->properties[4]));
   g_mutex_unlock (&skeleton->priv->lock);
   return value;
 }
@@ -7874,7 +8709,7 @@ gkd_exported_item_skeleton_get_modified (GkdExportedItem *object)
   GkdExportedItemSkeleton *skeleton = GKD_EXPORTED_ITEM_SKELETON (object);
   guint64 value;
   g_mutex_lock (&skeleton->priv->lock);
-  value = g_value_get_uint64 (&(skeleton->priv->properties[5]));
+  value = g_marshal_value_peek_uint64 (&(skeleton->priv->properties[5]));
   g_mutex_unlock (&skeleton->priv->lock);
   return value;
 }
@@ -8001,11 +8836,24 @@ gkd_exported_session_interface_info (void)
  * Returns: The last property id.
  */
 guint
-gkd_exported_session_override_properties (GObjectClass *klass, guint property_id_begin)
+gkd_exported_session_override_properties (GObjectClass *klass G_GNUC_UNUSED, guint property_id_begin)
 {
   return property_id_begin - 1;
 }
 
+
+inline static void
+gkd_exported_session_method_marshal_close (
+    GClosure     *closure,
+    GValue       *return_value,
+    unsigned int  n_param_values,
+    const GValue *param_values,
+    void         *invocation_hint,
+    void         *marshal_data)
+{
+  _g_dbus_codegen_marshal_BOOLEAN__OBJECT (closure,
+    return_value, n_param_values, param_values, invocation_hint, marshal_data);
+}
 
 
 /**
@@ -8036,9 +8884,9 @@ gkd_exported_session_default_init (GkdExportedSessionIface *iface)
    *
    * Signal emitted when a remote caller is invoking the <link linkend="gdbus-method-org-freedesktop-Secret-Session.Close">Close()</link> D-Bus method.
    *
-   * If a signal handler returns %TRUE, it means the signal handler will handle the invocation (e.g. take a reference to @invocation and eventually call gkd_exported_session_complete_close() or e.g. g_dbus_method_invocation_return_error() on it) and no order signal handlers will run. If no signal handler handles the invocation, the %G_DBUS_ERROR_UNKNOWN_METHOD error is returned.
+   * If a signal handler returns %TRUE, it means the signal handler will handle the invocation (e.g. take a reference to @invocation and eventually call gkd_exported_session_complete_close() or e.g. g_dbus_method_invocation_return_error() on it) and no other signal handlers will run. If no signal handler handles the invocation, the %G_DBUS_ERROR_UNKNOWN_METHOD error is returned.
    *
-   * Returns: %TRUE if the invocation was handled, %FALSE to let other signal handlers run.
+   * Returns: %G_DBUS_METHOD_INVOCATION_HANDLED or %TRUE if the invocation was handled, %G_DBUS_METHOD_INVOCATION_UNHANDLED or %FALSE to let other signal handlers run.
    */
   g_signal_new ("handle-close",
     G_TYPE_FROM_INTERFACE (iface),
@@ -8046,7 +8894,7 @@ gkd_exported_session_default_init (GkdExportedSessionIface *iface)
     G_STRUCT_OFFSET (GkdExportedSessionIface, handle_close),
     g_signal_accumulator_true_handled,
     NULL,
-    g_cclosure_marshal_generic,
+      gkd_exported_session_method_marshal_close,
     G_TYPE_BOOLEAN,
     1,
     G_TYPE_DBUS_METHOD_INVOCATION);
@@ -8156,7 +9004,7 @@ _out:
  */
 void
 gkd_exported_session_complete_close (
-    GkdExportedSession *object,
+    GkdExportedSession *object G_GNUC_UNUSED,
     GDBusMethodInvocation *invocation)
 {
   g_dbus_method_invocation_return_value (invocation,
@@ -8204,17 +9052,17 @@ gkd_exported_session_proxy_finalize (GObject *object)
 }
 
 static void
-gkd_exported_session_proxy_get_property (GObject      *object,
-  guint         prop_id,
-  GValue       *value,
+gkd_exported_session_proxy_get_property (GObject      *object G_GNUC_UNUSED,
+  guint         prop_id G_GNUC_UNUSED,
+  GValue       *value G_GNUC_UNUSED,
   GParamSpec   *pspec G_GNUC_UNUSED)
 {
 }
 
 static void
-gkd_exported_session_proxy_set_property (GObject      *object,
-  guint         prop_id,
-  const GValue *value,
+gkd_exported_session_proxy_set_property (GObject      *object G_GNUC_UNUSED,
+  guint         prop_id G_GNUC_UNUSED,
+  const GValue *value G_GNUC_UNUSED,
   GParamSpec   *pspec G_GNUC_UNUSED)
 {
 }
@@ -8322,7 +9170,7 @@ gkd_exported_session_proxy_class_init (GkdExportedSessionProxyClass *klass)
 }
 
 static void
-gkd_exported_session_proxy_iface_init (GkdExportedSessionIface *iface)
+gkd_exported_session_proxy_iface_init (GkdExportedSessionIface *iface G_GNUC_UNUSED)
 {
 }
 
@@ -8714,7 +9562,7 @@ out:
 }
 
 static void
-gkd_exported_session_skeleton_dbus_interface_flush (GDBusInterfaceSkeleton *_skeleton)
+gkd_exported_session_skeleton_dbus_interface_flush (GDBusInterfaceSkeleton *_skeleton G_GNUC_UNUSED)
 {
 }
 
@@ -8775,7 +9623,7 @@ gkd_exported_session_skeleton_class_init (GkdExportedSessionSkeletonClass *klass
 }
 
 static void
-gkd_exported_session_skeleton_iface_init (GkdExportedSessionIface *iface)
+gkd_exported_session_skeleton_iface_init (GkdExportedSessionIface *iface G_GNUC_UNUSED)
 {
 }
 
@@ -8804,6 +9652,13 @@ gkd_exported_session_skeleton_new (void)
  *
  * This section contains code for working with the <link linkend="gdbus-interface-org-freedesktop-Secret-Prompt.top_of_page">org.freedesktop.Secret.Prompt</link> D-Bus interface in C.
  */
+
+enum
+{
+  GKD__EXPORTED_PROMPT_COMPLETED,
+};
+
+static unsigned GKD__EXPORTED_PROMPT_SIGNALS[1] = { 0 };
 
 /* ---- Introspection data for org.freedesktop.Secret.Prompt ---- */
 
@@ -8941,11 +9796,50 @@ gkd_exported_prompt_interface_info (void)
  * Returns: The last property id.
  */
 guint
-gkd_exported_prompt_override_properties (GObjectClass *klass, guint property_id_begin)
+gkd_exported_prompt_override_properties (GObjectClass *klass G_GNUC_UNUSED, guint property_id_begin)
 {
   return property_id_begin - 1;
 }
 
+
+inline static void
+gkd_exported_prompt_signal_marshal_completed (
+    GClosure     *closure,
+    GValue       *return_value,
+    unsigned int  n_param_values,
+    const GValue *param_values,
+    void         *invocation_hint,
+    void         *marshal_data)
+{
+  _g_dbus_codegen_marshal_VOID__BOOLEAN_VARIANT (closure,
+    return_value, n_param_values, param_values, invocation_hint, marshal_data);
+}
+
+inline static void
+gkd_exported_prompt_method_marshal_prompt (
+    GClosure     *closure,
+    GValue       *return_value,
+    unsigned int  n_param_values,
+    const GValue *param_values,
+    void         *invocation_hint,
+    void         *marshal_data)
+{
+  _g_dbus_codegen_marshal_BOOLEAN__OBJECT_STRING (closure,
+    return_value, n_param_values, param_values, invocation_hint, marshal_data);
+}
+
+inline static void
+gkd_exported_prompt_method_marshal_dismiss (
+    GClosure     *closure,
+    GValue       *return_value,
+    unsigned int  n_param_values,
+    const GValue *param_values,
+    void         *invocation_hint,
+    void         *marshal_data)
+{
+  _g_dbus_codegen_marshal_BOOLEAN__OBJECT (closure,
+    return_value, n_param_values, param_values, invocation_hint, marshal_data);
+}
 
 
 /**
@@ -8979,9 +9873,9 @@ gkd_exported_prompt_default_init (GkdExportedPromptIface *iface)
    *
    * Signal emitted when a remote caller is invoking the <link linkend="gdbus-method-org-freedesktop-Secret-Prompt.Prompt">Prompt()</link> D-Bus method.
    *
-   * If a signal handler returns %TRUE, it means the signal handler will handle the invocation (e.g. take a reference to @invocation and eventually call gkd_exported_prompt_complete_prompt() or e.g. g_dbus_method_invocation_return_error() on it) and no order signal handlers will run. If no signal handler handles the invocation, the %G_DBUS_ERROR_UNKNOWN_METHOD error is returned.
+   * If a signal handler returns %TRUE, it means the signal handler will handle the invocation (e.g. take a reference to @invocation and eventually call gkd_exported_prompt_complete_prompt() or e.g. g_dbus_method_invocation_return_error() on it) and no other signal handlers will run. If no signal handler handles the invocation, the %G_DBUS_ERROR_UNKNOWN_METHOD error is returned.
    *
-   * Returns: %TRUE if the invocation was handled, %FALSE to let other signal handlers run.
+   * Returns: %G_DBUS_METHOD_INVOCATION_HANDLED or %TRUE if the invocation was handled, %G_DBUS_METHOD_INVOCATION_UNHANDLED or %FALSE to let other signal handlers run.
    */
   g_signal_new ("handle-prompt",
     G_TYPE_FROM_INTERFACE (iface),
@@ -8989,7 +9883,7 @@ gkd_exported_prompt_default_init (GkdExportedPromptIface *iface)
     G_STRUCT_OFFSET (GkdExportedPromptIface, handle_prompt),
     g_signal_accumulator_true_handled,
     NULL,
-    g_cclosure_marshal_generic,
+      gkd_exported_prompt_method_marshal_prompt,
     G_TYPE_BOOLEAN,
     2,
     G_TYPE_DBUS_METHOD_INVOCATION, G_TYPE_STRING);
@@ -9001,9 +9895,9 @@ gkd_exported_prompt_default_init (GkdExportedPromptIface *iface)
    *
    * Signal emitted when a remote caller is invoking the <link linkend="gdbus-method-org-freedesktop-Secret-Prompt.Dismiss">Dismiss()</link> D-Bus method.
    *
-   * If a signal handler returns %TRUE, it means the signal handler will handle the invocation (e.g. take a reference to @invocation and eventually call gkd_exported_prompt_complete_dismiss() or e.g. g_dbus_method_invocation_return_error() on it) and no order signal handlers will run. If no signal handler handles the invocation, the %G_DBUS_ERROR_UNKNOWN_METHOD error is returned.
+   * If a signal handler returns %TRUE, it means the signal handler will handle the invocation (e.g. take a reference to @invocation and eventually call gkd_exported_prompt_complete_dismiss() or e.g. g_dbus_method_invocation_return_error() on it) and no other signal handlers will run. If no signal handler handles the invocation, the %G_DBUS_ERROR_UNKNOWN_METHOD error is returned.
    *
-   * Returns: %TRUE if the invocation was handled, %FALSE to let other signal handlers run.
+   * Returns: %G_DBUS_METHOD_INVOCATION_HANDLED or %TRUE if the invocation was handled, %G_DBUS_METHOD_INVOCATION_UNHANDLED or %FALSE to let other signal handlers run.
    */
   g_signal_new ("handle-dismiss",
     G_TYPE_FROM_INTERFACE (iface),
@@ -9011,7 +9905,7 @@ gkd_exported_prompt_default_init (GkdExportedPromptIface *iface)
     G_STRUCT_OFFSET (GkdExportedPromptIface, handle_dismiss),
     g_signal_accumulator_true_handled,
     NULL,
-    g_cclosure_marshal_generic,
+      gkd_exported_prompt_method_marshal_dismiss,
     G_TYPE_BOOLEAN,
     1,
     G_TYPE_DBUS_METHOD_INVOCATION);
@@ -9027,15 +9921,16 @@ gkd_exported_prompt_default_init (GkdExportedPromptIface *iface)
    *
    * On the service-side, this signal can be used with e.g. g_signal_emit_by_name() to make the object emit the D-Bus signal.
    */
-  g_signal_new ("completed",
-    G_TYPE_FROM_INTERFACE (iface),
-    G_SIGNAL_RUN_LAST,
-    G_STRUCT_OFFSET (GkdExportedPromptIface, completed),
-    NULL,
-    NULL,
-    g_cclosure_marshal_generic,
-    G_TYPE_NONE,
-    2, G_TYPE_BOOLEAN, G_TYPE_VARIANT);
+  GKD__EXPORTED_PROMPT_SIGNALS[GKD__EXPORTED_PROMPT_COMPLETED] =
+    g_signal_new ("completed",
+      G_TYPE_FROM_INTERFACE (iface),
+      G_SIGNAL_RUN_LAST,
+      G_STRUCT_OFFSET (GkdExportedPromptIface, completed),
+      NULL,
+      NULL,
+      gkd_exported_prompt_signal_marshal_completed,
+      G_TYPE_NONE,
+      2, G_TYPE_BOOLEAN, G_TYPE_VARIANT);
 
 }
 
@@ -9053,7 +9948,7 @@ gkd_exported_prompt_emit_completed (
     gboolean arg_dismissed,
     GVariant *arg_result)
 {
-  g_signal_emit_by_name (object, "completed", arg_dismissed, arg_result);
+  g_signal_emit (object, GKD__EXPORTED_PROMPT_SIGNALS[GKD__EXPORTED_PROMPT_COMPLETED], 0, arg_dismissed, arg_result);
 }
 
 /**
@@ -9257,7 +10152,7 @@ _out:
  */
 void
 gkd_exported_prompt_complete_prompt (
-    GkdExportedPrompt *object,
+    GkdExportedPrompt *object G_GNUC_UNUSED,
     GDBusMethodInvocation *invocation)
 {
   g_dbus_method_invocation_return_value (invocation,
@@ -9275,7 +10170,7 @@ gkd_exported_prompt_complete_prompt (
  */
 void
 gkd_exported_prompt_complete_dismiss (
-    GkdExportedPrompt *object,
+    GkdExportedPrompt *object G_GNUC_UNUSED,
     GDBusMethodInvocation *invocation)
 {
   g_dbus_method_invocation_return_value (invocation,
@@ -9323,17 +10218,17 @@ gkd_exported_prompt_proxy_finalize (GObject *object)
 }
 
 static void
-gkd_exported_prompt_proxy_get_property (GObject      *object,
-  guint         prop_id,
-  GValue       *value,
+gkd_exported_prompt_proxy_get_property (GObject      *object G_GNUC_UNUSED,
+  guint         prop_id G_GNUC_UNUSED,
+  GValue       *value G_GNUC_UNUSED,
   GParamSpec   *pspec G_GNUC_UNUSED)
 {
 }
 
 static void
-gkd_exported_prompt_proxy_set_property (GObject      *object,
-  guint         prop_id,
-  const GValue *value,
+gkd_exported_prompt_proxy_set_property (GObject      *object G_GNUC_UNUSED,
+  guint         prop_id G_GNUC_UNUSED,
+  const GValue *value G_GNUC_UNUSED,
   GParamSpec   *pspec G_GNUC_UNUSED)
 {
 }
@@ -9441,7 +10336,7 @@ gkd_exported_prompt_proxy_class_init (GkdExportedPromptProxyClass *klass)
 }
 
 static void
-gkd_exported_prompt_proxy_iface_init (GkdExportedPromptIface *iface)
+gkd_exported_prompt_proxy_iface_init (GkdExportedPromptIface *iface G_GNUC_UNUSED)
 {
 }
 
@@ -9833,7 +10728,7 @@ out:
 }
 
 static void
-gkd_exported_prompt_skeleton_dbus_interface_flush (GDBusInterfaceSkeleton *_skeleton)
+gkd_exported_prompt_skeleton_dbus_interface_flush (GDBusInterfaceSkeleton *_skeleton G_GNUC_UNUSED)
 {
 }
 
