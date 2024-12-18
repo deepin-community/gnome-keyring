@@ -27,6 +27,9 @@ ifeq ($(DEB_HOST_ARCH_OS),linux)
 	dh_install -pgnome-keyring usr/lib/systemd/user
 endif
 
+override_dh_installsystemduser:
+	dh_installsystemduser  -pgnome-keyring --no-enable gnome-keyring-daemon.service
+
 override_dh_auto_test:
 	env -u LD_PRELOAD dbus-run-session -- dh_auto_test
 
