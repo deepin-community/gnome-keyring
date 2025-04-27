@@ -1,3 +1,9 @@
+gnome-keyring (46.2-1deepin3) unstable; urgency=medium
+
+  * add a feature to specify the working directory
+
+ -- fuleyi <fuleyi@uniontech.com>  Sun, 27 Apr 2025 10:28:36 +0800
+
 gnome-keyring (46.2-1deepin2) unstable; urgency=medium
 
   * disable gnome-keyring-daemon.server. 

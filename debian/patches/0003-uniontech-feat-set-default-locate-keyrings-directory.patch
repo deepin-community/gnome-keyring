@@ -1,0 +1,46 @@
+Index: gnome-keyring/daemon/dbus/gkd-secret-service.c
+===================================================================
+--- gnome-keyring.orig/daemon/dbus/gkd-secret-service.c
++++ gnome-keyring/daemon/dbus/gkd-secret-service.c
+@@ -156,9 +156,18 @@ get_default_path (void)
+ 	gchar *new_directory;
+ 	gchar *alias_directory = NULL;
+ 
++    const gchar *customPath = g_getenv("GNOME_KEYRING_CUSTOM_LOCAL_PATH");
++    if (customPath && customPath[0]) {
++        alias_directory = g_strdup(customPath);
++        g_debug("keyring custom local directory was overridden: %s", customPath);
++    }
++
+ #if WITH_DEBUG
+ 	const gchar *path = g_getenv ("GNOME_KEYRING_TEST_PATH");
+ 	if (path && path[0]) {
++		if (alias_directory != NULL) {
++			g_free (alias_directory);
++		}
+ 		alias_directory = g_strdup (path);
+ 		g_debug ("Alias directory was overridden by tests: %s", path);
+ 	}
+Index: gnome-keyring/pkcs11/gkm/gkm-util.c
+===================================================================
+--- gnome-keyring.orig/pkcs11/gkm/gkm-util.c
++++ gnome-keyring/pkcs11/gkm/gkm-util.c
+@@ -142,7 +142,17 @@ gkm_util_locate_keyrings_directory (void
+ {
+ 	gchar *old_directory;
+ 	gchar *new_directory;
+-	gchar *directory;
++	gchar *directory = NULL;
++
++	const gchar *customPath = g_getenv("GNOME_KEYRING_CUSTOM_LOCAL_PATH");
++    if (customPath && customPath[0]) {
++        directory = g_strdup(customPath);
++        g_debug("keyring custom local directory was overridden: %s", customPath);
++    }
++
++	if (directory != NULL) {
++		return directory;
++	}
+ 
+ 	old_directory = g_build_filename (g_get_home_dir (), ".gnome2", "keyrings", NULL);
+ 	new_directory = g_build_filename (g_get_user_data_dir (), "keyrings", NULL);
