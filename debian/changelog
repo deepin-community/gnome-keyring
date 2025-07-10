@@ -1,3 +1,9 @@
+gnome-keyring (46.2-1deepin4) unstable; urgency=medium
+
+  * if the password is not successfully modified, do not stash the new password
+
+ -- fuleyi <fuleyi@uniontech.com>  Thu, 10 Jul 2025 14:25:00 +0800
+
 gnome-keyring (46.2-1deepin3) unstable; urgency=medium
 
   * add a feature to specify the working directory

@@ -5,3 +5,4 @@ egg-secure-memory-Add-a-warning-if-gnome-keyring-36-happe.patch
 systemd-Start-with-graphical-session-instead-of-default.patch
 deepin-Ensure-the-login-collection-is-registered-after-unlocking.patch
 0003-uniontech-feat-set-default-locate-keyrings-directory.patch
+0005-fix-chauthtok-stash-password.patch
