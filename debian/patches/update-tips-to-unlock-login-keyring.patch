@@ -1,0 +1,1989 @@
+diff --git a/pkcs11/wrap-layer/gkm-wrap-prompt.c b/pkcs11/wrap-layer/gkm-wrap-prompt.c
+index 3bcbe4f..b6f9947 100644
+--- a/pkcs11/wrap-layer/gkm-wrap-prompt.c
++++ b/pkcs11/wrap-layer/gkm-wrap-prompt.c
+@@ -527,12 +527,13 @@ setup_unlock_keyring_login (GkmWrapPrompt *self)
+ 	prompt = GCR_PROMPT (self);
+ 
+ 	gcr_prompt_set_title (prompt, _("Unlock Login Keyring"));
+-	gcr_prompt_set_message (prompt, _("Authentication required"));
++	text = _("Try using a historical password to unlock your login keyring");
++	gcr_prompt_set_message (prompt, text);
+ 
+ 	if (gkm_wrap_login_did_unlock_fail ())
+ 		text = _("The password you use to log in to your computer no longer matches that of your login keyring.");
+ 	else
+-		text = _("The login keyring did not get unlocked when you logged into your computer.");
++		text = _("The current password does not unlock your login keyring, please try with a historical password.");
+ 	gcr_prompt_set_description (prompt, text);
+ 
+ 	gcr_prompt_set_choice_label (prompt, NULL);
+diff --git a/po/af.po b/po/af.po
+index 4c585fc..390af21 100644
+--- a/po/af.po
++++ b/po/af.po
+@@ -308,7 +308,7 @@ msgid "Unlock Login Keyring"
+ msgstr "Ontsluit aanmeldsleutelring"
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:636
+-msgid "Enter password to unlock your login keyring"
++msgid "Try using a historical password to unlock your login keyring"
+ msgstr "Voer wagwoord in om aanmeldsleutelring te ontsluit"
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:640
+@@ -321,7 +321,7 @@ msgstr ""
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:642
+ msgid ""
+-"The login keyring did not get unlocked when you logged into your computer."
++"The current password does not unlock your login keyring, please try with a historical password."
+ msgstr ""
+ "Die aanmeldsleutelring is nie ontsluit toe u aangeteken het op die rekenaar "
+ "nie."
+diff --git a/po/ar.po b/po/ar.po
+index 039343b..3f02b77 100644
+--- a/po/ar.po
++++ b/po/ar.po
+@@ -387,7 +387,7 @@ msgid "Unlock Login Keyring"
+ msgstr "فك قفل حلقة مفتاح الولوج"
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:592
+-msgid "Enter password to unlock your login keyring"
++msgid "Try using a historical password to unlock your login keyring"
+ msgstr "أدخل كلمة السر لفتح حلقة مفاتيح الولوج"
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:596
+@@ -400,7 +400,7 @@ msgstr ""
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:598
+ msgid ""
+-"The login keyring did not get unlocked when you logged into your computer."
++"The current password does not unlock your login keyring, please try with a historical password."
+ msgstr "لم تفتح حلقة مفاتيح الولوج عند ولوجك إلى هذا الحاسوب."
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:616
+diff --git a/po/as.po b/po/as.po
+index 0e86773..b670cb5 100644
+--- a/po/as.po
++++ b/po/as.po
+@@ -393,7 +393,7 @@ msgid "Unlock Login Keyring"
+ msgstr "keyring আনলক কৰক"
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:593
+-msgid "Enter password to unlock your login keyring"
++msgid "Try using a historical password to unlock your login keyring"
+ msgstr "আপোনাৰ লগিন keyring আনলক কৰিবলে পাছৱাৰ্ড সুমুৱাওক"
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:597
+@@ -406,7 +406,7 @@ msgstr ""
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:599
+ msgid ""
+-"The login keyring did not get unlocked when you logged into your computer."
++"The current password does not unlock your login keyring, please try with a historical password."
+ msgstr "আপুনি কমপিউটাৰত লগিন কৰোতে লগিন keyring আনলক নহল।"
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:617
+diff --git a/po/ast.po b/po/ast.po
+index 8a790ca..eb5f9bc 100644
+--- a/po/ast.po
++++ b/po/ast.po
+@@ -894,7 +894,7 @@ msgid "Unlock Login Keyring"
+ msgstr "Desbloquiar el depósitu d'aniciu"
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:636
+-msgid "Enter password to unlock your login keyring"
++msgid "Try using a historical password to unlock your login keyring"
+ msgstr "Introduz la contraseña d'aniciu pa desbloquiar el depósitu"
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:640
+@@ -907,7 +907,7 @@ msgstr ""
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:642
+ msgid ""
+-"The login keyring did not get unlocked when you logged into your computer."
++"The current password does not unlock your login keyring, please try with a historical password."
+ msgstr ""
+ "El depósitu d'aniciu de sesión nun se desbloquió cuando aniciaste sesión nel "
+ "equipu."
+diff --git a/po/az.po b/po/az.po
+index 27a968d..f9f17b3 100644
+--- a/po/az.po
++++ b/po/az.po
+@@ -305,7 +305,7 @@ msgstr "Şifrə Kisəsinin Qıfılını Aç"
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:636
+ #, fuzzy
+-msgid "Enter password to unlock your login keyring"
++msgid "Try using a historical password to unlock your login keyring"
+ msgstr "Yeni şifrə kisəsi üçün şifrəni seçin"
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:640
+@@ -316,7 +316,7 @@ msgstr ""
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:642
+ msgid ""
+-"The login keyring did not get unlocked when you logged into your computer."
++"The current password does not unlock your login keyring, please try with a historical password."
+ msgstr ""
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:660
+diff --git a/po/be.po b/po/be.po
+index 50a2d91..0dffe39 100644
+--- a/po/be.po
++++ b/po/be.po
+@@ -389,7 +389,7 @@ msgstr ""
+ 
+ #: pkcs11/wrap-layer/gkm-wrap-prompt.c:596
+ msgid ""
+-"The login keyring did not get unlocked when you logged into your computer."
++"The current password does not unlock your login keyring, please try with a historical password."
+ msgstr "Сеансавая вязка ключоў не была разблакіравана пры ўваходзе ў сістэму."
+ 
+ #: pkcs11/wrap-layer/gkm-wrap-prompt.c:614
+@@ -506,6 +506,9 @@ msgstr "каманды: "
+ msgid "          "
+ msgstr "        "
+ 
++msgid "Try using a historical password to unlock your login keyring"
++msgstr "Увядзіце пароль для разблакіравання сеансавай вязкі ключоў"
++
+ #~ msgid "Enter password to unlock your login keyring"
+ #~ msgstr "Увядзіце пароль для разблакіравання сеансавай вязкі ключоў"
+ 
+diff --git a/po/be@latin.po b/po/be@latin.po
+index 70b233a..754af3e 100644
+--- a/po/be@latin.po
++++ b/po/be@latin.po
+@@ -313,7 +313,7 @@ msgstr "Razblakuj uvachodnaha klučnika"
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:636
+ #, fuzzy
+-msgid "Enter password to unlock your login keyring"
++msgid "Try using a historical password to unlock your login keyring"
+ msgstr "Uviadzi ŭvachodny parol, kab adblakavać klučnika"
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:640
+@@ -325,7 +325,7 @@ msgstr ""
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:642
+ #, fuzzy
+ msgid ""
+-"The login keyring did not get unlocked when you logged into your computer."
++"The current password does not unlock your login keyring, please try with a historical password."
+ msgstr "Tvoj uvachodny klučnik nia byŭ aŭtamatyčna adčynieny, kali ty ŭvajšoŭ."
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:660
+diff --git a/po/bg.po b/po/bg.po
+index 619be88..6cac144 100644
+--- a/po/bg.po
++++ b/po/bg.po
+@@ -392,7 +392,7 @@ msgstr ""
+ 
+ #: pkcs11/wrap-layer/gkm-wrap-prompt.c:596
+ msgid ""
+-"The login keyring did not get unlocked when you logged into your computer."
++"The current password does not unlock your login keyring, please try with a historical password."
+ msgstr ""
+ "Ключодържателят при влизане не беше отключен при влизането ви в системата."
+ 
+@@ -508,3 +508,8 @@ msgstr "команди: "
+ #: tool/gkr-tool.c:106
+ msgid "          "
+ msgstr "         "
++
++msgid "Try using a historical password to unlock your login keyring"
++msgstr ""
++ "Въведете парола за отключване на ключодържателя ви при влизане в системата"
++ 
+\ No newline at end of file
+diff --git a/po/bn.po b/po/bn.po
+index 58acf9b..4e2a25f 100644
+--- a/po/bn.po
++++ b/po/bn.po
+@@ -311,7 +311,7 @@ msgid "Unlock Login Keyring"
+ msgstr "কী-রিং আনলক"
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:636
+-msgid "Enter password to unlock your login keyring"
++msgid "Try using a historical password to unlock your login keyring"
+ msgstr "লগিন কী-রিং আন-লক করতে আপনার পাসওয়ার্ড লিখুন"
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:640
+@@ -324,7 +324,7 @@ msgstr ""
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:642
+ msgid ""
+-"The login keyring did not get unlocked when you logged into your computer."
++"The current password does not unlock your login keyring, please try with a historical password."
+ msgstr ""
+ "এই কম্পিউটারে লগইন করার সময়, আপনার লগইন কী-রিং স্বয়ংক্রিয়ভাবে আন-লক করা হয়নি।"
+ 
+diff --git a/po/bn_IN.po b/po/bn_IN.po
+index d870b4e..a976de9 100644
+--- a/po/bn_IN.po
++++ b/po/bn_IN.po
+@@ -388,7 +388,7 @@ msgid "Unlock Login Keyring"
+ msgstr "কি-রিং আনলক করুন"
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:593
+-msgid "Enter password to unlock your login keyring"
++msgid "Try using a historical password to unlock your login keyring"
+ msgstr "লগ-ইন কি-রিং আন-লক করতে ব্যবহৃত পাসওয়ার্ড লিখুন"
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:597
+@@ -401,7 +401,7 @@ msgstr ""
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:599
+ msgid ""
+-"The login keyring did not get unlocked when you logged into your computer."
++"The current password does not unlock your login keyring, please try with a historical password."
+ msgstr "এই কম্পিউটারে লগ-ইন করার সময়, আপনার লগ-ইন কি-রিং আন-লক হয়নি।"
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:617
+diff --git a/po/bs.po b/po/bs.po
+index 5aa54b0..3a742d5 100644
+--- a/po/bs.po
++++ b/po/bs.po
+@@ -380,7 +380,7 @@ msgid "Unlock Login Keyring"
+ msgstr "Otključaj privezak za prijavu"
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:592
+-msgid "Enter password to unlock your login keyring"
++msgid "Try using a historical password to unlock your login keyring"
+ msgstr "Unesite lozinku da otključate privezak za prijavu"
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:596
+@@ -393,7 +393,7 @@ msgstr ""
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:598
+ msgid ""
+-"The login keyring did not get unlocked when you logged into your computer."
++"The current password does not unlock your login keyring, please try with a historical password."
+ msgstr ""
+ "Privezak za prijavu se nije automatski otključao kada ste se prijavili na "
+ "računar."
+diff --git a/po/ca.po b/po/ca.po
+index 7ca4b92..349d7f3 100644
+--- a/po/ca.po
++++ b/po/ca.po
+@@ -391,7 +391,7 @@ msgstr ""
+ 
+ #: pkcs11/wrap-layer/gkm-wrap-prompt.c:596
+ msgid ""
+-"The login keyring did not get unlocked when you logged into your computer."
++"The current password does not unlock your login keyring, please try with a historical password."
+ msgstr ""
+ "No s'ha desblocat l'anell de claus d'entrada quan heu entrat a l'ordinador."
+ 
+@@ -509,3 +509,6 @@ msgstr "ordres: "
+ #: tool/gkr-tool.c:106
+ msgid "          "
+ msgstr "        "
++
++msgid "Try using a historical password to unlock your login keyring"
++msgstr "Introduïu la contrasenya per desblocar l'anell de claus d'entrada"
+diff --git a/po/ca@valencia.po b/po/ca@valencia.po
+index 9df44ed..819fd26 100644
+--- a/po/ca@valencia.po
++++ b/po/ca@valencia.po
+@@ -335,7 +335,7 @@ msgid "Unlock Login Keyring"
+ msgstr "Desbloca l'anell de claus d'entrada"
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:592
+-msgid "Enter password to unlock your login keyring"
++msgid "Try using a historical password to unlock your login keyring"
+ msgstr "Introduïu la contrasenya per desblocar l'anell de claus d'entrada"
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:596
+@@ -348,7 +348,7 @@ msgstr ""
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:598
+ msgid ""
+-"The login keyring did not get unlocked when you logged into your computer."
++"The current password does not unlock your login keyring, please try with a historical password."
+ msgstr ""
+ "No s'ha desblocat l'anell de claus d'entrada quan heu entrat a l'ordinador."
+ 
+diff --git a/po/cs.po b/po/cs.po
+index 2ba411b..c19e00f 100644
+--- a/po/cs.po
++++ b/po/cs.po
+@@ -393,7 +393,7 @@ msgstr ""
+ 
+ #: pkcs11/wrap-layer/gkm-wrap-prompt.c:596
+ msgid ""
+-"The login keyring did not get unlocked when you logged into your computer."
++"The current password does not unlock your login keyring, please try with a historical password."
+ msgstr ""
+ "Vaše přihlašovací klíčenka nebyla během vašeho přihlášení k tomuto počítači "
+ "odemčena."
+@@ -512,6 +512,9 @@ msgstr "příkazy: "
+ msgid "          "
+ msgstr "         "
+ 
++msgid "Try using a historical password to unlock your login keyring"
++msgstr "Zadejte heslo k odemčení své přihlašovací klíčenky"
++
+ #~ msgid "Enter password to unlock your login keyring"
+ #~ msgstr "Zadejte heslo k odemčení své přihlašovací klíčenky"
+ 
+diff --git a/po/cy.po b/po/cy.po
+index 20c80dd..b866513 100644
+--- a/po/cy.po
++++ b/po/cy.po
+@@ -306,7 +306,7 @@ msgstr "Datgloi Cylch Allweddi"
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:636
+ #, fuzzy
+-msgid "Enter password to unlock your login keyring"
++msgid "Try using a historical password to unlock your login keyring"
+ msgstr "Dewiswch gyfrinair ar gyfer y cylch allweddi newydd"
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:640
+@@ -317,7 +317,7 @@ msgstr ""
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:642
+ msgid ""
+-"The login keyring did not get unlocked when you logged into your computer."
++"The current password does not unlock your login keyring, please try with a historical password."
+ msgstr ""
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:660
+diff --git a/po/da.po b/po/da.po
+index 26923c3..b716e61 100644
+--- a/po/da.po
++++ b/po/da.po
+@@ -394,7 +394,7 @@ msgstr ""
+ 
+ #: pkcs11/wrap-layer/gkm-wrap-prompt.c:596
+ msgid ""
+-"The login keyring did not get unlocked when you logged into your computer."
++"The current password does not unlock your login keyring, please try with a historical password."
+ msgstr ""
+ "Din logind-nøglering blev ikke låst op da du loggede ind på denne computer."
+ 
+@@ -513,6 +513,9 @@ msgstr "kommandoer: "
+ msgid "          "
+ msgstr "            "
+ 
++msgid "Try using a historical password to unlock your login keyring"
++msgstr "Indtast logind-adgangskode for at låse nøgleringen op"
++ 
+ #~ msgid "Enter password to unlock your login keyring"
+ #~ msgstr "Indtast logind-adgangskode for at låse nøgleringen op"
+ 
+diff --git a/po/de.po b/po/de.po
+index c2b86a6..bfcb57e 100644
+--- a/po/de.po
++++ b/po/de.po
+@@ -397,7 +397,7 @@ msgstr ""
+ 
+ #: pkcs11/wrap-layer/gkm-wrap-prompt.c:596
+ msgid ""
+-"The login keyring did not get unlocked when you logged into your computer."
++"The current password does not unlock your login keyring, please try with a historical password."
+ msgstr ""
+ "Ihr Anmeldeschlüsselbund wurde nicht automatisch entsperrt, als Sie sich an "
+ "diesem Rechner angemeldet haben."
+@@ -524,6 +524,9 @@ msgstr "Befehle: "
+ msgid "          "
+ msgstr "         "
+ 
++msgid "Try using a historical password to unlock your login keyring"
++msgstr "Geben Sie das Passwort zum Entsperren des Schlüsselbundes ein"
++ 
+ #~ msgid "Enter password to unlock your login keyring"
+ #~ msgstr "Geben Sie das Passwort zum Entsperren des Schlüsselbundes ein"
+ 
+diff --git a/po/dz.po b/po/dz.po
+index b887512..dcbf4bf 100644
+--- a/po/dz.po
++++ b/po/dz.po
+@@ -308,7 +308,7 @@ msgstr "ནང་བསྐྱོད་ ལྡེ་འཁོར་ལྡེ་
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:636
+ #, fuzzy
+-msgid "Enter password to unlock your login keyring"
++msgid "Try using a historical password to unlock your login keyring"
+ msgstr "ལྡེ་འཁོར་ ལྡེ་མིག་ཕྱེ་ནིའི་དོན་ལུ་ ནང་བསྐྱོད་ཆོག་ཡིག་བཙུགས་"
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:640
+@@ -320,7 +320,7 @@ msgstr ""
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:642
+ #, fuzzy
+ msgid ""
+-"The login keyring did not get unlocked when you logged into your computer."
++"The current password does not unlock your login keyring, please try with a historical password."
+ msgstr ""
+ "ཁྱོད་ གློག་རིག་འདི་ནང་ལུ་ ནང་བསྐྱོད་འབད་ཡོད་པའི་སྐབས་ ཁྱོད་རའི་ནང་བསྐྱོད་ ལྡེ་འཁོར་དེ་ རང་བཞིན་གྱིས་ ལྡེ་"
+ "མིག་ཕྱེ་དེ་ མིན་འདུག། "
+diff --git a/po/el.po b/po/el.po
+index b07ea13..fe67762 100644
+--- a/po/el.po
++++ b/po/el.po
+@@ -390,7 +390,7 @@ msgstr ""
+ 
+ #: pkcs11/wrap-layer/gkm-wrap-prompt.c:596
+ msgid ""
+-"The login keyring did not get unlocked when you logged into your computer."
++"The current password does not unlock your login keyring, please try with a historical password."
+ msgstr ""
+ "Η κλειδοθήκη εισόδου σας δεν ξεκλειδώθηκε όταν συνδεθήκατε σε αυτόν τον "
+ "υπολογιστή."
+@@ -514,6 +514,9 @@ msgstr "εντολές: "
+ msgid "          "
+ msgstr "          "
+ 
++msgid "Try using a historical password to unlock your login keyring"
++msgstr "Εισάγετε κωδικό πρόσβασης για το ξεκλείδωμα της κλειδοθήκης εισόδου"
++ 
+ #~ msgid "Enter password to unlock your login keyring"
+ #~ msgstr "Εισάγετε κωδικό πρόσβασης για το ξεκλείδωμα της κλειδοθήκης εισόδου"
+ 
+diff --git a/po/en@shaw.po b/po/en@shaw.po
+index 7ffe730..9e8daaa 100644
+--- a/po/en@shaw.po
++++ b/po/en@shaw.po
+@@ -326,7 +326,7 @@ msgstr "𐑩𐑯𐑤𐑭𐑒 𐑤𐑪𐑜𐑦𐑯 𐑒𐑰𐑮𐑦𐑙"
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:636
+ #, fuzzy
+-msgid "Enter password to unlock your login keyring"
++msgid "Try using a historical password to unlock your login keyring"
+ msgstr "𐑧𐑯𐑑𐑼 𐑐𐑭𐑕𐑢𐑼𐑛 𐑓𐑹 𐑑 𐑩𐑯𐑤𐑭𐑒 𐑿𐑼 𐑤𐑪𐑜𐑦𐑯 𐑒𐑰𐑮𐑦𐑙"
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:640
+@@ -340,7 +340,7 @@ msgstr ""
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:642
+ #, fuzzy
+ msgid ""
+-"The login keyring did not get unlocked when you logged into your computer."
++"The current password does not unlock your login keyring, please try with a historical password."
+ msgstr "𐑞 𐑤𐑪𐑜𐑦𐑯 𐑒𐑰𐑮𐑦𐑙 𐑛𐑦𐑛 𐑯𐑪𐑑 𐑜𐑧𐑑 𐑩𐑯𐑤𐑭𐑒𐑑 𐑢𐑧𐑯 𐑿 𐑤𐑪𐑜𐑛 𐑦𐑯𐑑𐑫 𐑿𐑼 𐑒𐑩𐑥𐑐𐑿𐑑𐑼."
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:660
+diff --git a/po/en_CA.po b/po/en_CA.po
+index 39674ef..2ddaa89 100644
+--- a/po/en_CA.po
++++ b/po/en_CA.po
+@@ -306,7 +306,7 @@ msgstr "Unlock Keyring"
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:636
+ #, fuzzy
+-msgid "Enter password to unlock your login keyring"
++msgid "Try using a historical password to unlock your login keyring"
+ msgstr "Choose password for new keyring"
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:640
+@@ -317,7 +317,7 @@ msgstr ""
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:642
+ msgid ""
+-"The login keyring did not get unlocked when you logged into your computer."
++"The current password does not unlock your login keyring, please try with a historical password."
+ msgstr ""
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:660
+diff --git a/po/en_GB.po b/po/en_GB.po
+index 2d83379..938f86e 100644
+--- a/po/en_GB.po
++++ b/po/en_GB.po
+@@ -392,9 +392,9 @@ msgstr ""
+ 
+ #: pkcs11/wrap-layer/gkm-wrap-prompt.c:596
+ msgid ""
+-"The login keyring did not get unlocked when you logged into your computer."
++"The current password does not unlock your login keyring, please try with a historical password."
+ msgstr ""
+-"The login keyring did not get unlocked when you logged into your computer."
++"The current password does not unlock your login keyring, please try with a historical password."
+ 
+ #: pkcs11/wrap-layer/gkm-wrap-prompt.c:614
+ msgid "Unlock Keyring"
+@@ -512,6 +512,9 @@ msgstr "commands: "
+ msgid "          "
+ msgstr "          "
+ 
++msgid "Try using a historical password to unlock your login keyring"
++msgstr "Try using a historical password to unlock your login keyring"
++ 
+ #~ msgid "Enter password to unlock your login keyring"
+ #~ msgstr "Enter password to unlock your login keyring"
+ 
+diff --git a/po/eo.po b/po/eo.po
+index 9a1d0f6..00ebc7b 100644
+--- a/po/eo.po
++++ b/po/eo.po
+@@ -505,6 +505,13 @@ msgstr "komandoj: "
+ msgid "          "
+ msgstr "          "
+ 
++msgid "Try using a historical password to unlock your login keyring"
++msgstr ""
++
++msgid ""
++"The current password does not unlock your login keyring, please try with a historical password."
++msgstr ""
++
+ #~ msgid "Enter password to unlock your login keyring"
+ #~ msgstr "Enigu pasvorton por malŝlosi vian salutan ŝlosilaron"
+ 
+diff --git a/po/es.po b/po/es.po
+index 7b7ba9c..ad163cc 100644
+--- a/po/es.po
++++ b/po/es.po
+@@ -1,12 +1,12 @@
+-# translation of gnome-keyring.master.po to Español
+-# Translation of gnome-keyring to Spanish.
+-# This file is distributed under the same license as the gnome-keyring package.
+-# Copyright (C) 2006 The Free Software Foundation.
+-# 
+-# Francisco Javier F. Serrador <serrador@cvs.gnome.org>, 2003, 2004, 2006.
+-# 
+-# Jorge González <jorgegonz@svn.gnome.org>, 2007, 2009, 2010, 2011.
+-# 
++# translation of gnome-keyring.master.po to Español
++# Translation of gnome-keyring to Spanish.
++# This file is distributed under the same license as the gnome-keyring package.
++# Copyright (C) 2006 The Free Software Foundation.
++# 
++# Francisco Javier F. Serrador <serrador@cvs.gnome.org>, 2003, 2004, 2006.
++# 
++# Jorge González <jorgegonz@svn.gnome.org>, 2007, 2009, 2010, 2011.
++# 
+ # Daniel Mustieles <daniel.mustieles@gmail.com>, 2011-2020.
+ #
+ msgid ""
+@@ -396,7 +396,7 @@ msgstr ""
+ 
+ #: pkcs11/wrap-layer/gkm-wrap-prompt.c:596
+ msgid ""
+-"The login keyring did not get unlocked when you logged into your computer."
++"The current password does not unlock your login keyring, please try with a historical password."
+ msgstr ""
+ "El depósito de claves de inicio de sesión no se desbloqueó cuando inició "
+ "sesión en su equipo."
+@@ -522,6 +522,11 @@ msgstr "comandos: "
+ msgid "          "
+ msgstr "          "
+ 
++msgid "Try using a historical password to unlock your login keyring"
++msgstr ""
++"Introducir la contraseña para desbloquear su depósito de claves de inicio de "
++ "sesión"
++
+ #~ msgid "Enter password to unlock your login keyring"
+ #~ msgstr ""
+ #~ "Introducir la contraseña para desbloquear su depósito de claves de inicio "
+diff --git a/po/et.po b/po/et.po
+index 33a544b..9a0582f 100644
+--- a/po/et.po
++++ b/po/et.po
+@@ -294,7 +294,7 @@ msgstr "Luku avamise parool võtmerõngale: %s"
+ msgid "Unlock Login Keyring"
+ msgstr "Sisselogimise võtmerõnga lukust lahtivõtmine"
+ 
+-msgid "Enter password to unlock your login keyring"
++msgid "Try using a historical password to unlock your login keyring"
+ msgstr "Sisesta sisselogimise võtmerõnga luku avamise parool"
+ 
+ msgid ""
+@@ -305,7 +305,7 @@ msgstr ""
+ "sisselogimise võtmerõnga parooliga."
+ 
+ msgid ""
+-"The login keyring did not get unlocked when you logged into your computer."
++"The current password does not unlock your login keyring, please try with a historical password."
+ msgstr ""
+ "Sisselogimise võtmerõngast ei võetud automaatselt lukust lahti, kui sa "
+ "sellesse arvutisse sisse logisid."
+diff --git a/po/eu.po b/po/eu.po
+index 08ff953..459f378 100644
+--- a/po/eu.po
++++ b/po/eu.po
+@@ -492,6 +492,15 @@ msgstr "komandoak: "
+ msgid "          "
+ msgstr "          "
+ 
++msgid "Try using a historical password to unlock your login keyring"
++msgstr "Sartu pasahitza zure saio-hasierako gako-sorta desblokeatzeko"
++
++msgid ""
++"The current password does not unlock your login keyring, please try with a historical password."
++msgstr ""
++"Zure saioaren gako-sorta ez da automatikoki desblokeatu ordenagailuan saioa "
++"hastean."
++
+ #~ msgid "Enter password to unlock your login keyring"
+ #~ msgstr "Sartu pasahitza zure saio-hasierako gako-sorta desblokeatzeko"
+ 
+diff --git a/po/fa.po b/po/fa.po
+index 2d6a95a..0e82daf 100644
+--- a/po/fa.po
++++ b/po/fa.po
+@@ -491,6 +491,13 @@ msgstr "فرمان‌ها: "
+ msgid "          "
+ msgstr "         "
+ 
++msgid "Try using a historical password to unlock your login keyring"
++msgstr "برای باز کردن قفل دسته‌کلید ورود به سیستم، گذرواژه خود را وارد کنید"
++
++msgid "The current password does not unlock your login keyring, please try with a historical password."
++msgstr "قفل دسته‌کلید ورود به سیستم هنگام ورود شما به رایانه باز نشد."
++
++
+ #~ msgid "Enter password to unlock your login keyring"
+ #~ msgstr "برای قفل‌گشایی دسته‌کلید ورود، گذرواژه‌تان را وارد کنید"
+ 
+diff --git a/po/fi.po b/po/fi.po
+index 0e33ced..d394d02 100644
+--- a/po/fi.po
++++ b/po/fi.po
+@@ -399,7 +399,7 @@ msgstr ""
+ 
+ #: pkcs11/wrap-layer/gkm-wrap-prompt.c:596
+ msgid ""
+-"The login keyring did not get unlocked when you logged into your computer."
++"The current password does not unlock your login keyring, please try with a historical password."
+ msgstr ""
+ "Sisäänkirjautumisten avainnippua ei avattu automaattisesti kun kirjauduit "
+ "sisään tälle tietokoneelle."
+@@ -522,6 +522,9 @@ msgstr "komennot: "
+ msgid "          "
+ msgstr "          "
+ 
++msgid "Try using a historical password to unlock your login keyring"
++msgstr "Syötä salasana avataksesi sisäänkirjautumisten avainnipun"
++
+ #~ msgid "Enter password to unlock your login keyring"
+ #~ msgstr "Syötä salasana avataksesi sisäänkirjautumisten avainnipun"
+ 
+diff --git a/po/fr.po b/po/fr.po
+index 85ea5f1..f14f588 100644
+--- a/po/fr.po
++++ b/po/fr.po
+@@ -402,7 +402,7 @@ msgstr ""
+ 
+ #: pkcs11/wrap-layer/gkm-wrap-prompt.c:596
+ msgid ""
+-"The login keyring did not get unlocked when you logged into your computer."
++"The current password does not unlock your login keyring, please try with a historical password."
+ msgstr ""
+ "Le trousseau de connexion n’a pas été déverrouillé lors de votre connexion à "
+ "cet ordinateur."
+@@ -529,3 +529,7 @@ msgstr "commandes : "
+ msgid "          "
+ msgstr "           "
+ 
++msgid "Try using a historical password to unlock your login keyring"
++msgstr ""
++"Saisissez votre mot de passe pour déverrouiller le trousseau de connexion"
++ 
+\ No newline at end of file
+diff --git a/po/fur.po b/po/fur.po
+index 0561d0a..d5592c5 100644
+--- a/po/fur.po
++++ b/po/fur.po
+@@ -387,7 +387,7 @@ msgstr ""
+ 
+ #: pkcs11/wrap-layer/gkm-wrap-prompt.c:596
+ msgid ""
+-"The login keyring did not get unlocked when you logged into your computer."
++"The current password does not unlock your login keyring, please try with a historical password."
+ msgstr ""
+ "Il puarteclâfs di acès nol è stât sblocât cuant che si à fat l'acès a chest "
+ "computer."
+@@ -507,6 +507,9 @@ msgstr "comants: "
+ msgid "          "
+ msgstr "         "
+ 
++msgid "Try using a historical password to unlock your login keyring"
++msgstr "Inserìs la password par sblocâ il puarteclâfs di acès"
++
+ #~ msgid "Enter password to unlock your login keyring"
+ #~ msgstr "Inserìs la password par sblocâ il puarteclâfs di acès"
+ 
+diff --git a/po/ga.po b/po/ga.po
+index 5ef14e6..8f5cef7 100644
+--- a/po/ga.po
++++ b/po/ga.po
+@@ -306,7 +306,7 @@ msgstr ""
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:636
+ #, fuzzy
+-msgid "Enter password to unlock your login keyring"
++msgid "Try using a historical password to unlock your login keyring"
+ msgstr "Iontráil focal faire chun an eochair phoiblí a dhíghlasáil"
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:640
+@@ -317,7 +317,7 @@ msgstr ""
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:642
+ msgid ""
+-"The login keyring did not get unlocked when you logged into your computer."
++"The current password does not unlock your login keyring, please try with a historical password."
+ msgstr ""
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:660
+diff --git a/po/gd.po b/po/gd.po
+index 51de7af..453d2da 100644
+--- a/po/gd.po
++++ b/po/gd.po
+@@ -337,7 +337,7 @@ msgid "Unlock Login Keyring"
+ msgstr "Thoir a’ ghlas o dhul-iuchrach a’ chlàraidh a-steach"
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:592
+-msgid "Enter password to unlock your login keyring"
++msgid "Try using a historical password to unlock your login keyring"
+ msgstr ""
+ "Cuir a-steach am facal-faire gus a’ ghlas a thoirt far dul-iuchrach a’ "
+ "chlàraidh a-steach"
+@@ -352,7 +352,7 @@ msgstr ""
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:598
+ msgid ""
+-"The login keyring did not get unlocked when you logged into your computer."
++"The current password does not unlock your login keyring, please try with a historical password."
+ msgstr ""
+ "Cha deach a’ ghlas a thoirt far dul-iuchrach a’ chlàraidh a-steach nuair a "
+ "chlàraich thu a-steach air a’ choimpiutair agad."
+diff --git a/po/gl.po b/po/gl.po
+index 12ab634..f806a76 100644
+--- a/po/gl.po
++++ b/po/gl.po
+@@ -398,7 +398,7 @@ msgstr ""
+ 
+ #: pkcs11/wrap-layer/gkm-wrap-prompt.c:596
+ msgid ""
+-"The login keyring did not get unlocked when you logged into your computer."
++"The current password does not unlock your login keyring, please try with a historical password."
+ msgstr ""
+ "O seu anel de chaves de inicio de sesión non foi desbloqueado "
+ "automaticamente ao iniciar a sesión neste computador."
+@@ -520,6 +520,10 @@ msgstr "ordes: "
+ msgid "          "
+ msgstr "          "
+ 
++msgid "Try using a historical password to unlock your login keyring"
++msgstr ""
++"Introduza o contrasinal para desbloquear o anel de chaves de inicio de sesión"
++
+ #~ msgid "Enter password to unlock your login keyring"
+ #~ msgstr ""
+ #~ "Introduza o contrasinal para desbloquear o anel de chaves de inicio de "
+diff --git a/po/gnome-keyring.pot b/po/gnome-keyring.pot
+index cec648e..fd80347 100644
+--- a/po/gnome-keyring.pot
++++ b/po/gnome-keyring.pot
+@@ -375,7 +375,7 @@ msgstr ""
+ 
+ #: pkcs11/wrap-layer/gkm-wrap-prompt.c:535
+ msgid ""
+-"The login keyring did not get unlocked when you logged into your computer."
++"The current password does not unlock your login keyring, please try with a historical password."
+ msgstr ""
+ 
+ #: pkcs11/wrap-layer/gkm-wrap-prompt.c:553
+@@ -487,3 +487,6 @@ msgstr ""
+ #: tool/gkr-tool.c:106
+ msgid "          "
+ msgstr ""
++
++msgid "Try using a historical password to unlock your login keyring"
++msgstr ""
+diff --git a/po/gu.po b/po/gu.po
+index 4b12ee4..65662cf 100644
+--- a/po/gu.po
++++ b/po/gu.po
+@@ -393,7 +393,7 @@ msgid "Unlock Login Keyring"
+ msgstr "કીરીંગનો પ્રવેશ માટે તાળુ ખોલો"
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:592
+-msgid "Enter password to unlock your login keyring"
++msgid "Try using a historical password to unlock your login keyring"
+ msgstr "તમારું પ્રવેશ કીરીંગનું તાળુ ખોલવા માટે પાસવર્ડને દાખલ કરો"
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:596
+@@ -405,7 +405,7 @@ msgstr ""
+ "બંધબેસશે નહિં."
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:598
+-msgid "The login keyring did not get unlocked when you logged into your computer."
++msgid "The current password does not unlock your login keyring, please try with a historical password."
+ msgstr "તમારા પ્રવેશ કીરીંગનું તાળું ખોલાતુ નથી જ્યારે તમે તમારા કમ્પ્યૂટરમાં પ્રવેશ્યા."
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:616
+diff --git a/po/he.po b/po/he.po
+index a7b7d3a..e36f624 100644
+--- a/po/he.po
++++ b/po/he.po
+@@ -390,7 +390,7 @@ msgstr ""
+ 
+ #: pkcs11/wrap-layer/gkm-wrap-prompt.c:596
+ msgid ""
+-"The login keyring did not get unlocked when you logged into your computer."
++"The current password does not unlock your login keyring, please try with a historical password."
+ msgstr "קבוצת ססמאות הכניסה לא שוחררה בעת שנכנסת למחשב."
+ 
+ #: pkcs11/wrap-layer/gkm-wrap-prompt.c:614
+@@ -505,6 +505,9 @@ msgstr "commands: "
+ msgid "          "
+ msgstr "          "
+ 
++msgid "Try using a historical password to unlock your login keyring"
++msgstr "יש להזין ססמה כדי לשחרר את קבוצת מפתחות הכניסה שלך"
++ 
+ #~ msgid "Enter password to unlock your login keyring"
+ #~ msgstr "יש להזין ססמה כדי לשחרר את קבוצת מפתחות הכניסה שלך"
+ 
+diff --git a/po/hi.po b/po/hi.po
+index 55d6959..33f51f4 100644
+--- a/po/hi.po
++++ b/po/hi.po
+@@ -509,6 +509,14 @@ msgstr "कमांड: "
+ msgid "          "
+ msgstr "          "
+ 
++msgid "Try using a historical password to unlock your login keyring"
++msgstr "लॉगिन कीरिंग को खोलने के लिये कूटशब्द डालें"
++
++msgid ""
++"The current password does not unlock your login keyring, please try with a historical password."
++msgstr ""
++"आपका लॉगिन कीरिंग अनलॉक नहीं किया गया था जब आप इस कंप्यूटर में लॉग इन हुए."
++
+ #~ msgid "GPG Password Agent"
+ #~ msgstr "जीपीजी कूटशब्द एजेंट"
+ 
+diff --git a/po/hr.po b/po/hr.po
+index 089cd67..6ba370a 100644
+--- a/po/hr.po
++++ b/po/hr.po
+@@ -384,7 +384,7 @@ msgstr ""
+ 
+ #: pkcs11/wrap-layer/gkm-wrap-prompt.c:596
+ msgid ""
+-"The login keyring did not get unlocked when you logged into your computer."
++"The current password does not unlock your login keyring, please try with a historical password."
+ msgstr ""
+ "Skup ključeva prijave nije se otključao kada ste se prijavili na vaše "
+ "računalo."
+@@ -503,6 +503,9 @@ msgstr "naredba: "
+ msgid "          "
+ msgstr "          "
+ 
++msgid "Try using a historical password to unlock your login keyring"
++msgstr "Upišite lozinku za otključavanje skupa ključeva prijave" 
++
+ #~ msgid "Enter password to unlock your login keyring"
+ #~ msgstr "Upišite lozinku za otključavanje skupa ključeva prijave"
+ 
+diff --git a/po/hu.po b/po/hu.po
+index 76b9b94..ff14f2c 100644
+--- a/po/hu.po
++++ b/po/hu.po
+@@ -393,7 +393,7 @@ msgstr ""
+ 
+ #: pkcs11/wrap-layer/gkm-wrap-prompt.c:596
+ msgid ""
+-"The login keyring did not get unlocked when you logged into your computer."
++"The current password does not unlock your login keyring, please try with a historical password."
+ msgstr ""
+ "A bejelentkezési kulcstartó nem lett feloldva a számítógépére történt "
+ "bejelentkezésekor."
+@@ -517,3 +517,6 @@ msgstr "parancsok: "
+ #: tool/gkr-tool.c:106
+ msgid "          "
+ msgstr "          "
++
++msgid "Try using a historical password to unlock your login keyring"
++msgstr "Adja meg jelszavát a bejelentkezési kulcstartó feloldásához"
+diff --git a/po/id.po b/po/id.po
+index 271fcf9..2ecafb8 100644
+--- a/po/id.po
++++ b/po/id.po
+@@ -390,7 +390,7 @@ msgstr ""
+ 
+ #: pkcs11/wrap-layer/gkm-wrap-prompt.c:596
+ msgid ""
+-"The login keyring did not get unlocked when you logged into your computer."
++"The current password does not unlock your login keyring, please try with a historical password."
+ msgstr ""
+ "Ring kunci log masuk tak terbuka ketika Anda log masuk ke komputer Anda."
+ 
+@@ -508,6 +508,9 @@ msgstr "perintah: "
+ msgid "          "
+ msgstr "          "
+ 
++msgid "Try using a historical password to unlock your login keyring"
++msgstr "Masukkan sandi untuk membuka ring kunci log masuk"
++ 
+ #~ msgid "Enter password to unlock your login keyring"
+ #~ msgstr "Masukkan sandi untuk membuka ring kunci log masuk"
+ 
+diff --git a/po/is.po b/po/is.po
+index bed8c4e..93abc58 100644
+--- a/po/is.po
++++ b/po/is.po
+@@ -386,7 +386,7 @@ msgstr ""
+ 
+ #: pkcs11/wrap-layer/gkm-wrap-prompt.c:596
+ msgid ""
+-"The login keyring did not get unlocked when you logged into your computer."
++"The current password does not unlock your login keyring, please try with a historical password."
+ msgstr ""
+ "Innskráningarlyklakippan aflæstist ekki þegar þú skráðir þig inn á tölvuna"
+ " þína."
+@@ -507,6 +507,9 @@ msgstr "skipanir: "
+ msgid "          "
+ msgstr "          "
+ 
++msgid "Try using a historical password to unlock your login keyring"
++msgstr ""
++
+ #~ msgid "Enter password to unlock your login keyring"
+ #~ msgstr "Settu inn lykilorð til að aflæsa innskráningarlyklakippunni þinni"
+ 
+diff --git a/po/it.po b/po/it.po
+index 47e67ac..cd79d80 100644
+--- a/po/it.po
++++ b/po/it.po
+@@ -401,7 +401,7 @@ msgstr ""
+ 
+ #: pkcs11/wrap-layer/gkm-wrap-prompt.c:596
+ msgid ""
+-"The login keyring did not get unlocked when you logged into your computer."
++"The current password does not unlock your login keyring, please try with a historical password."
+ msgstr ""
+ "Il portachiavi di accesso non è stato sbloccato quando si è effettuato "
+ "l'accesso a questo computer."
+@@ -527,3 +527,7 @@ msgstr "Comandi: "
+ #: tool/gkr-tool.c:106
+ msgid "          "
+ msgstr "         "
++
++msgid "Try using a historical password to unlock your login keyring"
++msgstr "Inserire la password per sbloccare il portachiavi di accesso"
++
+diff --git a/po/ja.po b/po/ja.po
+index f330a90..1cf6e61 100644
+--- a/po/ja.po
++++ b/po/ja.po
+@@ -522,6 +522,13 @@ msgstr "コマンド: "
+ msgid "          "
+ msgstr "　　　　  "
+ 
++msgid "Try using a historical password to unlock your login keyring"
++msgstr "ログインキーリングのパスワードを入力してください"
++
++msgid "The current password does not unlock your login keyring, please try with a historical password."
++msgstr "コンピューターにログインする際、ログインキーリングがロックを解除しませんでした。"
++
++
+ #~ msgid "Enter password to unlock your login keyring"
+ #~ msgstr "ログインキーリングのパスワードを入力してください"
+ 
+diff --git a/po/ka.po b/po/ka.po
+index 7684a12..258d105 100644
+--- a/po/ka.po
++++ b/po/ka.po
+@@ -496,3 +496,10 @@ msgstr "ბრძანებები: "
+ #: tool/gkr-tool.c:106
+ msgid "          "
+ msgstr "          "
++
++msgid "Try using a historical password to unlock your login keyring"
++msgstr "შეიყვანე პაროლი სტანდარტული keyring–ის გასახსნელად"
++
++msgid ""
++"The current password does not unlock your login keyring, please try with a historical password."
++msgstr ""
+\ No newline at end of file
+diff --git a/po/kk.po b/po/kk.po
+index 6163e2a..08938e1 100644
+--- a/po/kk.po
++++ b/po/kk.po
+@@ -388,7 +388,7 @@ msgstr ""
+ 
+ #: pkcs11/wrap-layer/gkm-wrap-prompt.c:596
+ msgid ""
+-"The login keyring did not get unlocked when you logged into your computer."
++"The current password does not unlock your login keyring, please try with a historical password."
+ msgstr ""
+ "Жүйеге кіру кілттер бауы сіз жүйеге кірген кезде блоктаудан босатылмады."
+ 
+@@ -512,6 +512,10 @@ msgstr "командалар: "
+ msgid "          "
+ msgstr "            "
+ 
++msgid "Try using a historical password to unlock your login keyring"
++msgstr "Жүйеге кіру кілттер бауын босату үшін парольді енгізіңіз"
++
++
+ #~ msgid "Enter password to unlock your login keyring"
+ #~ msgstr "Жүйеге кіру кілттер бауын босату үшін парольді енгізіңіз"
+ 
+diff --git a/po/km.po b/po/km.po
+index bb94d84..499fa28 100644
+--- a/po/km.po
++++ b/po/km.po
+@@ -365,7 +365,7 @@ msgid "Unlock Login Keyring"
+ msgstr "ដោះ​សោ​ Keyring សម្រាប់​ចូល"
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:592
+-msgid "Enter password to unlock your login keyring"
++msgid "Try using a historical password to unlock your login keyring"
+ msgstr "បញ្ចូល​ពាក្យសម្ងាត់ ដើម្បី​ដោះ​សោ keyring សម្រាប់​ចូល"
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:596
+@@ -378,7 +378,7 @@ msgstr ""
+ "សម្រាប់​ចូល​ទៀត​ឡើយ ។"
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:598
+-msgid "The login keyring did not get unlocked when you logged into your computer."
++msgid "The current password does not unlock your login keyring, please try with a historical password."
+ msgstr ""
+ "keyring សម្រាប់​ចូល​មិន​ត្រូវ​បាន​ដោះ​សោ "
+ "នៅ​ពេល​ដែល​អ្នក​បាន​ចូល​ទៅ​ក្នុង​កុំព្យូទ័រ​ទេ ។"
+diff --git a/po/kn.po b/po/kn.po
+index 7ca3031..90547a0 100644
+--- a/po/kn.po
++++ b/po/kn.po
+@@ -385,7 +385,7 @@ msgid "Unlock Login Keyring"
+ msgstr "ಪ್ರವೇಶ ಕೀಲಿಗೊಂಚಲನ್ನು ಅನ್‌ಲಾಕ್ ಮಾಡು"
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:593
+-msgid "Enter password to unlock your login keyring"
++msgid "Try using a historical password to unlock your login keyring"
+ msgstr "ನಿಮ್ಮ ಪ್ರವೇಶ ಕೀಲಿಗೊಂಚಲನ್ನು ಅನ್‌ಲಾಕ್ ಮಾಡಲು ಗುಪ್ತಪದವನ್ನು ನಮೂದಿಸಿ"
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:597
+@@ -398,7 +398,7 @@ msgstr ""
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:599
+ msgid ""
+-"The login keyring did not get unlocked when you logged into your computer."
++"The current password does not unlock your login keyring, please try with a historical password."
+ msgstr ""
+ "ನೀವು ನಿಮ್ಮ ಗಣಕಕ್ಕೆ ಪ್ರವೇಶಿಸಿದಾಗ ಪ್ರವೇಶ ಕೀಲಿಗೊಂಚಲು ತಾನಾಗಿಯೆ ಅನ್‌ಲಾಕ್ ಆಗಲಿಲ್ಲ."
+ 
+diff --git a/po/ko.po b/po/ko.po
+index f5fe095..608d8c6 100644
+--- a/po/ko.po
++++ b/po/ko.po
+@@ -385,7 +385,7 @@ msgstr "컴퓨터 로그인에 사용한 암호가 로그인 키 모음의 암
+ 
+ #: pkcs11/wrap-layer/gkm-wrap-prompt.c:596
+ msgid ""
+-"The login keyring did not get unlocked when you logged into your computer."
++"The current password does not unlock your login keyring, please try with a historical password."
+ msgstr "로그인할 때 로그인 키 모음의 잠금을 풀지 않았습니다."
+ 
+ #: pkcs11/wrap-layer/gkm-wrap-prompt.c:614
+@@ -501,6 +501,10 @@ msgstr "명령:"
+ msgid "          "
+ msgstr "     "
+ 
++msgid "Try using a historical password to unlock your login keyring"
++msgstr "로그인 키 모음의 잠금을 푸는 암호를 입력하십시오"
++
++
+ #~ msgid "Enter password to unlock your login keyring"
+ #~ msgstr "로그인 키 모음의 잠금을 푸는 암호를 입력하십시오"
+ 
+diff --git a/po/lt.po b/po/lt.po
+index 8f84758..e4eac21 100644
+--- a/po/lt.po
++++ b/po/lt.po
+@@ -392,7 +392,7 @@ msgstr ""
+ 
+ #: pkcs11/wrap-layer/gkm-wrap-prompt.c:596
+ msgid ""
+-"The login keyring did not get unlocked when you logged into your computer."
++"The current password does not unlock your login keyring, please try with a historical password."
+ msgstr ""
+ "Prisijungimo raktinė nebuvo automatiškai atrakinta, kai prisijungėte prie "
+ "savo kompiuterio."
+@@ -514,6 +514,10 @@ msgstr "komandos:"
+ msgid "          "
+ msgstr "         "
+ 
++msgid "Try using a historical password to unlock your login keyring"
++msgstr "Įveskite slaptažodį norėdami atrakinti savo prisijungimo raktinę"
++
++
+ #~ msgid "Enter password to unlock your login keyring"
+ #~ msgstr "Įveskite slaptažodį norėdami atrakinti savo prisijungimo raktinę"
+ 
+diff --git a/po/lv.po b/po/lv.po
+index bbb5e6d..207ca85 100644
+--- a/po/lv.po
++++ b/po/lv.po
+@@ -392,7 +392,7 @@ msgstr ""
+ 
+ #: pkcs11/wrap-layer/gkm-wrap-prompt.c:596
+ msgid ""
+-"The login keyring did not get unlocked when you logged into your computer."
++"The current password does not unlock your login keyring, please try with a historical password."
+ msgstr ""
+ "Ierakstīšanās saišķis netika automātiski atbloķēts, kad ierakstījāties savā "
+ "sesijā."
+@@ -512,6 +512,9 @@ msgstr "komandas: "
+ msgid "          "
+ msgstr "                    "
+ 
++msgid "Try using a historical password to unlock your login keyring"
++msgstr "Ievadiet paroli, lai atbloķētu savu ierakstīšanās saišķi"
++
+ #~ msgid "Enter password to unlock your login keyring"
+ #~ msgstr "Ievadiet paroli, lai atbloķētu savu ierakstīšanās saišķi"
+ 
+diff --git a/po/mai.po b/po/mai.po
+index e839a79..e8d36a4 100644
+--- a/po/mai.po
++++ b/po/mai.po
+@@ -306,7 +306,7 @@ msgstr ""
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:636
+ #, fuzzy
+-msgid "Enter password to unlock your login keyring"
++msgid "Try using a historical password to unlock your login keyring"
+ msgstr "नवीन कीरिंग क' लेल कूटशब्दकेँ चुनू"
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:640
+@@ -317,7 +317,7 @@ msgstr ""
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:642
+ msgid ""
+-"The login keyring did not get unlocked when you logged into your computer."
++"The current password does not unlock your login keyring, please try with a historical password."
+ msgstr ""
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:660
+diff --git a/po/mg.po b/po/mg.po
+index 26f6b9e..3e0a2c9 100644
+--- a/po/mg.po
++++ b/po/mg.po
+@@ -303,7 +303,7 @@ msgstr "Manafaka ilay rojom-panalahidy"
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:636
+ #, fuzzy
+-msgid "Enter password to unlock your login keyring"
++msgid "Try using a historical password to unlock your login keyring"
+ msgstr "Lazao ny teny fanalahidin'ilay rojom-panalahidy vaovao"
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:640
+@@ -314,7 +314,7 @@ msgstr ""
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:642
+ msgid ""
+-"The login keyring did not get unlocked when you logged into your computer."
++"The current password does not unlock your login keyring, please try with a historical password."
+ msgstr ""
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:660
+diff --git a/po/mk.po b/po/mk.po
+index 0aca6c6..0072797 100644
+--- a/po/mk.po
++++ b/po/mk.po
+@@ -350,7 +350,7 @@ msgid "Unlock Login Keyring"
+ msgstr "Отклучи привезок за најава."
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:592
+-msgid "Enter password to unlock your login keyring"
++msgid "Try using a historical password to unlock your login keyring"
+ msgstr "Внесете лозинка за отклучување на Вашиот приврзок за најава"
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:596
+@@ -358,7 +358,7 @@ msgid "The password you use to log in to your computer no longer matches that of
+ msgstr "Лозинката која ја користите за најава на Вашиот компјутер веќе не се совпаѓа со таа што се користи од приврзокот за најава."
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:598
+-msgid "The login keyring did not get unlocked when you logged into your computer."
++msgid "The current password does not unlock your login keyring, please try with a historical password."
+ msgstr "Вашиот приврзок не беше автоматски отклучен кога се најавивте."
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:615
+diff --git a/po/ml.po b/po/ml.po
+index 289a0fa..9b136c0 100644
+--- a/po/ml.po
++++ b/po/ml.po
+@@ -321,7 +321,7 @@ msgid "Unlock Login Keyring"
+ msgstr "ലോഗിന്‍ ചാവിക്കൂട്ടത്തിന്റെ പൂട്ടു തുറക്കുക"
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:592
+-msgid "Enter password to unlock your login keyring"
++msgid "Try using a historical password to unlock your login keyring"
+ msgstr "നിങ്ങളുടെ പ്രവേശന ചാവിക്കൂട്ടം തുറക്കാനായി രഹസ്യവാക്ക് നല്‍കുക"
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:596
+@@ -329,7 +329,7 @@ msgid "The password you use to log in to your computer no longer matches that of
+ msgstr "നിങ്ങളുടെ കമ്പ്യൂട്ടറിലേക്കു് പ്രവേശിയ്ക്കുന്നതിനുള്ള രഹസ്യവാക്ക്, നിങ്ങളുടെ പ്രവേശന ചാവിക്കൂട്ടവുമായി പൊരുത്തപ്പെടുന്നില്ല."
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:598
+-msgid "The login keyring did not get unlocked when you logged into your computer."
++msgid "The current password does not unlock your login keyring, please try with a historical password."
+ msgstr "നിങ്ങള്‍ ഈ കമ്പ്യൂട്ടറില്‍ ലോഗിന്‍ ചെയ്തപ്പോള്‍, നിങ്ങളുടെ ലോഗിന്‍ ചാവിക്കൂട്ടത്തിന്റെ പൂട്ട് തുറക്കപ്പെട്ടില്ല."
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:602 ../pkcs11/wrap-layer/gkm-wrap-prompt.c:629
+diff --git a/po/mn.po b/po/mn.po
+index 91a39c4..7f554c0 100644
+--- a/po/mn.po
++++ b/po/mn.po
+@@ -304,7 +304,7 @@ msgstr "Кейринг түгжээг тайлах"
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:636
+ #, fuzzy
+-msgid "Enter password to unlock your login keyring"
++msgid "Try using a historical password to unlock your login keyring"
+ msgstr "Шинэ кейринг-ийн нэвтрэх үгийг сонго"
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:640
+@@ -315,7 +315,7 @@ msgstr ""
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:642
+ msgid ""
+-"The login keyring did not get unlocked when you logged into your computer."
++"The current password does not unlock your login keyring, please try with a historical password."
+ msgstr ""
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:660
+diff --git a/po/mr.po b/po/mr.po
+index f558933..9bf26e6 100644
+--- a/po/mr.po
++++ b/po/mr.po
+@@ -388,7 +388,7 @@ msgid "Unlock Login Keyring"
+ msgstr "दाखलन कीरिंग कुलूप उघडा"
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:592
+-msgid "Enter password to unlock your login keyring"
++msgid "Try using a historical password to unlock your login keyring"
+ msgstr "प्रवेश किरिंग कुलूपबंद अशक्य करण्यासाठी पासवर्ड द्या"
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:596
+@@ -400,7 +400,7 @@ msgstr ""
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:598
+ msgid ""
+-"The login keyring did not get unlocked when you logged into your computer."
++"The current password does not unlock your login keyring, please try with a historical password."
+ msgstr "संगणकावर प्रवेश केल्यानंतर प्रवेश किरिंग कुलूपबंद अशक्य झाले नाही."
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:616
+diff --git a/po/ms.po b/po/ms.po
+index c8e9e4b..12cc852 100644
+--- a/po/ms.po
++++ b/po/ms.po
+@@ -383,7 +383,7 @@ msgstr ""
+ 
+ #: pkcs11/wrap-layer/gkm-wrap-prompt.c:598
+ msgid ""
+-"The login keyring did not get unlocked when you logged into your computer."
++"The current password does not unlock your login keyring, please try with a historical password."
+ msgstr ""
+ "Gelang kunci daftar masuk tidak boleh dinyahkunci ketika anda mendaftar "
+ "masuk ke komputer anda."
+@@ -522,6 +522,10 @@ msgstr "perintah: "
+ msgid "          "
+ msgstr "          "
+ 
++msgid "Try using a historical password to unlock your login keyring"
++msgstr "Masukkan katalaluan untuk dibuka keyring "
++
++
+ #, fuzzy
+ #~ msgid "GNOME Keyring: GPG Agent"
+ #~ msgstr "GNOME Keyring: Agen SSH"
+diff --git a/po/nb.po b/po/nb.po
+index 760f946..236c55f 100644
+--- a/po/nb.po
++++ b/po/nb.po
+@@ -387,7 +387,7 @@ msgstr ""
+ 
+ #: pkcs11/wrap-layer/gkm-wrap-prompt.c:596
+ msgid ""
+-"The login keyring did not get unlocked when you logged into your computer."
++"The current password does not unlock your login keyring, please try with a historical password."
+ msgstr ""
+ "Nøkkelring for pålogging ble ikke låst opp når du logget på din datamaskin."
+ 
+@@ -504,3 +504,7 @@ msgstr "kommandoer: "
+ #: tool/gkr-tool.c:106
+ msgid "          "
+ msgstr "            "
++
++msgid "Try using a historical password to unlock your login keyring"
++msgstr "Oppgi passord for å låse opp din nøkkelring for innlogging"
++
+diff --git a/po/ne.po b/po/ne.po
+index 5907190..13a3cd7 100644
+--- a/po/ne.po
++++ b/po/ne.po
+@@ -492,6 +492,12 @@ msgstr "आदेशहरू"
+ msgid "          "
+ msgstr "          "
+ 
++msgid "Try using a historical password to unlock your login keyring"
++msgstr "किरिङ '%s'को ताल्चा खोल्नका लागि पासवर्ड प्रविष्ट गर्नुहोस्"
++
++msgid "The current password does not unlock your login keyring, please try with a historical password."
++msgstr ""
++
+ #, fuzzy
+ #~ msgid "Enter password to unlock your login keyring"
+ #~ msgstr "किरिङ '%s'को ताल्चा खोल्नका लागि पासवर्ड प्रविष्ट गर्नुहोस्"
+diff --git a/po/nl.po b/po/nl.po
+index b22a4d9..a8e5104 100644
+--- a/po/nl.po
++++ b/po/nl.po
+@@ -402,7 +402,7 @@ msgstr ""
+ 
+ #: pkcs11/wrap-layer/gkm-wrap-prompt.c:596
+ msgid ""
+-"The login keyring did not get unlocked when you logged into your computer."
++"The current password does not unlock your login keyring, please try with a historical password."
+ msgstr ""
+ "Uw login-sleutelbos werd niet automatisch ontgrendeld bij het aanmelden op "
+ "deze computer."
+@@ -528,6 +528,10 @@ msgstr "opdrachten: "
+ msgid "          "
+ msgstr "          "
+ 
++msgid "Try using a historical password to unlock your login keyring"
++msgstr "Voer wachtwoord in om uw login-sleutelbos te ontgrendelen"
++
++
+ #~ msgid "Enter password to unlock your login keyring"
+ #~ msgstr "Voer wachtwoord in om uw login-sleutelbos te ontgrendelen"
+ 
+diff --git a/po/nn.po b/po/nn.po
+index 26c1320..e7598c8 100644
+--- a/po/nn.po
++++ b/po/nn.po
+@@ -305,7 +305,7 @@ msgid "Unlock Login Keyring"
+ msgstr "Lås opp innloggingsnøkkelring"
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:636
+-msgid "Enter password to unlock your login keyring"
++msgid "Try using a historical password to unlock your login keyring"
+ msgstr "Skriv inn passord for å låsa opp innloggingsnøkkelringen din"
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:640
+@@ -318,7 +318,7 @@ msgstr ""
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:642
+ msgid ""
+-"The login keyring did not get unlocked when you logged into your computer."
++"The current password does not unlock your login keyring, please try with a historical password."
+ msgstr ""
+ "Innloggingsnøkkelringen vart ikkje låst opp når du logga inn på datamaskina"
+ 
+diff --git a/po/oc.po b/po/oc.po
+index f55941c..d438736 100644
+--- a/po/oc.po
++++ b/po/oc.po
+@@ -391,7 +391,7 @@ msgstr ""
+ 
+ #: pkcs11/wrap-layer/gkm-wrap-prompt.c:596
+ msgid ""
+-"The login keyring did not get unlocked when you logged into your computer."
++"The current password does not unlock your login keyring, please try with a historical password."
+ msgstr ""
+ "Lo trossèl de connexion es pas estat desverrolhat al moment de vòstra "
+ "connexion a aquel ordenador."
+@@ -512,6 +512,10 @@ msgstr "comandas : "
+ msgid "          "
+ msgstr "          "
+ 
++msgid "Try using a historical password to unlock your login keyring"
++msgstr "Picatz vòstre senhal per desverrolhar lo trossèl de connexion"
++
++
+ #~ msgid "Enter password to unlock your login keyring"
+ #~ msgstr "Picatz vòstre senhal per desverrolhar lo trossèl de connexion"
+ 
+diff --git a/po/or.po b/po/or.po
+index 8933772..1227bf1 100644
+--- a/po/or.po
++++ b/po/or.po
+@@ -399,7 +399,7 @@ msgid "Unlock Login Keyring"
+ msgstr "ଲଗଇନ କି-ରିଙ୍ଗକୁ ପରିବର୍ତ୍ତନୀୟ କରନ୍ତୁ"
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:593
+-msgid "Enter password to unlock your login keyring"
++msgid "Try using a historical password to unlock your login keyring"
+ msgstr "ଆପଣଙ୍କର ଲଗଇନ କି-ରିଙ୍ଗକୁ ଖୋଲିବା ପାଇଁ ପ୍ରବଶ ସଙ୍କେତ ଭରଣ କରନ୍ତୁ"
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:597
+@@ -412,7 +412,7 @@ msgstr ""
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:599
+ msgid ""
+-"The login keyring did not get unlocked when you logged into your computer."
++"The current password does not unlock your login keyring, please try with a historical password."
+ msgstr ""
+ "ଆପଣଙ୍କର ଲଗଇନ କି ରିଙ୍ଗଟି ଏହି କମ୍ପୁଟରରେ ଲଗଇନ ହୋଇଥିବା ସମୟରେ ଅପରିବର୍ତ୍ତନୀୟ "
+ "ହୋଇନଥିଲା।"
+diff --git a/po/pa.po b/po/pa.po
+index 67c9b7e..f28ec65 100644
+--- a/po/pa.po
++++ b/po/pa.po
+@@ -407,7 +407,7 @@ msgstr ""
+ 
+ #: pkcs11/wrap-layer/gkm-wrap-prompt.c:596
+ msgid ""
+-"The login keyring did not get unlocked when you logged into your computer."
++"The current password does not unlock your login keyring, please try with a historical password."
+ msgstr ""
+ "ਜਦੋਂ ਤੁਸੀਂ ਕੰਪਿਊਟਰ ਉੱਤੇ ਲਾਗਇਨ ਕੀਤਾ ਤਾਂ ਤੁਹਾਡੀ ਲਾਗਇਨ ਕੀਰਿੰਗ ਆਟੋਮੈਟਿਕ ਅਣ-ਲਾਕ"
+ " ਨਹੀਂ ਹੋਈ ਸੀ।"
+@@ -543,6 +543,9 @@ msgstr "ਕਮਾਂਡਾਂ: "
+ msgid "          "
+ msgstr "          "
+ 
++msgid "Try using a historical password to unlock your login keyring"
++msgstr "ਆਪਣੇ ਲਾਗਇਨ ਕੀਰਿੰਗ ਨੂੰ ਅਣ-ਲਾਕ ਕਰਨ ਲਈ ਪਾਸਵਰਡ ਦਿਓ"
++
+ #~ msgid "GPG Password Agent"
+ #~ msgstr "GPG ਪਾਸਵਰਡ ਏਜੰਟ"
+ 
+diff --git a/po/pl.po b/po/pl.po
+index fbcda90..9bd4fa5 100644
+--- a/po/pl.po
++++ b/po/pl.po
+@@ -390,7 +390,7 @@ msgstr ""
+ 
+ #: pkcs11/wrap-layer/gkm-wrap-prompt.c:596
+ msgid ""
+-"The login keyring did not get unlocked when you logged into your computer."
++"The current password does not unlock your login keyring, please try with a historical password."
+ msgstr ""
+ "Baza kluczy konta nie została automatycznie odblokowana podczas zalogowania "
+ "się do tego komputera."
+@@ -509,3 +509,6 @@ msgstr "polecenia: "
+ #: tool/gkr-tool.c:106
+ msgid "          "
+ msgstr "           "
++
++msgid "Try using a historical password to unlock your login keyring"
++msgstr "Proszę wprowadzić hasło, aby odblokować bazę kluczy konta"
+diff --git a/po/pt_BR.po b/po/pt_BR.po
+index 47180de..8808369 100644
+--- a/po/pt_BR.po
++++ b/po/pt_BR.po
+@@ -407,7 +407,7 @@ msgstr ""
+ 
+ #: pkcs11/wrap-layer/gkm-wrap-prompt.c:596
+ msgid ""
+-"The login keyring did not get unlocked when you logged into your computer."
++"The current password does not unlock your login keyring, please try with a historical password."
+ msgstr ""
+ "Seu chaveiro de sessão não foi desbloqueado automaticamente quando você "
+ "iniciou a sessão neste computador."
+@@ -534,6 +534,10 @@ msgstr "comandos: "
+ msgid "          "
+ msgstr "          "
+ 
++msgid "Try using a historical password to unlock your login keyring"
++msgstr "Digite a senha para desbloquear o seu chaveiro de sessão"
++
++
+ # Não pode exceder 50 caracteres.
+ # https://gitlab.gnome.org/Teams/Translation/pt_BR/issues/9
+ #~ msgid "Enter password to unlock your login keyring"
+diff --git a/po/ro.po b/po/ro.po
+index 94b3379..86eba4c 100644
+--- a/po/ro.po
++++ b/po/ro.po
+@@ -393,7 +393,7 @@ msgstr ""
+ 
+ #: pkcs11/wrap-layer/gkm-wrap-prompt.c:596
+ msgid ""
+-"The login keyring did not get unlocked when you logged into your computer."
++"The current password does not unlock your login keyring, please try with a historical password."
+ msgstr ""
+ "Inelul de chei de autentificare nu a fost deblocat automat la autentificarea "
+ "dumneavoastră pe acest calculator."
+@@ -515,6 +515,10 @@ msgstr "comenzi: "
+ msgid "          "
+ msgstr "         "
+ 
++msgid "Try using a historical password to unlock your login keyring"
++msgstr "Introduceți parola pentru deblocarea inelului de chei de autentificare"
++
++
+ #~ msgid "Enter password to unlock your login keyring"
+ #~ msgstr ""
+ #~ "Introduceți parola pentru deblocarea inelului de chei de autentificare"
+diff --git a/po/ru.po b/po/ru.po
+index b22d08d..d6d29b7 100644
+--- a/po/ru.po
++++ b/po/ru.po
+@@ -394,7 +394,7 @@ msgstr ""
+ 
+ #: pkcs11/wrap-layer/gkm-wrap-prompt.c:596
+ msgid ""
+-"The login keyring did not get unlocked when you logged into your computer."
++"The current password does not unlock your login keyring, please try with a historical password."
+ msgstr ""
+ "Ваша связка ключей для входа в систему не была разблокирована, когда вы "
+ "зарегистрировались в компьютере."
+@@ -516,6 +516,9 @@ msgstr "команды: "
+ msgid "          "
+ msgstr "          "
+ 
++msgid "Try using a historical password to unlock your login keyring"
++msgstr "Введите пароль для разблокировки связки ключей для входа в систему"
++
+ #~ msgid "Enter password to unlock your login keyring"
+ #~ msgstr "Введите пароль для разблокировки связки ключей для входа в систему"
+ 
+diff --git a/po/rw.po b/po/rw.po
+index ada435b..cffe9ab 100644
+--- a/po/rw.po
++++ b/po/rw.po
+@@ -311,7 +311,7 @@ msgstr ""
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:636
+ #, fuzzy
+-msgid "Enter password to unlock your login keyring"
++msgid "Try using a historical password to unlock your login keyring"
+ msgstr "Ijambobanga... kugirango Gishya"
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:640
+@@ -322,7 +322,7 @@ msgstr ""
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:642
+ msgid ""
+-"The login keyring did not get unlocked when you logged into your computer."
++"The current password does not unlock your login keyring, please try with a historical password."
+ msgstr ""
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:660
+diff --git a/po/si.po b/po/si.po
+index ac001cd..c5f36de 100644
+--- a/po/si.po
++++ b/po/si.po
+@@ -302,7 +302,7 @@ msgstr "Keyring අගුලු අරින්න"
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:636
+ #, fuzzy
+-msgid "Enter password to unlock your login keyring"
++msgid "Try using a historical password to unlock your login keyring"
+ msgstr "නව Keyring සඳහා රහස්පදයක් තෝරා ගන්න"
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:640
+@@ -313,7 +313,7 @@ msgstr ""
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:642
+ msgid ""
+-"The login keyring did not get unlocked when you logged into your computer."
++"The current password does not unlock your login keyring, please try with a historical password."
+ msgstr ""
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:660
+diff --git a/po/sk.po b/po/sk.po
+index 69dcd21..72371c2 100644
+--- a/po/sk.po
++++ b/po/sk.po
+@@ -396,7 +396,7 @@ msgstr ""
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:596
+ msgid ""
+-"The login keyring did not get unlocked when you logged into your computer."
++"The current password does not unlock your login keyring, please try with a historical password."
+ msgstr ""
+ "Prihlasovací zväzok kľúčov sa neodomkol, keď ste sa prihlásili do počítača."
+ 
+@@ -514,6 +514,10 @@ msgstr "príkazy: "
+ msgid "          "
+ msgstr "         "
+ 
++msgid "Try using a historical password to unlock your login keyring"
++msgstr "Zadajte heslo na odomknutie prihlasovacieho zväzku kľúčov"
++
++
+ #~ msgid "Enter password to unlock your login keyring"
+ #~ msgstr "Zadajte heslo na odomknutie prihlasovacieho zväzku kľúčov"
+ 
+diff --git a/po/sl.po b/po/sl.po
+index 970087b..7cdeade 100644
+--- a/po/sl.po
++++ b/po/sl.po
+@@ -393,7 +393,7 @@ msgstr ""
+ 
+ #: pkcs11/wrap-layer/gkm-wrap-prompt.c:596
+ msgid ""
+-"The login keyring did not get unlocked when you logged into your computer."
++"The current password does not unlock your login keyring, please try with a historical password."
+ msgstr "Prijavna zbirka ključev ob prijavi ni bila samodejno odklenjena."
+ 
+ #: pkcs11/wrap-layer/gkm-wrap-prompt.c:614
+@@ -509,6 +509,9 @@ msgstr "ukazi:"
+ msgid "          "
+ msgstr "          "
+ 
++msgid "Try using a historical password to unlock your login keyring"
++msgstr "Vnesite geslo za odklepanje prijavnih ključev"
++
+ #~ msgid "GPG Password Agent"
+ #~ msgstr "Agent gesel GPG"
+ 
+diff --git a/po/sq.po b/po/sq.po
+index 4e3f257..12896e5 100644
+--- a/po/sq.po
++++ b/po/sq.po
+@@ -313,7 +313,7 @@ msgstr "Zhblloko mbajtësin e çelsave login"
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:636
+ #, fuzzy
+-msgid "Enter password to unlock your login keyring"
++msgid "Try using a historical password to unlock your login keyring"
+ msgstr "Jep fjalëkalimin e hyrjes për të zhbllokuar mbajtësin e çelsave"
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:640
+@@ -325,7 +325,7 @@ msgstr ""
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:642
+ #, fuzzy
+ msgid ""
+-"The login keyring did not get unlocked when you logged into your computer."
++"The current password does not unlock your login keyring, please try with a historical password."
+ msgstr ""
+ "Mbajtësi juaj i çelsave të \"hyrjes\" nuk është zhbllokuar automatikisht kur "
+ "është kryer hyrja në këtë kompjutër."
+diff --git a/po/sr.po b/po/sr.po
+index 753e60c..7dbe938 100644
+--- a/po/sr.po
++++ b/po/sr.po
+@@ -391,7 +391,7 @@ msgstr ""
+ 
+ #: pkcs11/wrap-layer/gkm-wrap-prompt.c:596
+ msgid ""
+-"The login keyring did not get unlocked when you logged into your computer."
++"The current password does not unlock your login keyring, please try with a historical password."
+ msgstr ""
+ "Привезак за пријаву се није аутоматски откључао када сте се пријавили на "
+ "рачунар."
+@@ -510,6 +510,10 @@ msgstr "наредбе: "
+ msgid "          "
+ msgstr "          "
+ 
++msgid "Try using a historical password to unlock your login keyring"
++msgstr "Унесите лозинку да откључате привезак за пријаву"
++
++
+ #~ msgid "Enter password to unlock your login keyring"
+ #~ msgstr "Унесите лозинку да откључате привезак за пријаву"
+ 
+diff --git a/po/sr@latin.po b/po/sr@latin.po
+index d470547..128589f 100644
+--- a/po/sr@latin.po
++++ b/po/sr@latin.po
+@@ -349,7 +349,7 @@ msgid "Unlock Login Keyring"
+ msgstr "Otključaj privezak za prijavu"
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:592
+-msgid "Enter password to unlock your login keyring"
++msgid "Try using a historical password to unlock your login keyring"
+ msgstr "Unesite lozinku da otključate privezak za prijavu"
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:596
+@@ -362,7 +362,7 @@ msgstr ""
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:598
+ msgid ""
+-"The login keyring did not get unlocked when you logged into your computer."
++"The current password does not unlock your login keyring, please try with a historical password."
+ msgstr ""
+ "Privezak za prijavu se nije automatski otključao kada ste se prijavili na "
+ "računar."
+diff --git a/po/sv.po b/po/sv.po
+index 4ad72a4..2e93895 100644
+--- a/po/sv.po
++++ b/po/sv.po
+@@ -388,7 +388,7 @@ msgstr ""
+ 
+ #: pkcs11/wrap-layer/gkm-wrap-prompt.c:596
+ msgid ""
+-"The login keyring did not get unlocked when you logged into your computer."
++"The current password does not unlock your login keyring, please try with a historical password."
+ msgstr ""
+ "Din inloggningsnyckelring låstes inte upp när du loggade in på din dator."
+ 
+@@ -505,6 +505,9 @@ msgstr "kommandon: "
+ msgid "          "
+ msgstr "           "
+ 
++msgid "Try using a historical password to unlock your login keyring"
++msgstr "Ange lösenordet för att låsa upp din inloggningsnyckelring"
++
+ #~ msgid "Enter password to unlock your login keyring"
+ #~ msgstr "Ange lösenordet för att låsa upp din inloggningsnyckelring"
+ 
+diff --git a/po/ta.po b/po/ta.po
+index e1737ca..d6f1dc2 100644
+--- a/po/ta.po
++++ b/po/ta.po
+@@ -389,7 +389,7 @@ msgid "Unlock Login Keyring"
+ msgstr "விசை வளையத்தின் பூட்டை திற"
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:593
+-msgid "Enter password to unlock your login keyring"
++msgid "Try using a historical password to unlock your login keyring"
+ msgstr "உங்கள் விசை வளையத்தை திறக்க உள்நுழைவு கடவுச்சொல்லை உள்ளிடுக"
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:597
+@@ -401,7 +401,7 @@ msgstr ""
+ "பொருந்தவில்லை."
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:599
+-msgid "The login keyring did not get unlocked when you logged into your computer."
++msgid "The current password does not unlock your login keyring, please try with a historical password."
+ msgstr ""
+ "நீங்கள் உங்கள் கணினியில் உள்நுழைந்த போது உள்நுழைவு விசை வளையம் தானியங்கியாக பூட்டு "
+ "நீக்கப்படவில்லை."
+diff --git a/po/te.po b/po/te.po
+index 837b3f6..7627a01 100644
+--- a/po/te.po
++++ b/po/te.po
+@@ -392,7 +392,7 @@ msgid "Unlock Login Keyring"
+ msgstr "లాగిన్ కీరింగును అన్‌లాక్ చేయి"
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:592
+-msgid "Enter password to unlock your login keyring"
++msgid "Try using a historical password to unlock your login keyring"
+ msgstr "మీ కీరింగును అన్‌లాక్ చేయుటకు సంకేతపదమును ప్రవేశపెట్టండి"
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:596
+@@ -404,7 +404,7 @@ msgstr ""
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:598
+ msgid ""
+-"The login keyring did not get unlocked when you logged into your computer."
++"The current password does not unlock your login keyring, please try with a historical password."
+ msgstr "ఈ కంప్యూటర్‌లోనికి ప్రవేశించినపుడు లాగిన్ కీరింగ్ స్వయంచాలకంగా అన్‌లాక్ చేయబడదు."
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:616
+diff --git a/po/tg.po b/po/tg.po
+index 464f55c..4ec2f4c 100644
+--- a/po/tg.po
++++ b/po/tg.po
+@@ -374,7 +374,7 @@ msgid "Unlock Login Keyring"
+ msgstr ""
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:593
+-msgid "Enter password to unlock your login keyring"
++msgid "Try using a historical password to unlock your login keyring"
+ msgstr ""
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:597
+@@ -385,7 +385,7 @@ msgstr ""
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:599
+ msgid ""
+-"The login keyring did not get unlocked when you logged into your computer."
++"The current password does not unlock your login keyring, please try with a historical password."
+ msgstr ""
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:617
+diff --git a/po/th.po b/po/th.po
+index 575479c..546f28e 100644
+--- a/po/th.po
++++ b/po/th.po
+@@ -470,6 +470,13 @@ msgstr "คำสั่ง: "
+ msgid "          "
+ msgstr "      "
+ 
++msgid "Try using a historical password to unlock your login keyring"
++msgstr "ป้อนรหัสผ่านเพื่อปลดล็อคพวงกุญแจเข้าระบบของคุณ"
++
++msgid ""
++"The current password does not unlock your login keyring, please try with a historical password."
++msgstr "พวงกุญแจเข้าระบบไม่ได้ถูกปลดล็อคเมื่อคุณเข้าระบบ"
++
+ #~ msgid "GPG Password Agent"
+ #~ msgstr "เอเจนต์รหัสผ่าน GPG"
+ 
+diff --git a/po/tr.po b/po/tr.po
+index 7d8438e..c5bdc5c 100644
+--- a/po/tr.po
++++ b/po/tr.po
+@@ -395,7 +395,7 @@ msgstr ""
+ 
+ #: pkcs11/wrap-layer/gkm-wrap-prompt.c:596
+ msgid ""
+-"The login keyring did not get unlocked when you logged into your computer."
++"The current password does not unlock your login keyring, please try with a historical password."
+ msgstr "Giriş anahtarlığı, bilgisayarınıza giriş yaptığınızda açılmadı."
+ 
+ #: pkcs11/wrap-layer/gkm-wrap-prompt.c:614
+@@ -515,3 +515,6 @@ msgstr "komutlar: "
+ #: tool/gkr-tool.c:106
+ msgid "          "
+ msgstr "          "
++
++msgid "Try using a historical password to unlock your login keyring"
++msgstr "Giriş anahtarlığınızı açmak için parolayı girin"
+diff --git a/po/ug.po b/po/ug.po
+index f422361..96b47b5 100644
+--- a/po/ug.po
++++ b/po/ug.po
+@@ -381,7 +381,7 @@ msgid "Unlock Login Keyring"
+ msgstr "ئاچقۇچ ھالقىسىغا كىرىشنى قۇلۇپسىزلا"
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:593
+-msgid "Enter password to unlock your login keyring"
++msgid "Try using a historical password to unlock your login keyring"
+ msgstr "ئاچقۇچ ھالقىسىنى قۇلۇپسىزلاش ئۈچۈن ئىم كىرگۈزۈڭ"
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:597
+@@ -392,7 +392,7 @@ msgstr "كومپيۇتېرغا تىزىمغا كىرىش ئۈچۈن ئىشلىت
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:599
+ msgid ""
+-"The login keyring did not get unlocked when you logged into your computer."
++"The current password does not unlock your login keyring, please try with a historical password."
+ msgstr "كومپيۇتېرغا تىزىمغا كىرگەندە ئاچقۇچ ھالقىسىغا تىزىملىتىش قۇلۇپسىزلانمايدۇ."
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:617
+diff --git a/po/uk.po b/po/uk.po
+index 2421a88..1efb6b1 100644
+--- a/po/uk.po
++++ b/po/uk.po
+@@ -408,7 +408,7 @@ msgstr ""
+ 
+ #: pkcs11/wrap-layer/gkm-wrap-prompt.c:596
+ msgid ""
+-"The login keyring did not get unlocked when you logged into your computer."
++"The current password does not unlock your login keyring, please try with a historical password."
+ msgstr ""
+ "Вашу в'язку ключів для входу у систему не було автоматично розблокована, "
+ "коли ви зареєструватися у комп'ютері."
+@@ -548,3 +548,7 @@ msgstr "команди:"
+ #: tool/gkr-tool.c:106
+ msgid "          "
+ msgstr "        "
++
++msgid "Try using a historical password to unlock your login keyring"
++msgstr "Введіть пароль для розблокування зв'язку ключів при вході в систему"
++
+diff --git a/po/vi.po b/po/vi.po
+index 8c92e49..0024e6b 100644
+--- a/po/vi.po
++++ b/po/vi.po
+@@ -351,7 +351,7 @@ msgid "Unlock Login Keyring"
+ msgstr "Gỡ khóa chùm chìa khóa đăng nhập"
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:592
+-msgid "Enter password to unlock your login keyring"
++msgid "Try using a historical password to unlock your login keyring"
+ msgstr "Nhập mật khẩu để gỡ khóa chùm chìa khóa đăng nhập"
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:596
+@@ -364,7 +364,7 @@ msgstr ""
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:598
+ msgid ""
+-"The login keyring did not get unlocked when you logged into your computer."
++"The current password does not unlock your login keyring, please try with a historical password."
+ msgstr ""
+ "Chùm chìa khóa đăng nhập đã không được gỡ khóa khi bạn đăng nhập vào máy "
+ "tính này."
+diff --git a/po/xh.po b/po/xh.po
+index d46637b..c566ccd 100644
+--- a/po/xh.po
++++ b/po/xh.po
+@@ -305,7 +305,7 @@ msgstr "Vula Umsesane wesitshixo"
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:636
+ #, fuzzy
+-msgid "Enter password to unlock your login keyring"
++msgid "Try using a historical password to unlock your login keyring"
+ msgstr "Khetha i-password usenzela umsesane omtsha wesitshixo"
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:640
+@@ -316,7 +316,7 @@ msgstr ""
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:642
+ msgid ""
+-"The login keyring did not get unlocked when you logged into your computer."
++"The current password does not unlock your login keyring, please try with a historical password."
+ msgstr ""
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:660
+diff --git a/po/zh_CN.po b/po/zh_CN.po
+index 4a0c1a2..bfcc98d 100644
+--- a/po/zh_CN.po
++++ b/po/zh_CN.po
+@@ -391,8 +391,8 @@ msgstr "您用来登录计算机的密码与登录密钥环里的密码不再匹
+ 
+ #: pkcs11/wrap-layer/gkm-wrap-prompt.c:596
+ msgid ""
+-"The login keyring did not get unlocked when you logged into your computer."
+-msgstr "您登录计算机时，您的登录密钥环未被解锁。"
++"The current password does not unlock your login keyring, please try with a historical password."
++msgstr "当前密码无法解锁您的登录密钥环，请使用历史密码进行尝试。"
+ 
+ #: pkcs11/wrap-layer/gkm-wrap-prompt.c:614
+ msgid "Unlock Keyring"
+@@ -504,6 +504,9 @@ msgstr "命令： "
+ msgid "          "
+ msgstr "          "
+ 
++msgid "Try using a historical password to unlock your login keyring"
++msgstr "尝试使用历史密码以解锁您的登录密钥环"
++
+ #~ msgid "Enter password to unlock your login keyring"
+ #~ msgstr "输入密码以解锁您的登录密钥环"
+ 
+diff --git a/po/zh_HK.po b/po/zh_HK.po
+index 32c0562..50abca9 100644
+--- a/po/zh_HK.po
++++ b/po/zh_HK.po
+@@ -372,8 +372,8 @@ msgid "Unlock Login Keyring"
+ msgstr "解開登入密碼匙圈"
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:593
+-msgid "Enter password to unlock your login keyring"
+-msgstr "請輸入解鎖登入密碼匙圈的密碼"
++msgid "Try using a historical password to unlock your login keyring"
++msgstr "嘗試使用歷史密碼以解鎖您的登錄密鑰環"
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:597
+ msgid ""
+@@ -383,8 +383,8 @@ msgstr "你用來登入電腦的密碼已和登入密碼匙圈不符。"
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:599
+ msgid ""
+-"The login keyring did not get unlocked when you logged into your computer."
+-msgstr "你的登入密碼匙圈並未在登入你的電腦時自動解鎖。"
++"The current password does not unlock your login keyring, please try with a historical password."
++msgstr "當前密碼無法解鎖您的登錄密鑰環，請使用歷史密碼進行嘗試。"
+ 
+ #: ../pkcs11/wrap-layer/gkm-wrap-prompt.c:617
+ msgid "Unlock Keyring"
+diff --git a/po/zh_TW.po b/po/zh_TW.po
+index 535ecf0..d5ea74b 100644
+--- a/po/zh_TW.po
++++ b/po/zh_TW.po
+@@ -377,8 +377,8 @@ msgstr "您用來登入電腦的密碼已和登入鑰匙圈不符。"
+ 
+ #: pkcs11/wrap-layer/gkm-wrap-prompt.c:596
+ msgid ""
+-"The login keyring did not get unlocked when you logged into your computer."
+-msgstr "您的登入鑰匙圈並未在登入您的電腦時自動解鎖。"
++"The current password does not unlock your login keyring, please try with a historical password."
++msgstr "當前密碼無法解鎖您的登錄金鑰環，請使用歷史密碼進行嘗試。"
+ 
+ #: pkcs11/wrap-layer/gkm-wrap-prompt.c:614
+ msgid "Unlock Keyring"
+@@ -490,6 +490,9 @@ msgstr "命令："
+ msgid "          "
+ msgstr "   "
+ 
++msgid "Try using a historical password to unlock your login keyring"
++msgstr "嘗試使用歷史密碼以解鎖您的登錄金鑰環"
++
+ #~ msgid "Enter password to unlock your login keyring"
+ #~ msgstr "請輸入解鎖登入鑰匙圈的密碼"
+ 
