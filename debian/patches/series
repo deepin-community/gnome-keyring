@@ -7,3 +7,4 @@ deepin-Ensure-the-login-collection-is-registered-after-unlocking.patch
 0003-uniontech-feat-set-default-locate-keyrings-directory.patch
 0005-fix-chauthtok-stash-password.patch
 update-tips-to-unlock-login-keyring.patch
+0006-change-control-file-error-to-warning.patch

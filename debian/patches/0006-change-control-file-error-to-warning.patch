@@ -1,0 +1,31 @@
+Index: gnome-keyring/pam/gkr-pam-module.c
+===================================================================
+--- gnome-keyring.orig/pam/gkr-pam-module.c
++++ gnome-keyring/pam/gkr-pam-module.c
+@@ -646,7 +646,7 @@ stop_daemon (pam_handle_t *ph,
+ 
+ 	res = get_control_file(ph, control);
+ 	if (res != GKD_CONTROL_RESULT_OK) {
+-		syslog (GKR_LOG_ERR, "gkr-pam: unable to locate daemon control file");
++		syslog (GKR_LOG_WARN, "gkr-pam: unable to locate daemon control file");
+ 		return PAM_SERVICE_ERR;
+ 	}
+ 
+@@ -679,7 +679,7 @@ unlock_keyring (pam_handle_t *ph,
+ 
+ 	res = get_control_file(ph, control);
+ 	if (res != GKD_CONTROL_RESULT_OK) {
+-		syslog (GKR_LOG_ERR, "gkr-pam: unable to locate daemon control file");
++		syslog (GKR_LOG_WARN, "gkr-pam: unable to locate daemon control file");
+ 		if (res == GKD_CONTROL_RESULT_NO_DAEMON && need_daemon)
+ 			*need_daemon = 1;
+ 		return PAM_SERVICE_ERR;
+@@ -723,7 +723,7 @@ change_keyring_password (pam_handle_t *
+ 
+ 	res = get_control_file(ph, control);
+ 	if (res != GKD_CONTROL_RESULT_OK) {
+-		syslog (GKR_LOG_ERR, "gkr-pam: unable to locate daemon control file");
++		syslog (GKR_LOG_WARN, "gkr-pam: unable to locate daemon control file");
+ 		return PAM_SERVICE_ERR;
+ 	}
+ 
