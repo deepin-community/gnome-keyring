@@ -1,0 +1,17 @@
+Index: gnome-keyring/daemon/control/gkd-control-server.c
+===================================================================
+--- gnome-keyring.orig/daemon/control/gkd-control-server.c
++++ gnome-keyring/daemon/control/gkd-control-server.c
+@@ -115,8 +115,11 @@ control_change_login (EggBuffer *buffer)
+ 		return GKD_CONTROL_RESULT_FAILED;
+ 	}
+ 
+-	if (gkd_login_change_lock (original, master))
++	if (gkd_login_change_lock (original, master)){
+ 		res = GKD_CONTROL_RESULT_OK;
++		if (gkd_main_secrets_started ())
++			gkd_dbus_ensure_login_collection_is_registered ();
++	}	
+ 	else
+ 		res = GKD_CONTROL_RESULT_DENIED;
+ 
